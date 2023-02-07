@@ -1,7 +1,7 @@
 This file will track progression through the Mars Lander Simulator Game project.
 This diary will be updated atleast once a week, however entries should be made whenever a retrospective is carried out.(Retrospective posts could be listed seperately.)
 
-Week 1 (02/02/2023) - 
+Week 1 (02/02/2023)
 
 I began by looking at literature and media to do with my project. The core principle of this project is to make a game/simulation that educates people(children/teenagers). In education this is called gamification. I decided to look for papers that cover the effects of gamification and whether it is useful in education. I plan to investigate this further and will add issues on my repo to document these outstanding tasks.
 
@@ -12,3 +12,9 @@ My next area of investigation was into what games have been made that display th
 My last area of investigation consisted of looking at how I would develop my project. I had originally planned to utilise Unity, however decided to look into a game engine I had heard about some time ago, but never looked into extensively. This game engine is Godot, and so far I feel posistive about utilising it to carry out my project however investigation into alternatives is still required.
 
 When it comes to planning how to carry out the development of my project I have yet to come to a conclusion. I hope after a meeting with my Project Supervisor I can narrow down my options.
+
+Week 1 Retrospective (07/02/23)
+
+In the first week of the project I focused on completing the project outline. As of yet most of the outline is slated for review, with the annotated bibliography the only item left. I have not yet begun reviewing papers and articles to do with gamification, however I have had good ideas from my discussion with my supervisor. I have moved towards using a Kanban board to track progress made through the project, I will probably compliment this with a weekly integration cycle. Moving forwards, I will be completing my look at relevant literature, and completing tutorials and demos available for Godot and Unity, to make a decision between the two.
+
+
