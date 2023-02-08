@@ -17,4 +17,9 @@ Week 1 Retrospective (07/02/23)
 
 In the first week of the project I focused on completing the project outline. As of yet most of the outline is slated for review, with the annotated bibliography the only item left. I have not yet begun reviewing papers and articles to do with gamification, however I have had good ideas from my discussion with my supervisor. I have moved towards using a Kanban board to track progress made through the project, I will probably compliment this with a weekly integration cycle. Moving forwards, I will be completing my look at relevant literature, and completing tutorials and demos available for Godot and Unity, to make a decision between the two.
 
+Week 2 (08/02/23)
+
+I have started looking at Godot, by going through and following the tutorials that are available on the Godot site. So far, Godot works by creating "scenes" which are collections of nodes. The nodes are defined from inside the game engine and are provided to the developer with pre-defined behaviour and attributes, for example, a ball node is made up of a sprite node (for a texture) and a collision node (for physics and collisions). Scripting in GDScript or C# is then used to extend the functionality of these nodes/scenes. In the first tutorial I used GDScript to move and rotate the Godot icon around the screen.
+The results of my work here can be seen on my gitlab repo, under Prototyping, with GodotTest2Win/Linux being available.
+
 
