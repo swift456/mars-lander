@@ -1,0 +1,112 @@
+\documentclass[11pt,fleqn,twoside]{article}
+\usepackage{makeidx}
+\makeindex
+\usepackage{palatino} %or {times} etc
+\usepackage{plain} %bibliography style
+\usepackage{amsmath} %math fonts - just in case
+\usepackage{amsfonts} %math fonts
+\usepackage{amssymb} %math fonts
+\usepackage{lastpage} %for footer page numbers
+\usepackage{fancyhdr} %header and footer package
+\usepackage{mmpv2}
+%\usepackage{url}
+\usepackage{hyperref}
+
+% the following packages are used for citations - You only need to include one.
+%
+% Use the cite package if you are using the numeric style (e.g. IEEEannot).
+% Use the natbib package if you are using the author-date style (e.g. authordate2annot).
+% Only use one of these and comment out the other one.
+\usepackage{cite}
+%\usepackage{natbib}
+
+\begin{document}
+
+\name{Jack Partington}
+\userid{jap93}
+\projecttitle{Mars Lander Simulator Game}
+\projecttitlememoir{Mars Lander Simulator Game} %same as the project title or abridged version for page header
+\reporttitle{Project Outline}
+\version{1.0}
+\docstatus{Draft} % change to Release when you are ready to submit your document
+\modulecode{CS39440}
+\degreeschemecode{G400}
+\degreeschemename{Computer Science}
+\supervisor{Laurence Tyler} % e.g. Neil Taylor
+\supervisorid{lgt} % e.g. nst
+
+%optional - comment out next line to use current date for the document
+%\documentdate{8th February 2022}
+\mmp
+
+%\setcounter{tocdepth}{3} %set required number of level in table of contents
+
+
+%==============================================================================
+\section{Project description}
+%==============================================================================
+
+The primary aims of this project is to develop a game which imparts upon the player the processes and knowledge involved with landing a rover on Mars. Secondly, this game should be suitable for use as outreach material on open days to give an introduction to the concepts present in landing on Mars. Due to this, it is appropriate to approximate the physics of the landing sequence.   The game should show a coherent and consistent design that aids in keeping players engaged. As well as this, the game will have to be fun as otherwise the game is unsuitable for use in an outreach capacity. \\
+
+One of the ways that educational material can be included in the project is through the use of decisions at pivotal moments in the landing sequence. By giving a player the choice to make a decision when, for example, the speed at which the parachute is deployed, a consequence can then be relayed to the player. The idea is that through trial and error (with relevant information to guide the player), a player learns about the consequences behind certain decisions, and why Mars missions are designed the way they are. Care will need to be taken to ensure that these elements of the game aren't just throwing large amounts of information at the player as then the information will not be retained and the game becomes unsuitable for education. The reality is that most of these "decisions" in an actual Mars landing have been automated to happen at specific times, or under certain conditions, however this would not make for a very interesting game, so some liberty has to be taken with the way in which the player will proceed through the landing. Stages like entry, parachute deployment, and landing are all automated, however in this game they shall be controlled by the player through either direct control, selecting the right option, or timing button presses correctly.\\
+
+One of the biggest difficulties in this project may come down to the balance of educational material to game play elements. If the game heavily leans towards the educational aspect, when used in an outreach environment engagement could be low. However, if the balance is skewed more towards the game aspect, the information, and subsequently the value of the game as an educational tool would be diminished. Striking a balance between the two will only be possible through research on education methods surrounding games/gamification.\\ 
+
+There exists many methods of developing this project, with one of these methods being the use of a game engine. It has been decided that the Godot game engine will be used for this project. Godot is fully suited to producing a 2D game, and also provides deployment on the Web, as well as Linux. Godot also offers an asset library, which could be used for some generic assets such as rocks, stars, atmospheric effects. However,  manual asset creation may be needed for elements of the game such as, parachute, aeroshell, lander, orbiter. \\
+
+The end goal this project is to have a game that is first of all fun, and second of all educational. The players may not know anything about space, or mars, or the missions that have and are being carried out. Therefore it would be a reasonable expectation that this project should spark an interest in the player and allow them to research more if they so wish. 
+
+
+
+%==============================================================================
+\section{Proposed tasks}
+%==============================================================================
+The following outlines the tasks that are to be completed through the course of the project
+\begin{itemize}
+  \item Research into Mars Missions - This task will primarily be a fact finding exercise, where past mission and current mission details as well as information surrounding Mars will be collected for use in the game. 
+  
+  \item Investigation of game engine and gamification
+    \begin{itemize}
+        \item Investigation of game engine - This investigation will be carried out by completing the basic tutorials for the Godot game engine. This allows for familiarisation with the technology and scripting language (GDScript) that will be used.
+        
+        \item Investigation of gamification - Research will be carried out on the concept of gamification. This will hopefully allow for the balance between 'fun' and 'education' to be found early on, before development begins.
+    \end{itemize}
+  \item Project Diary - A project diary will be produced which will detail all work completed in each week of the project.
+             
+  \item Prototyping - Using knowledge gained from the previous task, prototyping can begin to combine knowledge of Mars Landings with gamification, which will result in game mechanics that are both educational and enjoyable for a player. At this point in time, placeholders will likely be used for graphical assets.
+  
+  \item Development of core mechanics - Mechanics that are considered core to the game will have to be identified, the results of prototyping may prove useful in this task. Core mechanics are likely to include; A Lunar Lander-esque mechanic for powered landings on Mars and modelling drag on the craft for the entry and parachute deployment phase.  Moving towards a game with solid mechanics and good educational value.
+  
+  \item Preparation of materials for demonstrations - for the mid-project demonstration, prototyping and further development of core mechanics will most likely be what is displayed. Between the mid-project demonstration and the final demonstration, work will be undertaken to refine core mechanics, UI, and Graphics. 
+\end{itemize}
+
+%==============================================================================
+\section{Project deliverables}
+%==============================================================================
+The following outlines the deliverables that are to be expected from the project
+\begin{itemize}
+    \item Compilation of research and investigation - This research will be compiled and presented inside the "Background" section of the final report.
+    \item Project Diary - Project diary will be available for viewing on the project repository and will be updated every week. At the end of the project this should be complete, and should cover all work completed from week to week.
+    \item Prototype Game - This is to be delivered at the mid-project demonstration, and will include aspects from the research performed, as well as elements that will form the final game.
+    \item Final Game - Developing from the prototype, this game should have filled in areas that were missing in the prototype, be equipped with graphics and animations, have information from the research phase embedded inside, and have clear win and lose conditions.
+    \item Project Report - This report will detail all work carried out through the course of the project, the project diary is likely to be reworded and used here.
+\end{itemize}
+
+
+
+
+
+\nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
+
+% the following line is included so that the bibliography is also shown in the table of contents. There is the possibility that this is added to the previous page for the bibliography. To address this, a newline is added so that it appears on the first page for the bibliography.
+\newpage
+\addcontentsline{toc}{section}{Initial Annotated Bibliography}
+
+%
+% example of including an annotated bibliography. The current style is an author date one. If you want to change, comment out the line and uncomment the subsequent line. You should also modify the packages included at the top (see the notes earlier in the file) and then trash your aux files and re-run.
+%\bibliographystyle{authordate2annot}
+\bibliographystyle{IEEEannotU}
+\renewcommand{\refname}{Annotated Bibliography}  % if you put text into the final {} on this line, you will get an extra title, e.g. References. This isn't necessary for the outline project specification.
+\bibliography{mmp} % References file
+
+\end{document}
