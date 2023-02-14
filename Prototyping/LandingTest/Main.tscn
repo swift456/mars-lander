@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Lander.tscn" type="PackedScene" id=2]
+
+[node name="Main" type="Node2D"]
+position = Vector2( 486, 196 )
+
+[node name="Lander" parent="." instance=ExtResource( 2 )]
+
+[node name="StartPosition" type="Node2D" parent="."]
