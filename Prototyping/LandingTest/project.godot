@@ -28,7 +28,8 @@ parachute={
 [physics]
 
 common/enable_pause_aware_picking=true
-2d/default_linear_damp=0.8
+2d/default_gravity=37
+2d/default_linear_damp=0.3
 
 [rendering]
 

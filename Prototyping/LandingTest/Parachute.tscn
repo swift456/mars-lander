@@ -6,7 +6,8 @@
 extents = Vector2( 18.5, 19 )
 
 [node name="Parachute" type="RigidBody2D"]
-gravity_scale = -0.1
+mass = 0.027027
+gravity_scale = 0.0
 __meta__ = {
 "_edit_group_": true
 }
