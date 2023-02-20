@@ -7,8 +7,9 @@
 position = Vector2( 486, 196 )
 
 [node name="Lander" parent="." instance=ExtResource( 2 )]
+position = Vector2( 11, -144 )
 
 [node name="StartPosition" type="Node2D" parent="."]
 
 [node name="Surface" parent="." instance=ExtResource( 1 )]
-position = Vector2( 32, 387 )
+position = Vector2( 24, 189 )
