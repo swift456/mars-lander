@@ -8,19 +8,29 @@ var instance = parachute
 enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_DEPLOYED, THRUST, DESTROYED, PAUSED}
 var _state = State.FREEFALL
 var parachute_count = 0
-## Called when the node enters the scene tree for the first time.
-#
+
+
+
+
 
 func _process(delta):
+	
+	_integrate_forces(self)
 	input()
+
+	print(rotation)
+	
+#	input()
+	
 	var debug_velocity = get_linear_velocity()
 	print((_state)," ",(debug_velocity),(drag),(parachute_deployed))
+	
 	match _state:
-		
+
 		State.PARACHUTE_DEPLOY:
-			
+
 			if parachute_count == 0:
-				
+
 				instance = parachute.instance()
 				add_child(instance)
 				instance.position = Vector2($ParachuteSpawn.position.x,$ParachuteSpawn.position.y + -10)
@@ -30,7 +40,7 @@ func _process(delta):
 				add_child(pinjoint)
 				pinjoint.global_transform.origin = (instance.global_transform.origin - self.global_transform.origin / 2)
 				parachute_count += 1
-				
+
 			if drag <= 2.7:
 				print("Parachute Deployed!")
 				instance.set_mass(drag)
@@ -41,13 +51,33 @@ func _process(delta):
 			if Input.is_action_just_pressed("parachute"):
 				instance.queue_free()
 				_state = State.FREEFALL
-				
+		
 			
+		
+
+
+			
+			
+
+func _integrate_forces(state):
+	self.set_applied_torque(0)
+	if Input.is_action_pressed("left"):
+		self.set_applied_torque(-1000)
+	if Input.is_action_pressed("right"):
+		self.set_applied_torque(1000)
+	if Input.is_action_pressed("thrust"):
+		self.apply_impulse(Vector2.rotated(rotation), Vector2(0,-1))
+
 func input():
+	
+	
+		
+	
 	if Input.is_action_just_pressed("parachute") && parachute_count == 0:
 		_state = State.PARACHUTE_DEPLOY
 	if Input.is_action_just_pressed("thrust"):
 		_state = State.THRUST
+	
 	
 	
 	
