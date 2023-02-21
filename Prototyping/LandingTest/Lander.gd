@@ -14,11 +14,11 @@ var parachute_count = 0
 func _process(delta):
 	input()
 	var debug_velocity = get_linear_velocity()
-	print(_state)
+	print((_state)," ",(debug_velocity),(drag),(parachute_deployed))
 	match _state:
 		
 		State.PARACHUTE_DEPLOY:
-			print((debug_velocity),(drag),(parachute_deployed))
+			
 			if parachute_count == 0:
 				
 				instance = parachute.instance()
@@ -37,9 +37,14 @@ func _process(delta):
 				drag += 1 * delta
 				if drag >= 2.7:
 					_state = State.PARACHUTE_DEPLOYED
+		State.PARACHUTE_DEPLOYED:
+			if Input.is_action_just_pressed("parachute"):
+				instance.queue_free()
+				_state = State.FREEFALL
+				
 			
 func input():
-	if Input.is_action_just_pressed("parachute"):
+	if Input.is_action_just_pressed("parachute") && parachute_count == 0:
 		_state = State.PARACHUTE_DEPLOY
 	if Input.is_action_just_pressed("thrust"):
 		_state = State.THRUST
