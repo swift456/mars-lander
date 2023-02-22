@@ -66,8 +66,10 @@ func _integrate_forces(state):
 	if Input.is_action_pressed("right"):
 		self.set_applied_torque(1000)
 	if Input.is_action_pressed("thrust"):
-		self.apply_impulse(Vector2.rotated(rotation), Vector2(0,-1))
-
+		var thrust = -self.global_transform.y
+		thrust = thrust/4
+		apply_central_impulse(thrust)
+	print(rotation)
 func input():
 	
 	
