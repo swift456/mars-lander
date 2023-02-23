@@ -46,9 +46,8 @@ func _process(delta):
 				instance.set_mass(drag)
 				drag += 1 * delta
 				if drag >= 2.7:
-					_state = State.PARACHUTE_DEPLOYED
+					_state = State.FREEFALL
 		State.PARACHUTE_DEPLOYED:
-			if Input.is_action_just_pressed("parachute"):
 				instance.queue_free()
 				_state = State.FREEFALL
 		
@@ -77,6 +76,8 @@ func input():
 	
 	if Input.is_action_just_pressed("parachute") && parachute_count == 0:
 		_state = State.PARACHUTE_DEPLOY
+	if Input.is_action_just_pressed("parachute") && parachute_count >= 1:
+		_state = State.PARACHUTE_DEPLOYED
 	if Input.is_action_just_pressed("thrust"):
 		_state = State.THRUST
 	
