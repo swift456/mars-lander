@@ -2,7 +2,8 @@ extends RigidBody2D
 
 const parachute = preload("res://Parachute.tscn")
 var parachute_deployed = false
-var drag = 0.1
+var parachute_drag = 2
+var drag = 1
 var instancing = true
 var instance = parachute
 enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED, DESTROYED, PAUSED}
@@ -15,7 +16,7 @@ var _state = State.FREEFALL
 
 func _process(delta):
 	
-	_integrate_forces(self)
+	
 	input()
 
 	print(rotation)
@@ -23,12 +24,12 @@ func _process(delta):
 #	input()
 	
 	var debug_velocity = get_linear_velocity()
-	print((_state)," ",(debug_velocity),(drag),(parachute_deployed))
+	print((_state)," ",(debug_velocity),(parachute_drag),(parachute_deployed))
 	
 	match _state:
 
 		State.PARACHUTE_DEPLOY:
-			
+				_integrate_forces(self)
 				instance = parachute.instance()
 				add_child(instance)
 				instance.position = Vector2($ParachuteSpawn.position.x,$ParachuteSpawn.position.y + -10)
@@ -38,16 +39,16 @@ func _process(delta):
 				add_child(pinjoint)
 				pinjoint.global_transform.origin = (instance.global_transform.origin - self.global_transform.origin / 2)
 				_state = State.PARACHUTE_DEPLOYED
+				
 		State.PARACHUTE_DEPLOYED:
-				if drag <= 3.7:
-					print("Parachute Deployed!")
-					instance.set_mass(drag)
-					drag += 1.8 * delta
-				if drag >= 3.7:
-					_state = State.PARACHUTE_DEPLOYED
+				print("Parachute Deployed!")
+				set_linear_damp(parachute_drag)
+				
 		State.PARACHUTE_CUT:
 				instance.queue_free()
+				
 				_state = State.PARACHUTE_USED
+				set_linear_damp(drag)
 				
 		
 			
