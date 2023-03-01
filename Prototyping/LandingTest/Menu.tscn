@@ -14,6 +14,7 @@ margin_bottom = 40.0
 [node name="Start" type="Button" parent="VBoxContainer"]
 margin_right = 63.0
 margin_bottom = 20.0
+focus_neighbour_top = NodePath("../Exit")
 text = "Start"
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
@@ -26,6 +27,9 @@ text = "Settings"
 margin_top = 48.0
 margin_right = 63.0
 margin_bottom = 68.0
+focus_neighbour_bottom = NodePath("../Start")
 text = "Exit"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
