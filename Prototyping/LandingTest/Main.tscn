@@ -10,13 +10,17 @@ position = Vector2( 486, 196 )
 [node name="StartPosition" type="Node2D" parent="."]
 
 [node name="Surface" parent="." instance=ExtResource( 1 )]
-position = Vector2( 24, 189 )
+position = Vector2( 33, 174 )
+scale = Vector2( 1.69547, 1.96441 )
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2( 0, -164 )
+position = Vector2( 0, -53 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Lander" parent="Node2D" instance=ExtResource( 2 )]
+__meta__ = {
+"_edit_group_": true
+}

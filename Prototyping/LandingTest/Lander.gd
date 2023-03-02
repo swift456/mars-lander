@@ -31,13 +31,24 @@ func _process(delta):
 		State.PARACHUTE_DEPLOY:
 				_integrate_forces(self)
 				instance = parachute.instance()
+				
+				
 				add_child(instance)
-				instance.position = Vector2($ParachuteSpawn.position.x,$ParachuteSpawn.position.y + -10)
-				var pinjoint = PinJoint2D.new()
-				pinjoint.set("node_b", self.get_path())
-				pinjoint.set("node_a", instance.get_path())
-				add_child(pinjoint)
-				pinjoint.global_transform.origin = (instance.global_transform.origin - self.global_transform.origin / 2)
+				instance.global_transform.origin = (self.global_transform.origin)
+				
+				
+				var spring = DampedSpringJoint2D.new()
+				spring.set("node_b", self.get_path())
+				spring.set("node_a", instance.get_path())
+				spring.set_rest_length(-70)
+				spring.set_length(-100)
+				spring.set_stiffness(6)
+				spring.set_damping(1)
+				add_child(spring)
+				
+				
+				spring.global_transform.origin = self.global_transform.origin
+				
 				_state = State.PARACHUTE_DEPLOYED
 				
 		State.PARACHUTE_DEPLOYED:
