@@ -8,8 +8,11 @@ var instancing = true
 var instance = parachute
 enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED,LANDED, DESTROYED, PAUSED}
 var _state = State.FREEFALL
+var density = 0.0020
 
 
+func _ready():
+	apply_central_impulse(Vector2(100,140))
 
 
 
@@ -37,13 +40,9 @@ func _process(delta):
 				instance.global_transform.origin = (self.global_transform.origin)
 				
 				
-				var spring = DampedSpringJoint2D.new()
+				var spring = PinJoint2D.new()
 				spring.set("node_b", self.get_path())
 				spring.set("node_a", instance.get_path())
-				spring.set_rest_length(-70)
-				spring.set_length(-100)
-				spring.set_stiffness(6)
-				spring.set_damping(1)
 				add_child(spring)
 				
 				
@@ -79,14 +78,19 @@ func _process(delta):
 func _integrate_forces(state):
 	self.set_applied_torque(0)
 	if Input.is_action_pressed("left"):
-		self.set_applied_torque(-1000)
+		self.set_applied_torque(-100)
 	if Input.is_action_pressed("right"):
-		self.set_applied_torque(1000)
+		self.set_applied_torque(100)
 	if Input.is_action_pressed("thrust"):
 		var thrust = -self.global_transform.y
 		thrust = thrust
 		apply_central_impulse(thrust)
 	print(rotation)
+	
+	
+
+	
+	
 func input():
 	
 	

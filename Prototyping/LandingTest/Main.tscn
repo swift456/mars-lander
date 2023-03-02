@@ -5,12 +5,14 @@
 [ext_resource path="res://ControlNode.gd" type="Script" id=3]
 
 [node name="Main" type="Node2D"]
-position = Vector2( 518, 374 )
+position = Vector2( 803, 718 )
+scale = Vector2( 1, 0.760002 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Surface" parent="." instance=ExtResource( 1 )]
+position = Vector2( -5, -178.947 )
 scale = Vector2( 1.69547, 1.96441 )
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -21,6 +23,7 @@ __meta__ = {
 }
 
 [node name="Lander" parent="Node2D" instance=ExtResource( 2 )]
+position = Vector2( -798, -609.208 )
 __meta__ = {
 "_edit_group_": true
 }
