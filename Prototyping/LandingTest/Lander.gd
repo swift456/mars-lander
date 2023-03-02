@@ -3,31 +3,36 @@ extends RigidBody2D
 const parachute = preload("res://Parachute.tscn")
 var parachute_deployed = false
 var parachute_drag = 2
-var drag = 1
+var drag = 0
 var instancing = true
 var instance = parachute
 enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED,LANDED, DESTROYED, PAUSED}
 var _state = State.FREEFALL
-var density = 0.0020
+var density = 0.00000002
+var area = 2000
+var current_velocity = 0
+const CD = 1.7
+
+
 
 
 func _ready():
-	apply_central_impulse(Vector2(100,140))
+	pass
 
 
 
 
-func _process(delta):
+func _physics_process(delta):
 	
 	
 	input()
 
-	print(rotation)
 	
-#	input()
+	
+
 	
 	var debug_velocity = get_linear_velocity()
-	print((_state)," ",(debug_velocity),(parachute_drag),(parachute_deployed))
+	print((_state)," ",(debug_velocity),(drag),(parachute_deployed))
 	
 	match _state:
 
@@ -52,13 +57,13 @@ func _process(delta):
 				
 		State.PARACHUTE_DEPLOYED:
 				print("Parachute Deployed!")
-				set_linear_damp(parachute_drag)
+				area =+ 25
 				
 		State.PARACHUTE_CUT:
 				instance.queue_free()
 				
 				_state = State.PARACHUTE_USED
-				set_linear_damp(drag)
+				
 		
 		State.LANDED:
 			if self.get_linear_velocity().y > 40:
@@ -76,6 +81,8 @@ func _process(delta):
 			
 
 func _integrate_forces(state):
+	drag = density * self.get_linear_velocity().y * area * CD * 1/2
+	apply_central_impulse(Vector2(0,-drag))
 	self.set_applied_torque(0)
 	if Input.is_action_pressed("left"):
 		self.set_applied_torque(-100)
