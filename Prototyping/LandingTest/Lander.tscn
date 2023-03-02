@@ -7,6 +7,8 @@
 extents = Vector2( 30, 30 )
 
 [node name="Lander" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -6,7 +6,7 @@ var parachute_drag = 2
 var drag = 1
 var instancing = true
 var instance = parachute
-enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED, DESTROYED, PAUSED}
+enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED,LANDED, DESTROYED, PAUSED}
 var _state = State.FREEFALL
 
 
@@ -60,6 +60,13 @@ func _process(delta):
 				
 				_state = State.PARACHUTE_USED
 				set_linear_damp(drag)
+		
+		State.LANDED:
+			if self.get_linear_velocity().y > 40:
+				_state = State.DESTROYED
+		
+		State.DESTROYED:
+			get_tree().change_scene("res://Menu.tscn")
 				
 		
 			
@@ -85,7 +92,7 @@ func input():
 	
 		
 	
-	if Input.is_action_just_pressed("parachute") && !_state == State.PARACHUTE_DEPLOYED && !_state == State.PARACHUTE_USED:
+	if Input.is_action_just_pressed("parachute") && !_state == State.PARACHUTE_DEPLOYED && !_state == State.PARACHUTE_USED && !_state == State.LANDED:
 		_state = State.PARACHUTE_DEPLOY
 	if Input.is_action_just_pressed("parachute") && _state == State.PARACHUTE_DEPLOYED:
 		_state = State.PARACHUTE_CUT
@@ -96,3 +103,7 @@ func input():
 	
 #
 #		
+
+
+func _on_Surface_body_entered(body):
+		_state = State.LANDED
