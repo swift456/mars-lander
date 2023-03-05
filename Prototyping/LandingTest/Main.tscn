@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Surface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Lander.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ControlNode.gd" type="Script" id=3]
+[ext_resource path="res://HSpeedIndicator.gd" type="Script" id=4]
+[ext_resource path="res://VSpeedIndicator.gd" type="Script" id=5]
 
 [node name="Main" type="Node2D"]
-position = Vector2( 803, 718 )
+position = Vector2( 804, 711 )
 scale = Vector2( 1, 0.760002 )
 __meta__ = {
 "_edit_group_": true
@@ -27,5 +29,22 @@ position = Vector2( -798, -609.208 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="HSpeedIndicator" type="RichTextLabel" parent="."]
+margin_left = 735.0
+margin_top = -934.208
+margin_right = 775.0
+margin_bottom = -894.208
+rect_scale = Vector2( 1.51996, 1 )
+text = "Hori"
+script = ExtResource( 4 )
+
+[node name="VSpeedIndicator" type="RichTextLabel" parent="."]
+margin_left = 735.0
+margin_top = -894.735
+margin_right = 775.0
+margin_bottom = -854.735
+rect_scale = Vector2( 1.52, 1 )
+script = ExtResource( 5 )
 
 [connection signal="body_entered" from="Surface" to="Node2D/Lander" method="_on_Surface_body_entered"]

@@ -8,7 +8,7 @@ var instancing = true
 var instance = parachute
 enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED,LANDED, DESTROYED, PAUSED}
 var _state = State.FREEFALL
-var density = 0.00002
+var density = 0.000002
 var area = 300
 var current_velocity = 0
 const CD = 1.7
