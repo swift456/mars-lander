@@ -13,7 +13,7 @@ func _ready():
 
 
 func _process(delta):
-	var h_speed = round(get_parent().get_child(1).get_child(0).get_linear_velocity().x)
+	var h_speed = round($Node2D/Lander.get_linear_velocity().x)
 	
 	self.clear()
 	self.add_text(str(h_speed))

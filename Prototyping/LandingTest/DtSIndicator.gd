@@ -1,4 +1,4 @@
-extends RichTextLabel
+extends Control
 
 
 # Declare member variables here. Examples:
@@ -13,9 +13,24 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var distance_to_surface = round(get_parent().get_child(1).get_child(0).get_global_position().distance_to(get_parent().get_child(0).get_global_position()))
-	
-	self.clear()
-	self.add_text(str(distance_to_surface))
-	
+	dts_Indicator()
+	h_Speed_indicator()
+	v_Speed_indicator()
 
+func dts_Indicator():
+	var distance_to_surface = round($Node2D/Lander.get_global_position().distance_to($Surface.get_global_position()))
+	
+	$DtSIndicator.clear()
+	$DtSIndicator.add_text(str(distance_to_surface))
+
+func h_Speed_indicator():
+	var h_speed = round($Node2D/Lander.get_linear_velocity().x)
+	$HSpeedIndicator.clear()
+	$HSpeedIndicator.add_text(str(h_speed))
+
+func v_Speed_indicator():
+	var v_speed = round($Node2D/Lander.get_linear_velocity().y)
+	$VSpeedIndicator.clear()
+	$VSpeedIndicator.add_text(str(v_speed))
+	
+	

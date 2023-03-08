@@ -1,4 +1,4 @@
-extends RichTextLabel
+extends Control
 
 
 # Declare member variables here. Examples:
@@ -13,9 +13,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var v_speed = round($Node2D/Lander.get_linear_velocity().y)
-	
-	self.clear()
-	self.add_text(str(v_speed))
-	
-
+	if Input.is_action_just_pressed("pause"):
+		self.visible = true
+		get_tree().paused = true
