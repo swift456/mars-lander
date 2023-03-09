@@ -13,6 +13,20 @@ position = Vector2(804, 711)
 scale = Vector2(1, 0.760002)
 script = ExtResource("7")
 
+[node name="PauseMenu" parent="." instance=ExtResource("8")]
+visible = false
+visibility_layer = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -799.0
+offset_top = -936.84
+offset_right = -799.0
+offset_bottom = -936.84
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
 [node name="UI" type="Control" parent="."]
 visibility_layer = 2
 layout_mode = 3
@@ -56,20 +70,6 @@ script = ExtResource("3")
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
 visibility_layer = 2
 position = Vector2(-25, -592.103)
-
-[node name="PauseMenu" parent="UI/Node2D/Lander" instance=ExtResource("8")]
-visible = false
-visibility_layer = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -778.0
-offset_top = -19.7366
-offset_right = -778.0
-offset_bottom = -19.7366
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
 
 [node name="Surface" parent="UI" instance=ExtResource("1")]
 light_mask = 2

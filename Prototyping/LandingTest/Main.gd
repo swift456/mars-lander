@@ -16,7 +16,10 @@ var current_velocity = 0
 const CD = 1.7
 
 
-
+func _unhandled_input(event):
+	if event.is_action_pressed("pause"):
+		$PauseMenu.pause()
+	
 
 func _ready():
 	pass
@@ -69,12 +72,12 @@ func _physics_process(delta):
 				
 		
 		State.LANDED:
-			if $UI/Node2D/Lander.get_linear_velocity().y > 40:
+			if $UI/Node2D/Lander.get_linear_velocity().y > 800:
 				_state = State.DESTROYED
 				#Need to instance a new scene here "Success"
 		
 		State.DESTROYED:
-			get_tree().change_scene_to_file("res://Menu.tscn")
+			get_tree().change_scene_to_file("res://StartMenu.tscn")
 			#Need to instance a new scene here "DESTROYED"
 			
 		
@@ -101,7 +104,7 @@ func _integrate_forces(state):
 	
 	
 func drag():
-	
+	#function to find out the magnitude of the vector
 	vert_drag = density * $UI/Node2D/Lander.get_linear_velocity().y * (area+parachute_area) * CD * 1/2
 	hori_drag = density * $UI/Node2D/Lander.get_linear_velocity().x * (area+parachute_area) * CD * 1/2
 	$UI/Node2D/Lander.apply_central_impulse(Vector2(-hori_drag,-vert_drag))
