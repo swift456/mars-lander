@@ -8,11 +8,21 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$Background/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Resume.pressed.connect(unpause)
+	$Background/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Exit.pressed.connect(get_tree().quit)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("pause"):
-		self.visible = true
-		get_tree().paused = true
+	pass
+
+
+func unpause():
+	get_tree().paused = false
+	visible = false
+
+
+func pause():
+	get_tree().paused = true
+	visible = true

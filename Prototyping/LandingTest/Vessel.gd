@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var speed = 100
-export var gravity = 8
+@export var gravity = 8
 var velocity = Vector2()
 # Declare member variables here. Examples:
 # var a = 2

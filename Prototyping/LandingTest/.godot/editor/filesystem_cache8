@@ -1,0 +1,28 @@
+2a60927148abd1d33b818b535e306557
+::res://::1678359900
+ControlNode.gd::GDScript::-1::1678359884::0::1::::<>Node2D<>::
+default_env.tres::Environment::-1::1678359884::0::1::::<><>::
+DtSIndicator.gd::GDScript::-1::1678359884::0::1::::<>Control<>::
+HSpeedIndicator.gd::GDScript::-1::1678359884::0::1::::<>RichTextLabel<>::
+icon.png::CompressedTexture2D::2268617921838320969::1676299884::1678359902::1::::<><>::
+Lander.gd::GDScript::-1::1678359884::0::1::::<>RigidBody2D<>::
+Lander.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://icon.png<>res://Lander.gd
+LanderKinematic.gd::GDScript::-1::1678359884::0::1::::<>CharacterBody2D<>::
+LanderKinematic.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://LanderKinematic.gd<>res://icon.png
+Main.gd::GDScript::-1::1678359884::0::1::::<>Node2D<>::
+Main.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://Surface.tscn<>res://Lander.tscn<>res://ControlNode.gd<>res://DtSIndicator.gd<>res://Main.gd<>res://Menu.tscn
+Menu.gd::GDScript::-1::1678359884::0::1::::<>Control<>::
+Menu.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://MS Gothic.ttf<>res://PauseMenu.gd
+MS Gothic.ttf::FontFile::7377445999158097782::1678304610::1678359902::1::::<><>::
+Node.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://Timer.tscn<>res://Vessel.tscn
+Parachute.gd::GDScript::-1::1678359884::0::1::::<>RigidBody2D<>::
+Parachute.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://icon.png
+PauseMenu.gd::GDScript::-1::1678359884::0::1::::<>Control<>::
+PauseMenu.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://Menu.gd
+Player.gd::GDScript::-1::1678359884::0::1::::<>Area2D<>::
+Player.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://icon.png<>res://Player.gd
+Surface.tscn::PackedScene::-1::1678359884::0::1::::<><>::
+Timer.tscn::PackedScene::-1::1678359884::0::1::::<><>::
+Vessel.gd::GDScript::-1::1678359884::0::1::::<>RigidBody2D<>::
+Vessel.tscn::PackedScene::-1::1678359884::0::1::::<><>::res://Vessel.gd<>res://icon.png
+VSpeedIndicator.gd::GDScript::-1::1678359884::0::1::::<>RichTextLabel<>::

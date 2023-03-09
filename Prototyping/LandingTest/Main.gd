@@ -26,7 +26,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	
+	_integrate_forces($UI/Node2D/Lander)
 	input()
 
 	
@@ -40,7 +40,7 @@ func _physics_process(delta):
 
 		State.PARACHUTE_DEPLOY:
 				_integrate_forces($UI/Node2D/Lander)
-				instance = parachute.instance()
+				instance = parachute.instantiate()
 				
 				
 				$UI/Node2D/Lander.add_child(instance)
@@ -74,7 +74,7 @@ func _physics_process(delta):
 				#Need to instance a new scene here "Success"
 		
 		State.DESTROYED:
-			get_tree().change_scene("res://Menu.tscn")
+			get_tree().change_scene_to_file("res://Menu.tscn")
 			#Need to instance a new scene here "DESTROYED"
 			
 		
@@ -88,11 +88,11 @@ func _physics_process(delta):
 
 func _integrate_forces(state):
 	drag()
-	$UI/Node2D/Lander.set_applied_torque(0)
+	$UI/Node2D/Lander.apply_torque(0)
 	if Input.is_action_pressed("left"):
-		$UI/Node2D/Lander.set_applied_torque(-100)
+		$UI/Node2D/Lander.apply_torque(-100)
 	if Input.is_action_pressed("right"):
-		$UI/Node2D/Lander.set_applied_torque(100)
+		$UI/Node2D/Lander.apply_torque(100)
 	if Input.is_action_pressed("thrust"):
 		var thrust = -$UI/Node2D/Lander.global_transform.y
 		thrust = thrust
@@ -126,5 +126,9 @@ func input():
 #		
 
 
-func _on_Surface_body_entered(body):
-		_state = State.LANDED
+
+		
+
+
+func _on_surface_body_entered(body):
+	_state = State.LANDED
