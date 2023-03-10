@@ -44,7 +44,7 @@ func _physics_process(delta):
 				
 				
 				$UI/Node2D/Lander.add_child(instance)
-				instance.global_transform.origin = ($UI/Node2D/Lander.global_transform.origin)
+				instance.global_transform.origin = ($UI/Node2D/Lander/ParachuteSpawn.global_transform.origin)
 				
 				
 				var spring = PinJoint2D.new()
