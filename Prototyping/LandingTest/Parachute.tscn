@@ -1,21 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cck84jnafg62u"]
 
-[ext_resource path="res://icon.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://cakf4wkcolec" path="res://assets/Parachute.png" id="1_4yasm"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 18.5, 19 )
+[node name="RigidBody2D" type="RigidBody2D"]
 
-[node name="Parachute" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 0
-mass = 0.135135
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(9, -24)
+scale = Vector2(0.524268, 1.02344)
+texture = ExtResource("1_4yasm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2( 0.6, 0.6 )
-texture = ExtResource( 1 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(9, -10)
+polygon = PackedVector2Array(-1, 7, -13, -22, -16, -20, -12, -37, -4, -44, 3, -45, 10, -37, 15, -25, 16, -22)

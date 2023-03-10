@@ -1,9 +1,9 @@
 extends Node2D
 
-const parachute = preload("res://Parachute.tscn")
+const parachute = preload("res://Parachute2.tscn")
 const pause_menu = preload("res://Menu.tscn")
 
-var parachute_area = 0
+var parachute_area = 2500
 var vert_drag = 0
 var hori_drag = 0
 var instancing = true
@@ -14,6 +14,8 @@ var density = 0.000002
 var area = 300
 var current_velocity = 0
 const CD = 1.7
+var parachute_vert_drag = 0
+var parachute_hori_drag = 0
 
 
 func _unhandled_input(event):
@@ -47,22 +49,23 @@ func _physics_process(delta):
 				
 				
 				$UI/Node2D/Lander.add_child(instance)
-				instance.global_transform.origin = ($UI/Node2D/Lander/ParachuteSpawn.global_transform.origin)
+				instance.global_transform.origin = $UI/Node2D/Lander/AttachmentPoint.global_transform.origin
 				
 				
-				var spring = PinJoint2D.new()
-				spring.set("node_b", $UI/Node2D/Lander.get_path())
-				spring.set("node_a", instance.get_path())
-				$UI/Node2D/Lander.add_child(spring)
+			
+				
+				instance.get_node("Attachment").set("node_b", $UI/Node2D/Lander/AttachmentPoint.get_path_to(instance.get_node("RopeSegment3")))
+				instance.get_node("Attachment").set("node_a", instance.get_node("RopeSegment3").get_path_to($UI/Node2D/Lander/AttachmentPoint))
 				
 				
-				spring.global_transform.origin = $UI/Node2D/Lander.global_transform.origin
+				
+				
 				
 				_state = State.PARACHUTE_DEPLOYED
 				
 		State.PARACHUTE_DEPLOYED:
 				print("Parachute Deployed!")
-				parachute_area = 2500
+				parachute_drag()
 				
 				
 		State.PARACHUTE_CUT:
@@ -105,10 +108,15 @@ func _integrate_forces(state):
 	
 func drag():
 	#function to find out the magnitude of the vector
-	vert_drag = density * $UI/Node2D/Lander.get_linear_velocity().y * (area+parachute_area) * CD * 1/2
-	hori_drag = density * $UI/Node2D/Lander.get_linear_velocity().x * (area+parachute_area) * CD * 1/2
+	vert_drag = density * $UI/Node2D/Lander.get_linear_velocity().y * (area) * CD * 1/2
+	hori_drag = density * $UI/Node2D/Lander.get_linear_velocity().x * (area) * CD * 1/2
 	$UI/Node2D/Lander.apply_central_impulse(Vector2(-hori_drag,-vert_drag))
 	
+	
+func parachute_drag():
+	parachute_vert_drag = density * $UI/Node2D/Lander.get_linear_velocity().y * (parachute_area) * CD * 1/2
+	parachute_hori_drag = density * $UI/Node2D/Lander.get_linear_velocity().x * (parachute_area) * CD * 1/2
+	instance.apply_central_impulse(Vector2(-parachute_hori_drag,-parachute_vert_drag))
 	
 func input():
 	

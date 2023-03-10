@@ -1,16 +1,9 @@
 res://default_env.tres
-<<<<<<< HEAD
 res://Menu.tscn
 res://Main.gd
 res://Main.tscn
-=======
-res://Main.tscn
-res://Lander.gd
-res://Main.gd
-res://Menu.tscn
->>>>>>> 315d524383c960071f20ac6055afff3a954f9586
 res://Surface.tscn
 res://Lander.tscn
-res://StartMenu.tscn
-res://StartMenu.gd
-res://Menu.gd
+res://Parachute.tscn
+res://Parachute2.tscn
+res://rope_segment.tscn
