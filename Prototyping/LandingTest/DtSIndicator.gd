@@ -18,13 +18,14 @@ func _process(delta):
 	v_Speed_indicator()
 
 func dts_Indicator():
-	var distance_to_surface = round($Node2D/Lander.get_global_position().distance_to($Surface.get_global_position()))
+	var distance_to_surface = round($Node2D/RayCast2D.get_collision_point().y - $Node2D/Lander.get_global_position().y)
 	
 	$DtSIndicator.clear()
 	$DtSIndicator.add_text(str(distance_to_surface))
 
 func h_Speed_indicator():
-	var h_speed = round($Node2D/Lander.get_linear_velocity().x)
+	$Node2D/RayCast2D.add_exception($Node2D/Lander)
+	var h_speed = $Node2D/RayCast2D.get_collider()
 	$HSpeedIndicator.clear()
 	$HSpeedIndicator.add_text(str(h_speed))
 
