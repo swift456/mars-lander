@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-
+@export var area = 300 
 
 func _process(delta):
 	pass

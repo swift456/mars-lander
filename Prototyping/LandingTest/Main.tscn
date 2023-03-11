@@ -64,16 +64,34 @@ scale = Vector2(1.51996, 1)
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
-position = Vector2(4, -325)
+position = Vector2(-541, -905.261)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
 visibility_layer = 2
-position = Vector2(-25, -592.103)
+
+[node name="CollisionPolygon2D" parent="UI/Node2D/Lander" index="0"]
+position = Vector2(-0.599976, -9.01572)
+
+[node name="Sprite2D" parent="UI/Node2D/Lander" index="1"]
+position = Vector2(0.400024, -8.01572)
+
+[node name="AttachmentPoint" parent="UI/Node2D/Lander" index="2"]
+position = Vector2(0.400024, -18.0157)
+
+[node name="RayCast2D" type="RayCast2D" parent="UI/Node2D"]
+modulate = Color(0.286275, 1, 1, 1)
+position = Vector2(0, 2.63157)
+target_position = Vector2(0, 1200)
+collision_mask = 4
+collide_with_areas = true
 
 [node name="Surface" parent="UI" instance=ExtResource("1")]
 light_mask = 2
 position = Vector2(-13, -121.052)
 scale = Vector2(1.73408, 1.96441)
+collision_layer = 5
 
 [connection signal="body_entered" from="UI/Surface" to="." method="_on_surface_body_entered"]
+
+[editable path="UI/Node2D/Lander"]

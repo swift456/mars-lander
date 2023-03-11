@@ -17,5 +17,6 @@ position = Vector2(9, 9)
 scale = Vector2(0.475, 0.475)
 texture = ExtResource("2_o0rdu")
 
-[node name="AttachmentPoint" type="Node2D" parent="."]
-position = Vector2(9, 0)
+[node name="AttachmentPoint" type="PinJoint2D" parent="."]
+position = Vector2(9, -1)
+node_a = NodePath("..")

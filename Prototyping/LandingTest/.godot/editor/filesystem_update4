@@ -1,9 +1,11 @@
 res://default_env.tres
 res://Menu.tscn
-res://Main.gd
 res://Main.tscn
 res://Surface.tscn
 res://Lander.tscn
-res://Parachute.tscn
 res://Parachute2.tscn
 res://rope_segment.tscn
+res://Main.gd
+res://Lander.gd
+res://Parachute2.gd
+res://DtSIndicator.gd
