@@ -1,0 +1,31 @@
+@startuml
+FREEFALL : This is the default state
+
+state deploy_input <<choice>>
+FREEFALL -> deploy_input
+deploy_input --> PARACHUTE_DEPLOY : deploy input recieved
+deploy_input --> LANDED : no input recieved by time lander touches surface
+PARACHUTE_DEPLOY -> PARACHUTE_DEPLOYED
+state cut_input <<choice>>
+PARACHUTE_DEPLOYED -> cut_input
+PARACHUTE_DEPLOYED -> LANDED
+cut_input --> PARACHUTE_CUT : cut input recieved
+cut_input --> PARACHUTE_DEPLOYED : no input recieved
+PARACHUTE_CUT -> PARACHUTE_USED
+PARACHUTE_USED -> LANDED
+PARACHUTE_DEPLOY : generate instance of parachute
+PARACHUTE_DEPLOYED : 
+PARACHUTE_USED : 
+LANDED : 
+
+state is_destroyed <<choice>>
+LANDED -> is_destroyed
+
+is_destroyed --> LANDED : collides with surface going less than x speed
+is_destroyed --> DESTROYED : collides with surface going more than||equal to x speed
+
+
+
+
+DESTROYED -> [*]
+@enduml
