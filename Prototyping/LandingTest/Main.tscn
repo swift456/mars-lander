@@ -1,31 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmd8x0owy3igp"]
+[gd_scene load_steps=6 format=3 uid="uid://cmd8x0owy3igp"]
 
 [ext_resource type="PackedScene" uid="uid://bumve4rwl80ip" path="res://Surface.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://eju5jnr1sa4c" path="res://Lander.tscn" id="2"]
 [ext_resource type="Script" path="res://ControlNode.gd" id="3"]
 [ext_resource type="Script" path="res://DtSIndicator.gd" id="6"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
-[ext_resource type="PackedScene" uid="uid://bg0l8ny181npf" path="res://Menu.tscn" id="8"]
 
 [node name="Main" type="Node2D"]
 visibility_layer = 2
 position = Vector2(804, 711)
 scale = Vector2(1, 0.760002)
 script = ExtResource("7")
-
-[node name="PauseMenu" parent="." instance=ExtResource("8")]
-visible = false
-visibility_layer = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -799.0
-offset_top = -936.84
-offset_right = -799.0
-offset_bottom = -936.84
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
 
 [node name="UI" type="Control" parent="."]
 visibility_layer = 2
@@ -64,7 +49,7 @@ scale = Vector2(1.51996, 1)
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
-position = Vector2(-541, -905.261)
+position = Vector2(-437, -1205.26)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]

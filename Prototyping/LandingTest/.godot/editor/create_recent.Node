@@ -1,3 +1,7 @@
+CanvasLayer
+PanelContainer
+CenterContainer
+HSeparator
 RayCast2D
 PinJoint2D
 Node2D

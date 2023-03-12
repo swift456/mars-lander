@@ -1,13 +1,13 @@
 extends Node2D
 
-const parachute = preload("res://Parachute2.tscn")
-const pause_menu = preload("res://Menu.tscn")
+const ParachuteScene = preload("res://Parachute2.tscn")
+const PauseScene = preload("res://Menu.tscn")
 
 var vert_drag = 0
 var hori_drag = 0
 var air_resistance = Vector2(0,0)
-var instance = parachute
-enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED,LANDED, DESTROYED, PAUSED}
+var instance = ParachuteScene
+enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED,LANDED,SUCCESS, DESTROYED, PAUSED}
 var _state = State.FREEFALL
 var density = 0.00002
 var current_velocity = 0
@@ -17,8 +17,8 @@ var parachute_used = false
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
-		$PauseMenu.pause()
-	
+		var pause_menu = PauseScene.instantiate()
+		add_child(pause_menu)
 
 func _ready():
 	pass
@@ -40,7 +40,7 @@ func _physics_process(delta):
 	
 	match _state:
 		State.PARACHUTE_DEPLOY:
-				instance = parachute.instantiate()
+				instance = ParachuteScene.instantiate()
 				$UI/Node2D/Lander.add_child(instance)
 				instance.global_transform.origin = $UI/Node2D/Lander/AttachmentPoint.global_transform.origin
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
@@ -57,16 +57,22 @@ func _physics_process(delta):
 				_state = State.PARACHUTE_USED
 			
 			
-		State.LANDED:
-			if $UI/Node2D/Lander.get_linear_velocity().y > 800:
-				_state = State.DESTROYED
-				#Need to instance a new scene here "Success"
+	
 				
 		State.DESTROYED:
-			get_tree().change_scene_to_file("res://StartMenu.tscn")
-			#Need to instance a new scene here "DESTROYED"
 			
-		
+			var pause_menu = PauseScene.instantiate()
+			pause_menu.get_node("Control").change_title(State.DESTROYED)
+			add_child(pause_menu)
+			_state = State.FREEFALL
+			
+			
+		State.SUCCESS:
+			
+			var pause_menu = PauseScene.instantiate()
+			pause_menu.get_node("Control").change_title(State.SUCCESS)
+			add_child(pause_menu)
+			_state = State.FREEFALL
 			
 		
 		
@@ -124,4 +130,8 @@ func input():
 
 
 func _on_surface_body_entered(body):
-	_state = State.LANDED
+	if $UI/Node2D/Lander.get_linear_velocity().y > 30:
+		_state = State.DESTROYED
+	else:
+		await get_tree().create_timer(3).timeout
+		_state = State.SUCCESS
