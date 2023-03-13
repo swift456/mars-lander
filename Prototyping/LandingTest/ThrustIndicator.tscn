@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bdej18wxdudg2"]
+
+[node name="VSlider" type="VSlider"]
+offset_right = 16.0
+offset_bottom = 138.0
+max_value = 1.0
+step = 0.1
