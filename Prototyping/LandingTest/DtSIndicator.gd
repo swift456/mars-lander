@@ -18,21 +18,22 @@ func _process(delta):
 	v_Speed_indicator()
 
 func dts_Indicator():
-	$Node2D/RayCast2D.add_exception($Node2D/Lander)
-	var distance_to_surface = round($Node2D/RayCast2D.get_collision_point().y - $Node2D/Lander.get_global_position().y)
+#	$Node2D/RayCast2D.add_exception($Node2D/Lander)
+	var distance_to_surface = round($Node2D/Lander/RayCast2D.get_collision_point().y - $Node2D/Lander.get_global_position().y)
+	print($Node2D/Lander/RayCast2D.get_collider())
 	
-	$DtSIndicator.clear()
-	$DtSIndicator.add_text(str(distance_to_surface))
+	$Node2D/Lander/Camera2D/DtSIndicator.clear()
+	$Node2D/Lander/Camera2D/DtSIndicator.add_text(str(distance_to_surface))
 
 func h_Speed_indicator():
 	
 	var h_speed = round($Node2D/Lander.get_linear_velocity().x)
-	$HSpeedIndicator.clear()
-	$HSpeedIndicator.add_text(str(h_speed))
+	$Node2D/Lander/Camera2D/HSpeedIndicator.clear()
+	$Node2D/Lander/Camera2D/HSpeedIndicator.add_text(str(h_speed))
 
 func v_Speed_indicator():
 	var v_speed = round($Node2D/Lander.get_linear_velocity().y)
-	$VSpeedIndicator.clear()
-	$VSpeedIndicator.add_text(str(v_speed))
+	$Node2D/Lander/Camera2D/VSpeedIndicator.clear()
+	$Node2D/Lander/Camera2D/VSpeedIndicator.add_text(str(v_speed))
 	
 	
