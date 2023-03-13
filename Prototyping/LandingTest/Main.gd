@@ -88,11 +88,8 @@ func _integrate_forces(state):
 		$UI/Node2D/Lander.apply_torque(-100)
 	if Input.is_action_pressed("right"):
 		$UI/Node2D/Lander.apply_torque(100)
-	if Input.is_action_pressed("thrust"):
-		var thrust = -$UI/Node2D/Lander.global_transform.y
-		thrust = thrust
-		$UI/Node2D/Lander.apply_central_impulse(thrust)
-	print(rotation)
+	
+	
 	
 	
 func drag(state):
