@@ -47,7 +47,6 @@ collide_with_areas = true
 
 [node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
 position = Vector2(0, -14.4736)
-ignore_rotation = false
 
 [node name="VSpeedIndicator" type="RichTextLabel" parent="UI/Node2D/Lander/Camera2D"]
 visibility_layer = 2

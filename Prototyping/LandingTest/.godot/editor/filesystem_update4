@@ -6,6 +6,4 @@ res://Lander.tscn
 res://Parachute2.tscn
 res://rope_segment.tscn
 res://StartMenu.tscn
-res://DtSIndicator.gd
 res://ThrustIndicator.tscn
-res://Main.gd
