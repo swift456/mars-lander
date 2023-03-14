@@ -19,7 +19,8 @@ scale = Vector2(0.475, 0.475)
 texture = ExtResource("2_o0rdu")
 
 [node name="AttachmentPoint" type="PinJoint2D" parent="."]
-position = Vector2(9, -1)
+position = Vector2(9, -5)
 node_a = NodePath("..")
-bias = 0.75
+bias = 0.9
 disable_collision = false
+softness = 0.2

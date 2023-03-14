@@ -40,10 +40,11 @@ func _physics_process(delta):
 	match _state:
 		State.PARACHUTE_DEPLOY:
 				instance = ParachuteScene.instantiate()
+				instance.linear_velocity = $UI/Node2D/Lander.get_linear_velocity()
 				$UI/Node2D/Lander.add_child(instance)
 				instance.global_transform.origin = $UI/Node2D/Lander/AttachmentPoint.global_transform.origin
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
-				instance.linear_velocity = $UI/Node2D/Lander.get_linear_velocity()
+				
 				_state = State.PARACHUTE_DEPLOYED
 				
 				
@@ -128,8 +129,8 @@ func input():
 
 
 func _on_surface_body_entered(body):
-	if $UI/Node2D/Lander.get_linear_velocity().y > 800:
+	if $UI/Node2D/Lander.get_linear_velocity().y > 40:
 		_state = State.DESTROYED
 	else:
-		await get_tree().create_timer(200).timeout
+		await get_tree().create_timer(5).timeout
 		_state = State.SUCCESS

@@ -58,7 +58,7 @@ pause={
 
 [physics]
 
-common/max_physics_steps_per_frame=16
+common/max_physics_steps_per_frame=32
 2d/default_gravity=37
 2d/default_linear_damp=0.0
 common/enable_pause_aware_picking=true

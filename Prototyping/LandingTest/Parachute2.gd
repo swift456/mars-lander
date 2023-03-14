@@ -3,7 +3,7 @@ extends RigidBody2D
 var air_resistance = Vector2(0,0)
 var density = 0.00002
 const CD = 1.75
-@export var area = 25000
+@export var area = 250000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

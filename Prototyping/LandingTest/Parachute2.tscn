@@ -10,51 +10,48 @@ collision_mask = 3
 mass = 10.0
 script = ExtResource("1_8gw8e")
 
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2(0, -33.7)
-node_a = NodePath("..")
-node_b = NodePath("../RopeSegment")
-bias = 0.75
-disable_collision = false
-
-[node name="PinJoint2D2" type="PinJoint2D" parent="."]
-position = Vector2(0, -23.7)
-node_a = NodePath("../RopeSegment")
-node_b = NodePath("../RopeSegment2")
-bias = 0.75
-disable_collision = false
-
-[node name="Attachment" type="PinJoint2D" parent="."]
-position = Vector2(0, -2)
-node_a = NodePath("../RopeSegment3")
-bias = 0.75
-disable_collision = false
-
-[node name="PinJoint2D3" type="PinJoint2D" parent="."]
-position = Vector2(0, -11.7)
-node_a = NodePath("../RopeSegment2")
-node_b = NodePath("../RopeSegment3")
-bias = 0.75
-disable_collision = false
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(9.53674e-07, -54.7)
-scale = Vector2(0.524268, 1.02344)
-texture = ExtResource("1_fstp5")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -54.7)
+polygon = PackedVector2Array(0, 21, -15, -9, -11, -20, 0, -30, 13, -19, 15, -8)
 
 [node name="RopeSegment" parent="." instance=ExtResource("2_pib13")]
 position = Vector2(0, -28.7)
 
+[node name="PinJoint2D" type="PinJoint2D" parent="RopeSegment"]
+position = Vector2(0, -5)
+node_a = NodePath("../..")
+node_b = NodePath("..")
+bias = 0.9
+disable_collision = false
+softness = 0.2
+
 [node name="RopeSegment2" parent="." instance=ExtResource("2_pib13")]
 position = Vector2(0, -17.7)
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="RopeSegment2"]
+position = Vector2(0, -6)
+node_a = NodePath("../../RopeSegment")
+node_b = NodePath("..")
+bias = 0.9
+disable_collision = false
+softness = 0.2
 
 [node name="RopeSegment3" parent="." instance=ExtResource("2_pib13")]
 position = Vector2(0, -6.7)
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -54.7)
-polygon = PackedVector2Array(0, 21, -15, -9, -11, -20, 0, -30, 13, -19, 15, -8)
+[node name="PinJoint2D3" type="PinJoint2D" parent="RopeSegment3"]
+position = Vector2(0, -5)
+node_a = NodePath("../../RopeSegment2")
+node_b = NodePath("..")
+bias = 0.9
+disable_collision = false
+softness = 0.2
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, -54.7)
+scale = Vector2(0.524268, 1.02344)
+texture = ExtResource("1_fstp5")
 
 [editable path="RopeSegment3"]

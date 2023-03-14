@@ -6,33 +6,30 @@ extends RigidBody2D
 var air_resistance = Vector2(0,0)
 var density = 0.00002
 const CD = 1.7
-@export var area = 20674
+@export var area = 2067
 
 func _ready():
-	run_drag(true)
+	pass
+#	run_drag(true)
 
 
 func _process(delta):
-	pass
+	_integrate_forces(self)
 	
 	
-func run_drag(bool):
-	if bool:
-		_integrate_forces(self)
-	else:
-		pass
 
+#
 func _integrate_forces(state):
 	drag(state)
-	
+
 	if Input.is_action_pressed("left"):
 		self.apply_torque(-100)
 	if Input.is_action_pressed("right"):
 		self.apply_torque(100)
 	self.apply_torque(0)
-	
-	
-	
+
+
+
 func drag(state):
 	#function to find out the magnitude of the vector
 	air_resistance = density * state.get_linear_velocity() * (area) * CD * 1/2

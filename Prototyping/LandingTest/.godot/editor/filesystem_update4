@@ -1,6 +1,5 @@
 res://default_env.tres
 res://Menu.tscn
-res://Parachute2.gd
 res://Main.tscn
 res://Surface.tscn
 res://Lander.tscn
@@ -10,4 +9,5 @@ res://StartMenu.tscn
 res://ThrustIndicator.tscn
 res://canvas_layer.tscn
 res://Lander.gd
+res://Parachute2.gd
 res://Main.gd
