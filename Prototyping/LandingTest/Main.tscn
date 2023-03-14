@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bumve4rwl80ip" path="res://Surface.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://eju5jnr1sa4c" path="res://Lander.tscn" id="2"]
 [ext_resource type="Script" path="res://ControlNode.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://bdej18wxdudg2" path="res://ThrustIndicator.tscn" id="5_t3thv"]
+[ext_resource type="PackedScene" uid="uid://oh82i8npbprn" path="res://canvas_layer.tscn" id="3_lvhsy"]
 [ext_resource type="Script" path="res://DtSIndicator.gd" id="6"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
 
@@ -20,6 +20,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6")
+
+[node name="CanvasLayer" parent="UI" instance=ExtResource("3_lvhsy")]
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
@@ -48,32 +50,6 @@ collide_with_areas = true
 [node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
 position = Vector2(0, -14.4736)
 
-[node name="VSpeedIndicator" type="RichTextLabel" parent="UI/Node2D/Lander/Camera2D"]
-visibility_layer = 2
-offset_left = 462.0
-offset_top = 99.9993
-offset_right = 502.0
-offset_bottom = 139.999
-scale = Vector2(1.52, 1)
-
-[node name="DtSIndicator" type="RichTextLabel" parent="UI/Node2D/Lander/Camera2D"]
-visibility_layer = 2
-offset_left = 462.0
-offset_top = 139.473
-offset_right = 502.0
-offset_bottom = 179.473
-scale = Vector2(1.52, 1)
-
-[node name="HSpeedIndicator" type="RichTextLabel" parent="UI/Node2D/Lander/Camera2D"]
-visibility_layer = 2
-offset_left = 462.0
-offset_top = 60.5263
-offset_right = 502.0
-offset_bottom = 100.526
-scale = Vector2(1.51996, 1)
-
-[node name="ThrustIndicator" parent="UI/Node2D/Lander/Camera2D" instance=ExtResource("5_t3thv")]
-
 [node name="Surface" parent="UI" instance=ExtResource("1")]
 light_mask = 2
 position = Vector2(-48, -21.0526)
@@ -82,4 +58,5 @@ collision_layer = 261
 
 [connection signal="body_entered" from="UI/Surface" to="." method="_on_surface_body_entered"]
 
+[editable path="UI/CanvasLayer"]
 [editable path="UI/Node2D/Lander"]

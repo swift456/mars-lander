@@ -22,18 +22,18 @@ func dts_Indicator():
 	var distance_to_surface = round($Node2D/Lander/RayCast2D.get_collision_point().y - $Node2D/Lander.get_global_position().y)
 	print($Node2D/Lander/RayCast2D.get_collider())
 	
-	$Node2D/Lander/Camera2D/DtSIndicator.clear()
-	$Node2D/Lander/Camera2D/DtSIndicator.add_text(str(distance_to_surface))
+	$CanvasLayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer4/DtSIndicator.clear()
+	$CanvasLayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer4/DtSIndicator.add_text(str(distance_to_surface))
 
 func h_Speed_indicator():
 	
 	var h_speed = round($Node2D/Lander.get_linear_velocity().x)
-	$Node2D/Lander/Camera2D/HSpeedIndicator.clear()
-	$Node2D/Lander/Camera2D/HSpeedIndicator.add_text(str(h_speed))
+	$CanvasLayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer3/HSpeedIndicator.clear()
+	$CanvasLayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer3/HSpeedIndicator.add_text(str(h_speed))
 
 func v_Speed_indicator():
 	var v_speed = round($Node2D/Lander.get_linear_velocity().y)
-	$Node2D/Lander/Camera2D/VSpeedIndicator.clear()
-	$Node2D/Lander/Camera2D/VSpeedIndicator.add_text(str(v_speed))
+	$CanvasLayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer2/VSpeedIndicator.clear()
+	$CanvasLayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer2/VSpeedIndicator.add_text(str(v_speed))
 	
 	
