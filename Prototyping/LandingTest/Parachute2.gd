@@ -2,9 +2,8 @@ extends RigidBody2D
 
 var air_resistance = Vector2(0,0)
 var density = 0.00002
-const CD = 1.7
-
-@export var area = 2500
+const CD = 1.75
+@export var area = 25000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +11,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func physics_process(delta):
+func _process(delta):
 	_integrate_forces(self)
 
 

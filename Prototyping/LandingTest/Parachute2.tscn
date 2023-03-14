@@ -7,26 +7,35 @@
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 3
 collision_mask = 3
+mass = 10.0
 script = ExtResource("1_8gw8e")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 position = Vector2(0, -33.7)
 node_a = NodePath("..")
 node_b = NodePath("../RopeSegment")
+bias = 0.75
+disable_collision = false
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="."]
 position = Vector2(0, -23.7)
 node_a = NodePath("../RopeSegment")
 node_b = NodePath("../RopeSegment2")
+bias = 0.75
+disable_collision = false
 
 [node name="Attachment" type="PinJoint2D" parent="."]
 position = Vector2(0, -2)
 node_a = NodePath("../RopeSegment3")
+bias = 0.75
+disable_collision = false
 
 [node name="PinJoint2D3" type="PinJoint2D" parent="."]
 position = Vector2(0, -11.7)
 node_a = NodePath("../RopeSegment2")
 node_b = NodePath("../RopeSegment3")
+bias = 0.75
+disable_collision = false
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(9.53674e-07, -54.7)

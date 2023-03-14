@@ -58,5 +58,4 @@ collision_layer = 261
 
 [connection signal="body_entered" from="UI/Surface" to="." method="_on_surface_body_entered"]
 
-[editable path="UI/CanvasLayer"]
 [editable path="UI/Node2D/Lander"]

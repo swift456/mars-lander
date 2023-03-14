@@ -28,7 +28,6 @@ func _ready():
 
 func _physics_process(delta):
 	
-	_integrate_forces($UI/Node2D/Lander)
 	input()
 
 	
@@ -36,7 +35,7 @@ func _physics_process(delta):
 
 	
 	var debug_velocity = $UI/Node2D/Lander.get_linear_velocity()
-	print((_state)," ",(debug_velocity)," ",(hori_drag))
+	print((_state)," ",(debug_velocity)," ",(air_resistance))
 	
 	match _state:
 		State.PARACHUTE_DEPLOY:
@@ -44,20 +43,22 @@ func _physics_process(delta):
 				$UI/Node2D/Lander.add_child(instance)
 				instance.global_transform.origin = $UI/Node2D/Lander/AttachmentPoint.global_transform.origin
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
+				instance.linear_velocity = $UI/Node2D/Lander.get_linear_velocity()
 				_state = State.PARACHUTE_DEPLOYED
 				
 				
 		State.PARACHUTE_DEPLOYED:
 				print("Parachute Deployed!")
-				
+				print(instance.air_resistance)
 				
 				
 		State.PARACHUTE_CUT:
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
 				_state = State.PARACHUTE_USED
+				
 			
-			
-	
+		State.PARACHUTE_USED:
+			pass
 				
 		State.DESTROYED:
 			
@@ -81,21 +82,21 @@ func _physics_process(delta):
 			
 			
 
-func _integrate_forces(state):
-	drag(state)
-	$UI/Node2D/Lander.apply_torque(0)
-	if Input.is_action_pressed("left"):
-		$UI/Node2D/Lander.apply_torque(-100)
-	if Input.is_action_pressed("right"):
-		$UI/Node2D/Lander.apply_torque(100)
-	
-	
-	
-	
-func drag(state):
-	#function to find out the magnitude of the vector
-	air_resistance = density * state.get_linear_velocity() * (state.area) * CD * 1/2
-	state.apply_central_impulse(Vector2(-air_resistance))
+#func _integrate_forces(state):
+#	drag(state)
+#
+#	if Input.is_action_pressed("left"):
+#		$UI/Node2D/Lander.apply_torque(-100)
+#	if Input.is_action_pressed("right"):
+#		$UI/Node2D/Lander.apply_torque(100)
+#	$UI/Node2D/Lander.apply_torque(0)
+#
+#
+#
+#func drag(state):
+#	#function to find out the magnitude of the vector
+#	air_resistance = density * state.get_linear_velocity() * (state.area) * CD * 1/2
+#	state.apply_central_impulse(Vector2(-air_resistance))
 	
 	
 #func parachute_drag():
@@ -127,8 +128,8 @@ func input():
 
 
 func _on_surface_body_entered(body):
-	if $UI/Node2D/Lander.get_linear_velocity().y > 30:
+	if $UI/Node2D/Lander.get_linear_velocity().y > 800:
 		_state = State.DESTROYED
 	else:
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(200).timeout
 		_state = State.SUCCESS
