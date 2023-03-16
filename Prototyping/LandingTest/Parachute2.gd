@@ -19,7 +19,7 @@ func _process(delta):
 func drag(state):
 	#function to find out the magnitude of the vector
 	air_resistance = density * state.get_linear_velocity() * (area) * CD * 1/2
-	state.apply_central_impulse(Vector2(-air_resistance))
+	state.apply_central_force(Vector2(-air_resistance))
 
 
 func _integrate_forces(state):

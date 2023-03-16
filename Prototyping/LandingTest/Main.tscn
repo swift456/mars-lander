@@ -9,7 +9,7 @@
 
 [node name="Main" type="Node2D"]
 visibility_layer = 2
-position = Vector2(1036, 2131)
+position = Vector2(940, 3669)
 scale = Vector2(1, 0.760002)
 script = ExtResource("7")
 
@@ -20,35 +20,40 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6")
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" parent="UI" instance=ExtResource("3_lvhsy")]
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
-position = Vector2(14, -4339.46)
+position = Vector2(-82, -8698.66)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
 visibility_layer = 2
+position = Vector2(0, -0.0012207)
 
 [node name="CollisionPolygon2D" parent="UI/Node2D/Lander" index="0"]
-position = Vector2(-0.599976, -9.01572)
+position = Vector2(-1.59998, -1.12119)
 
-[node name="Sprite2D" parent="UI/Node2D/Lander" index="1"]
-position = Vector2(0.400024, -8.01572)
+[node name="LanderSprite" parent="UI/Node2D/Lander" index="1"]
+position = Vector2(-0.599976, -0.0161133)
 
 [node name="AttachmentPoint" parent="UI/Node2D/Lander" index="2"]
-position = Vector2(0.400024, -18.0157)
+position = Vector2(-0.599976, -11.6475)
+
+[node name="HeatShield" parent="UI/Node2D/Lander" index="3"]
+position = Vector2(-0.599976, 14.9841)
 
 [node name="RayCast2D" type="RayCast2D" parent="UI/Node2D/Lander"]
 modulate = Color(0.286275, 1, 1, 1)
-position = Vector2(0, 10.5266)
+position = Vector2(-1, 7.89476)
 target_position = Vector2(0, 7000)
 collision_mask = 256
 collide_with_areas = true
 
 [node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
-position = Vector2(0, -14.4736)
+position = Vector2(-0.599976, -2.43674)
 
 [node name="Surface" parent="UI" instance=ExtResource("1")]
 light_mask = 2

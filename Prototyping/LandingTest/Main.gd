@@ -27,7 +27,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	
+	_integrate_forces($UI/Node2D/Lander)
 	input()
 
 	
@@ -46,7 +46,8 @@ func _physics_process(delta):
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
 				
 				_state = State.PARACHUTE_DEPLOYED
-				
+				if instance.get_linear_velocity().y >= 250:
+					$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
 				
 		State.PARACHUTE_DEPLOYED:
 				print("Parachute Deployed!")
@@ -83,22 +84,22 @@ func _physics_process(delta):
 			
 			
 
-#func _integrate_forces(state):
-#	drag(state)
-#
-#	if Input.is_action_pressed("left"):
-#		$UI/Node2D/Lander.apply_torque(-100)
-#	if Input.is_action_pressed("right"):
-#		$UI/Node2D/Lander.apply_torque(100)
-#	$UI/Node2D/Lander.apply_torque(0)
-#
-#
-#
-#func drag(state):
-#	#function to find out the magnitude of the vector
-#	air_resistance = density * state.get_linear_velocity() * (state.area) * CD * 1/2
-#	state.apply_central_impulse(Vector2(-air_resistance))
-	
+func _integrate_forces(state):
+	drag(state)
+
+	if Input.is_action_pressed("left"):
+		$UI/Node2D/Lander.apply_torque(-100)
+	if Input.is_action_pressed("right"):
+		$UI/Node2D/Lander.apply_torque(100)
+	$UI/Node2D/Lander.apply_torque(0)
+
+
+
+func drag(state):
+	#function to find out the magnitude of the vector
+	air_resistance = density * state.get_linear_velocity() * (state.area) * CD * 1/2
+	state.apply_central_impulse(Vector2(-air_resistance))
+
 	
 #func parachute_drag():
 #	parachute_vert_drag = density * $UI/Node2D/Lander.get_linear_velocity().y * (parachute_area) * CD * 1/2
