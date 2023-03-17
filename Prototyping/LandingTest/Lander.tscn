@@ -44,7 +44,6 @@ node_b = NodePath("..")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HeatShield"]
 position = Vector2(0.399998, -4.02251)
-scale = Vector2(1, 1)
 polygon = PackedVector2Array(-14, 1, -2, 5, 2, 5, 14, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="HeatShield"]

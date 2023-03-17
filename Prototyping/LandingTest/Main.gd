@@ -29,13 +29,21 @@ func _ready():
 func _physics_process(delta):
 	_integrate_forces($UI/Node2D/Lander)
 	input()
-
+	if Input.is_action_pressed("left"):
+		$UI/Node2D/Lander.apply_torque(-10000)
+	if Input.is_action_pressed("right"):
+		$UI/Node2D/Lander.apply_torque(10000)
+	
+	
+	
+	thrust($UI/CanvasLayer/HBoxContainer/ThrustIndicator.value)
+	print($UI/CanvasLayer/HBoxContainer/ThrustIndicator.value)
 	
 	
 
 	
-	var debug_velocity = $UI/Node2D/Lander.get_linear_velocity()
-	print((_state)," ",(debug_velocity)," ",(air_resistance))
+#	var debug_velocity = $UI/Node2D/Lander.get_linear_velocity()
+#	print((_state)," ",(debug_velocity)," ",(air_resistance))
 	
 	match _state:
 		State.PARACHUTE_DEPLOY:
@@ -50,8 +58,9 @@ func _physics_process(delta):
 					$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
 				
 		State.PARACHUTE_DEPLOYED:
-				print("Parachute Deployed!")
-				print(instance.air_resistance)
+#				print("Parachute Deployed!")
+#				print(instance.air_resistance)
+				pass
 				
 				
 		State.PARACHUTE_CUT:
@@ -87,13 +96,16 @@ func _physics_process(delta):
 func _integrate_forces(state):
 	drag(state)
 
-	if Input.is_action_pressed("left"):
-		$UI/Node2D/Lander.apply_torque(-100)
-	if Input.is_action_pressed("right"):
-		$UI/Node2D/Lander.apply_torque(100)
-	$UI/Node2D/Lander.apply_torque(0)
+	
 
-
+func thrust(value):
+	var thrust_value = Vector2(0,-value)
+	var thrust_vector = $UI/Node2D/Lander.get_global_transform().y
+	thrust_value += thrust_vector
+	
+	
+	$UI/Node2D/Lander.apply_central_force(thrust_value)
+	print(thrust_value)
 
 func drag(state):
 	#function to find out the magnitude of the vector

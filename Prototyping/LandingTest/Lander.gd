@@ -34,6 +34,9 @@ func drag(state):
 
 func _integrate_forces(state):
 	drag(state)
+	
+	
+	
 
 
 
