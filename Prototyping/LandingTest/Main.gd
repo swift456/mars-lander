@@ -100,8 +100,8 @@ func _integrate_forces(state):
 
 func thrust(value):
 	var thrust_value = Vector2(0,-value)
-	var thrust_vector = $UI/Node2D/Lander.get_global_transform().y
-	thrust_value += thrust_vector
+	var lander_orientation = $UI/Node2D/Lander.rotation
+	$UI/Node2D/Lander.apply_central_force(Vector2(cos(lander_orientation), sin(lander_orientation)) * value)
 	
 	
 	$UI/Node2D/Lander.apply_central_force(thrust_value)

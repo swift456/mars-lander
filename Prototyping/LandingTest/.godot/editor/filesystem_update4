@@ -1,6 +1,5 @@
 res://default_env.tres
 res://Menu.tscn
-res://Lander.gd
 res://Main.gd
 res://Main.tscn
 res://Surface.tscn
