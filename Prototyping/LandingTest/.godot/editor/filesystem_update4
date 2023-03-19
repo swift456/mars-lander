@@ -10,3 +10,4 @@ res://ThrustIndicator.tscn
 res://canvas_layer.tscn
 res://Lander.gd
 res://Main.gd
+res://ThrustIndicator.gd

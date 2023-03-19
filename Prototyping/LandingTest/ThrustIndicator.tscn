@@ -1,7 +1,10 @@
-[gd_scene format=3 uid="uid://bdej18wxdudg2"]
+[gd_scene load_steps=2 format=3 uid="uid://bdej18wxdudg2"]
+
+[ext_resource type="Script" path="res://ThrustIndicator.gd" id="1_1elt6"]
 
 [node name="VSlider" type="VSlider"]
 offset_right = 16.0
 offset_bottom = 138.0
 max_value = 10000.0
-step = 20.0
+step = 100.0
+script = ExtResource("1_1elt6")
