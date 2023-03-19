@@ -26,7 +26,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
-position = Vector2(-82, -8698.66)
+position = Vector2(-319, -1280.26)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]

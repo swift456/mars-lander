@@ -15,11 +15,7 @@ func _ready():
 
 func _physics_process(delta):
 	_integrate_forces(self)
-	if Input.is_action_pressed("left"):
-		self.apply_torque(-100)
-	if Input.is_action_pressed("right"):
-		self.apply_torque(100)
-	self.apply_torque(0)
+	
 	if Input.is_action_pressed("heatshield"):
 		$HeatShield/HeatShieldConnection1.set_node_a("")
 		$HeatShield/HeatShieldConnection2.set_node_a("")
