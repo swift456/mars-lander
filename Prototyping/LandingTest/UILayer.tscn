@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdej18wxdudg2" path="res://ThrustIndicator.tscn" id="1_aymh4"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="UILayer" type="CanvasLayer"]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 1

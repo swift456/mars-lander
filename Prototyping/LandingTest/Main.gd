@@ -35,7 +35,7 @@ func _physics_process(delta):
 	
 	
 	
-	print($UI/CanvasLayer/HBoxContainer/ThrustIndicator.value)
+	print($UI/UILayer/HBoxContainer/ThrustIndicator.value)
 	
 	
 
@@ -93,14 +93,15 @@ func _physics_process(delta):
 
 func _integrate_forces(state):
 	drag(state)
-
+	thrust($UI/UILayer/HBoxContainer/ThrustIndicator.value)
+	rotating($UI/Node2D/Lander)
 	
 
 func thrust(value):
 	var thrust_value = Vector2(0,-value)
 	var lander_orientation = $UI/Node2D/Lander.rotation
 	$UI/Node2D/Lander.apply_central_force(Vector2(cos(lander_orientation), sin(lander_orientation)) * value)
-	$UI/Node2D/Lander.apply_central_force(thrust_value)
+	
 	print(thrust_value)
 	rotating($UI/Node2D/Lander)
 	
@@ -108,10 +109,10 @@ func rotating(body):
 	
 	if Input.is_action_pressed("left"):
 		body.apply_torque(10000)
-		thrust($UI/CanvasLayer/HBoxContainer/ThrustIndicator.value)
+		
 	if Input.is_action_pressed("right"):
 		body.apply_torque(-10000)
-		thrust($UI/CanvasLayer/HBoxContainer/ThrustIndicator.value)
+		
 	body.apply_torque(0)
 	
 	

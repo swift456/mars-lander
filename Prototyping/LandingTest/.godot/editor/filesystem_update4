@@ -9,3 +9,7 @@ res://StartMenu.tscn
 res://ThrustIndicator.tscn
 res://canvas_layer.tscn
 res://TileSurface.tscn
+res://UILayer.tscn
+res://Main.gd
+res://DtSIndicator.gd
+res://Lander.gd

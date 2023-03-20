@@ -19,6 +19,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("heatshield"):
 		$HeatShield/HeatShieldConnection1.set_node_a("")
 		$HeatShield/HeatShieldConnection2.set_node_a("")
+		$HeatShield.set_collision_layer_value(1,false)
 	
 	
 	
