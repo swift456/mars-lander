@@ -8,6 +8,4 @@ res://rope_segment.tscn
 res://StartMenu.tscn
 res://ThrustIndicator.tscn
 res://canvas_layer.tscn
-res://Lander.gd
-res://Main.gd
-res://ThrustIndicator.gd
+res://TileSurface.tscn

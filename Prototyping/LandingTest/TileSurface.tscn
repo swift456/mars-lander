@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://dutk86iukd2s1"]
+
+[ext_resource type="Texture2D" uid="uid://gsp0gbnub3cv" path="res://assets/spritesheet_tiles.png" id="1_pwnqf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8maw"]
+texture = ExtResource("1_pwnqf")
+texture_region_size = Vector2i(128, 128)
+4:3/0 = 0
+4:3/0/terrain_set = 0
+8:4/0 = 0
+8:4/0/terrain_set = 0
+8:4/0/terrain = 0
+8:4/0/terrains_peering_bit/right_side = 0
+8:4/0/terrains_peering_bit/bottom_side = 0
+8:4/0/terrains_peering_bit/left_side = 0
+8:4/0/terrains_peering_bit/top_side = 0
+3:9/0 = 0
+3:9/0/terrain_set = 0
+3:8/0 = 0
+3:8/0/terrain_set = 0
+3:8/0/terrain = 0
+3:8/0/terrains_peering_bit/bottom_side = 0
+
+[sub_resource type="TileSet" id="TileSet_7hwm3"]
+tile_size = Vector2i(128, 128)
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "MartianSurface0"
+terrain_set_0/terrain_0/color = Color(1, 0.345098, 0.25098, 1)
+sources/1 = SubResource("TileSetAtlasSource_f8maw")
+
+[node name="Node" type="Node"]
+
+[node name="FlatSection" type="TileMap" parent="."]
+position = Vector2(1536, 0)
+tile_set = SubResource("TileSet_7hwm3")
+format = 2
+layer_0/tile_data = PackedInt32Array(65537, 524289, 4, 65536, 524289, 4, 65538, 524289, 4, 65539, 524289, 4, 131075, 524289, 4, 131074, 524289, 4, 131073, 524289, 4, 131072, 524289, 4, 196608, 524289, 4, 196609, 524289, 4, 196610, 524289, 4, 196611, 524289, 4)
+
+[node name="Valley" type="TileMap" parent="."]
+position = Vector2(512, 0)
+tile_set = SubResource("TileSet_7hwm3")
+format = 2
+
+[node name="ValleyLeft" type="TileMap" parent="Valley"]
+tile_set = SubResource("TileSet_7hwm3")
+format = 2
+layer_0/tile_data = PackedInt32Array(262143, 524289, 4, 262142, 524289, 4, 262141, 524289, 4, 262140, 524289, 4, 196604, 524289, 4, 131068, 524289, 4, 131069, 524289, 4, 196605, 524289, 4, 196606, 524289, 4)
+
+[node name="ValleyMiddle" type="TileMap" parent="Valley"]
+tile_set = SubResource("TileSet_7hwm3")
+format = 2
+layer_0/tile_data = PackedInt32Array(196608, 524289, 4, 196609, 524289, 4, 196610, 524289, 4, 196611, 524289, 4)
+
+[node name="ValleyRight" type="TileMap" parent="Valley"]
+position = Vector2(512, 0)
+tile_set = SubResource("TileSet_7hwm3")
+format = 2
+layer_0/tile_data = PackedInt32Array(65538, 524289, 4, 65539, 524289, 4, 131075, 524289, 4, 131074, 524289, 4, 131073, 524289, 4, 196608, 524289, 4, 196609, 524289, 4, 196610, 524289, 4, 196611, 524289, 4)
