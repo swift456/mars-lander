@@ -1,8 +1,11 @@
+StaticBody2D
+CollisionShape2D
+Sprite2D
+Area2D
 TileMap
 Node
 PinJoint2D
 CollisionPolygon2D
-Sprite2D
 RigidBody2D
 Label
 MarginContainer
@@ -18,4 +21,3 @@ CenterContainer
 HSeparator
 RayCast2D
 Node2D
-CollisionShape2D

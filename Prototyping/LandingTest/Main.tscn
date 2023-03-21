@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://c0prcjmw6uk44"]
 
-[ext_resource type="PackedScene" uid="uid://bumve4rwl80ip" path="res://Surface.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://eju5jnr1sa4c" path="res://Lander.tscn" id="2"]
 [ext_resource type="Script" path="res://ControlNode.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://oh82i8npbprn" path="res://UILayer.tscn" id="3_lvhsy"]
 [ext_resource type="Script" path="res://DtSIndicator.gd" id="6"]
+[ext_resource type="PackedScene" uid="uid://bh1l8xf35ajhc" path="res://surface2.tscn" id="6_d2uus"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
 
 [node name="Main" type="Node2D"]
@@ -26,41 +26,38 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
-position = Vector2(-311, -684.208)
+position = Vector2(70, -3893.41)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
 visibility_layer = 2
 position = Vector2(0, -0.0012207)
+max_contacts_reported = 1
 
 [node name="CollisionPolygon2D" parent="UI/Node2D/Lander" index="0"]
 position = Vector2(-1.59998, -1.12119)
+polygon = PackedVector2Array(-13.4, 10.3333, 15.6, 10.3333, 15.6, 6.38586, 4.59998, -5.45618, 3.59998, -12.0351, -1.40002, -12.0351, -2.40002, -5.45618, -13.4, 6.38586)
 
 [node name="LanderSprite" parent="UI/Node2D/Lander" index="1"]
 position = Vector2(-0.599976, -0.0161133)
 
 [node name="AttachmentPoint" parent="UI/Node2D/Lander" index="2"]
 position = Vector2(-0.599976, -11.6475)
-
-[node name="HeatShield" parent="UI/Node2D/Lander" index="3"]
-position = Vector2(-0.599976, 14.9841)
+disable_collision = false
 
 [node name="RayCast2D" type="RayCast2D" parent="UI/Node2D/Lander"]
 modulate = Color(0.286275, 1, 1, 1)
 position = Vector2(-1, 7.89476)
-target_position = Vector2(0, 7000)
-collision_mask = 256
+target_position = Vector2(0, 15000)
+collision_mask = 257
 collide_with_areas = true
 
 [node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
 position = Vector2(-0.599976, -2.43674)
 
-[node name="Surface" parent="UI" instance=ExtResource("1")]
-light_mask = 2
-position = Vector2(-48, -21.0526)
-scale = Vector2(1.73408, 2.9453)
-collision_layer = 261
+[node name="Surface" parent="." instance=ExtResource("6_d2uus")]
 
-[connection signal="body_entered" from="UI/Surface" to="." method="_on_surface_body_entered"]
+[connection signal="collided" from="UI/Node2D/Lander" to="." method="_on_lander_collided"]
 
 [editable path="UI/Node2D/Lander"]
+[editable path="UI/Node2D/Lander/HeatShield"]

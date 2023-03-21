@@ -7,19 +7,21 @@ var air_resistance = Vector2(0,0)
 var density = 0.00002
 const CD = 1.7
 @export var area = 20670
+var recieved_thrust_value = Vector2(0,0)
 
 func _ready():
 	pass
 
+signal collided
 
-
+func _process(delta):
+	rotating(self)
 func _physics_process(delta):
-	_integrate_forces(self)
+	thrust(recieved_thrust_value)
+	print(self.rotation)
 	
-	if Input.is_action_pressed("heatshield"):
-		$HeatShield/HeatShieldConnection1.set_node_a("")
-		$HeatShield/HeatShieldConnection2.set_node_a("")
-		$HeatShield.set_collision_layer_value(1,false)
+	
+		
 	
 	
 	
@@ -33,9 +35,37 @@ func _integrate_forces(state):
 	drag(state)
 	
 	
+	for i in state.get_contact_count():
+		var collider = state.get_contact_collider_object(i)
+		emit_signal('collided' , collider)
+	
+	if Input.is_action_pressed("heatshield"):
+		$HeatShield.set_collision_layer_value(2,true)
+		$HeatShield/HeatShieldConnection1.set_node_a("")
+		$HeatShield/HeatShieldConnection2.set_node_a("")
+	
 	
 
+func thrust(value):
+	var thrust = -global_transform.y
+	thrust * value
+	apply_central_force(thrust)
+	
+	
+	rotating(self)
+	
+func rotating(body):
+	
+	if Input.is_action_pressed("left"):
+		body.apply_torque(10000)
+		
+	if Input.is_action_pressed("right"):
+		body.apply_torque(-10000)
+		
+	body.apply_torque(0)
 
+func _on_thrust_indicator_value_changed(value):
+	recieved_thrust_value = value
 
 
 
@@ -224,3 +254,6 @@ func _integrate_forces(state):
 #
 #func _on_Surface_body_entered(body):
 #		_state = State.LANDED
+
+
+

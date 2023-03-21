@@ -5,8 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://q8lptmwh0eum" path="res://rope_segment.tscn" id="2_pib13"]
 
 [node name="RigidBody2D" type="RigidBody2D"]
-collision_layer = 3
-collision_mask = 3
 mass = 5.0
 script = ExtResource("1_8gw8e")
 
@@ -38,8 +36,6 @@ softness = 0.2
 
 [node name="RopeSegment3" parent="." instance=ExtResource("2_pib13")]
 position = Vector2(0, -6.7)
-collision_layer = 3
-collision_mask = 3
 
 [node name="PinJoint2D3" type="PinJoint2D" parent="RopeSegment3"]
 position = Vector2(0, -5)

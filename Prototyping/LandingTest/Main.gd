@@ -13,7 +13,7 @@ var density = 0.00002
 var current_velocity = 0
 const CD = 1.7
 var parachute_used = false
-
+var lander_speed = 0
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
@@ -21,28 +21,10 @@ func _unhandled_input(event):
 		add_child(pause_menu)
 
 func _ready():
-	pass
+	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,800))
 
-
-
-
-func _physics_process(delta):
-	
-	_integrate_forces($UI/Node2D/Lander)
-	input()
-	
-	
-	
-	
-	
-	print($UI/UILayer/HBoxContainer/ThrustIndicator.value)
-	
-	
-
-	
-#	var debug_velocity = $UI/Node2D/Lander.get_linear_velocity()
-#	print((_state)," ",(debug_velocity)," ",(air_resistance))
-	
+func _process(delta):
+	print("State = ", _state)
 	match _state:
 		State.PARACHUTE_DEPLOY:
 				instance = ParachuteScene.instantiate()
@@ -52,7 +34,7 @@ func _physics_process(delta):
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
 				
 				_state = State.PARACHUTE_DEPLOYED
-				if instance.get_linear_velocity().y >= 250:
+				if instance.get_linear_velocity().y >= 300:
 					$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
 				
 		State.PARACHUTE_DEPLOYED:
@@ -88,32 +70,53 @@ func _physics_process(delta):
 		
 
 
+func _physics_process(delta):
+	lander_speed = $UI/Node2D/Lander.get_linear_velocity().y
+	_integrate_forces($UI/Node2D/Lander)
+	input()
+	
+	
+	
+	
+	
+	print($UI/UILayer/HBoxContainer/ThrustIndicator.value)
+	
+	
+
+	
+#	var debug_velocity = $UI/Node2D/Lander.get_linear_velocity()
+#	print((_state)," ",(debug_velocity)," ",(air_resistance))
+	
+	
+
+
 			
 			
 
 func _integrate_forces(state):
 	drag(state)
 	thrust($UI/UILayer/HBoxContainer/ThrustIndicator.value)
-	rotating($UI/Node2D/Lander)
+#	rotating($UI/Node2D/Lander)
 	
 
 func thrust(value):
-	var thrust_value = Vector2(0,-value)
-	var lander_orientation = $UI/Node2D/Lander.rotation
-	$UI/Node2D/Lander.apply_central_force(Vector2(cos(lander_orientation), sin(lander_orientation)) * value)
+	var thrust_value = Vector2(0,value)
+	var thrust = -self.global_transform.y
+	thrust = thrust * value
+	$UI/Node2D/Lander.apply_central_impulse(thrust)
 	
 	print(thrust_value)
-	rotating($UI/Node2D/Lander)
+#	rotating($UI/Node2D/Lander)
 	
-func rotating(body):
-	
-	if Input.is_action_pressed("left"):
-		body.apply_torque(10000)
-		
-	if Input.is_action_pressed("right"):
-		body.apply_torque(-10000)
-		
-	body.apply_torque(0)
+#func rotating(body):
+#
+#	if Input.is_action_pressed("left"):
+#		body.apply_torque(10000)
+#
+#	if Input.is_action_pressed("right"):
+#		body.apply_torque(-10000)
+#
+#	body.apply_torque(0)
 	
 	
 
@@ -151,9 +154,27 @@ func input():
 		
 
 
-func _on_surface_body_entered(body):
-	if $UI/Node2D/Lander.get_linear_velocity().y > 40:
-		_state = State.DESTROYED
-	else:
-		await get_tree().create_timer(5).timeout
-		_state = State.SUCCESS
+#func _on_surface_body_entered(body):
+#	if body.get_linear_velocity().y > 40:
+#		_state = State.DESTROYED
+#	else:
+#		await get_tree().create_timer(5).timeout
+#		_state = State.SUCCESS
+
+
+#func _on_lander_body_entered(body):
+#	if body == $UI/Surface:
+#		if body.get_linear_velocity().y > 40:
+#			_state = State.DESTROYED
+#		else:
+#			await get_tree().create_timer(5).timeout
+#			_state = State.SUCCESS
+
+
+func _on_lander_collided(collider):
+	if collider == $Surface:
+		if lander_speed > 40:
+			_state = State.DESTROYED
+		else:
+			await get_tree().create_timer(5).timeout
+			_state = State.SUCCESS

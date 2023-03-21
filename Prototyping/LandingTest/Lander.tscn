@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Lander.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://yx3kik3riuhm" path="res://assets/Backshell.png" id="2_o0rdu"]
-[ext_resource type="Texture2D" uid="uid://d0mla0l8axpgf" path="res://assets/Heatshield.png" id="3_154o8"]
+[ext_resource type="PackedScene" uid="uid://xju6ttxxo0y0" path="res://heat_shield.tscn" id="3_ucsw6"]
 
 [node name="Lander" type="RigidBody2D"]
-collision_layer = 3
-collision_mask = 3
 mass = 110.0
+max_contacts_reported = 6
+contact_monitor = true
 script = ExtResource("2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -23,30 +23,25 @@ texture = ExtResource("2_o0rdu")
 position = Vector2(0.400002, -11.7)
 node_a = NodePath("..")
 bias = 0.9
-disable_collision = false
 softness = 0.2
 
-[node name="HeatShield" type="RigidBody2D" parent="."]
-position = Vector2(0.400002, 17.3)
-collision_layer = 3
-collision_mask = 3
-mass = 62.0
+[node name="HeatShield" parent="." instance=ExtResource("3_ucsw6")]
+disable_mode = 2
+collision_layer = 0
+collision_mask = 0
+max_contacts_reported = 4
+contact_monitor = false
 
-[node name="HeatShieldConnection1" type="PinJoint2D" parent="HeatShield"]
-position = Vector2(-12, -4)
-node_a = NodePath("../..")
-node_b = NodePath("..")
+[node name="HeatShieldConnection1" parent="HeatShield" index="0"]
+position = Vector2(-12.4, -5.3)
 
-[node name="HeatShieldConnection2" type="PinJoint2D" parent="HeatShield"]
-position = Vector2(12, -4)
-node_a = NodePath("../..")
-node_b = NodePath("..")
+[node name="HeatShieldConnection2" parent="HeatShield" index="1"]
+position = Vector2(11.6, -5.3)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HeatShield"]
-position = Vector2(0.399998, -4.02251)
-polygon = PackedVector2Array(-14, 1, -2, 5, 2, 5, 14, 1)
+[node name="CollisionPolygon2D" parent="HeatShield" index="2"]
+position = Vector2(0, -5.32249)
 
-[node name="Sprite2D" type="Sprite2D" parent="HeatShield"]
-position = Vector2(0.206257, -1.82376)
-scale = Vector2(0.462305, 0.474258)
-texture = ExtResource("3_154o8")
+[node name="Sprite2D" parent="HeatShield" index="3"]
+position = Vector2(-0.193741, -3.12374)
+
+[editable path="HeatShield"]
