@@ -43,7 +43,7 @@ polygon = PackedVector2Array(-13.4, 10.3333, 15.6, 10.3333, 15.6, 6.38586, 4.599
 position = Vector2(-0.599976, -0.0161133)
 
 [node name="AttachmentPoint" parent="UI/Node2D/Lander" index="2"]
-position = Vector2(-0.599976, -11.6475)
+position = Vector2(-0.999878, -6.52738)
 disable_collision = false
 
 [node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
