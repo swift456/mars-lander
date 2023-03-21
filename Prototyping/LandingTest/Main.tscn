@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0prcjmw6uk44"]
+[gd_scene load_steps=8 format=3 uid="uid://c0prcjmw6uk44"]
 
 [ext_resource type="PackedScene" uid="uid://eju5jnr1sa4c" path="res://Lander.tscn" id="2"]
 [ext_resource type="Script" path="res://ControlNode.gd" id="3"]
@@ -6,10 +6,11 @@
 [ext_resource type="Script" path="res://DtSIndicator.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://bh1l8xf35ajhc" path="res://surface2.tscn" id="6_d2uus"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://qjkp0b7qllf" path="res://GradientBG.tscn" id="7_uaj16"]
 
 [node name="Main" type="Node2D"]
 visibility_layer = 2
-position = Vector2(940, 3669)
+position = Vector2(5192, 3965)
 scale = Vector2(1, 0.760002)
 script = ExtResource("7")
 
@@ -26,7 +27,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
-position = Vector2(70, -3893.41)
+position = Vector2(-50, -14890.8)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
@@ -45,17 +46,26 @@ position = Vector2(-0.599976, -0.0161133)
 position = Vector2(-0.599976, -11.6475)
 disable_collision = false
 
-[node name="RayCast2D" type="RayCast2D" parent="UI/Node2D/Lander"]
-modulate = Color(0.286275, 1, 1, 1)
-position = Vector2(-1, 7.89476)
-target_position = Vector2(0, 15000)
-collision_mask = 257
-collide_with_areas = true
-
 [node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
 position = Vector2(-0.599976, -2.43674)
 
+[node name="RayCast2D" type="RayCast2D" parent="UI/Node2D"]
+modulate = Color(0.286275, 1, 1, 1)
+position = Vector2(-1, 7.89355)
+target_position = Vector2(0, 14860.5)
+collision_mask = 256
+hit_from_inside = true
+collide_with_areas = true
+
 [node name="Surface" parent="." instance=ExtResource("6_d2uus")]
+position = Vector2(-4, 3.94775)
+collision_layer = 259
+
+[node name="TextureRect" parent="." instance=ExtResource("7_uaj16")]
+offset_left = 1522.0
+offset_right = 17475.0
+offset_bottom = -12824.0
+metadata/_edit_use_anchors_ = true
 
 [connection signal="collided" from="UI/Node2D/Lander" to="." method="_on_lander_collided"]
 

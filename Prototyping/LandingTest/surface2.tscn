@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bh1l8xf35ajhc"]
-
-[ext_resource type="Texture2D" uid="uid://7k62nofiuxfd" path="res://icon.png" id="1_p0f30"]
+[gd_scene load_steps=2 format=3 uid="uid://bh1l8xf35ajhc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_csl3k"]
 size = Vector2(1328, 54)
@@ -8,10 +6,12 @@ size = Vector2(1328, 54)
 [node name="StaticBody2D" type="StaticBody2D"]
 collision_layer = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.00012207, 0)
-scale = Vector2(20.7344, 1)
-texture = ExtResource("1_p0f30")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_csl3k")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1588.0
+offset_top = -27.0
+offset_right = 1584.0
+offset_bottom = 444.0
+color = Color(1, 0.305882, 0.176471, 1)
