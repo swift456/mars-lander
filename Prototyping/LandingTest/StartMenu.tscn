@@ -140,6 +140,7 @@ If you hit the surface whilst going faster than 40,
 the lander will be destroyed"
 
 [node name="MarginContainer4" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_left = 180.0
 offset_top = 309.0
 offset_right = 348.0

@@ -17,7 +17,7 @@ signal collided
 func _process(delta):
 	rotating(self)
 func _physics_process(delta):
-	thrust(recieved_thrust_value)
+#	thrust(recieved_thrust_value)
 	print(self.rotation)
 	
 	
@@ -46,13 +46,13 @@ func _integrate_forces(state):
 	
 	
 
-func thrust(value):
-	var thrust = -global_transform.y
-	thrust * value
-	apply_central_force(thrust)
-	
-	
-	rotating(self)
+#func thrust(value):
+#	var thrust = -global_transform.y
+#	thrust * value
+#	apply_central_force(thrust)
+#
+#
+#	rotating(self)
 	
 func rotating(body):
 	

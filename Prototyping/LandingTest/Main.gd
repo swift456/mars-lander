@@ -14,6 +14,7 @@ var current_velocity = 0
 const CD = 1.7
 var parachute_used = false
 var lander_speed = 0
+var lander_fuel = 1000
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
@@ -100,12 +101,16 @@ func _integrate_forces(state):
 	
 
 func thrust(value):
-	var thrust_value = Vector2(0,value)
-	var thrust = -self.global_transform.y
-	thrust = thrust * value
-	$UI/Node2D/Lander.apply_central_impulse(thrust)
-	
-	print(thrust_value)
+	if $UI/UILayer/HBoxContainer/TextureProgressBar.value > 0:
+		var thrust_value = Vector2(0,value)
+		var thrust = -self.global_transform.y
+		thrust = thrust * value
+		$UI/Node2D/Lander.apply_central_impulse(thrust)
+		$UI/UILayer/HBoxContainer/TextureProgressBar.value -= value/80
+		print($UI/UILayer/HBoxContainer/TextureProgressBar.value)
+	else:
+		$UI/UILayer/HBoxContainer/TextureProgressBar.value = 0
+		print("Out of fuel!")
 #	rotating($UI/Node2D/Lander)
 	
 #func rotating(body):

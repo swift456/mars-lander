@@ -1,12 +1,15 @@
 res://default_env.tres
-res://StartMenu.tscn
 res://Menu.tscn
+res://Main.gd
 res://Main.tscn
 res://Lander.tscn
 res://Parachute2.tscn
 res://rope_segment.tscn
+res://StartMenu.tscn
 res://ThrustIndicator.tscn
 res://UILayer.tscn
 res://TileSurface.tscn
 res://surface2.tscn
 res://heat_shield.tscn
+res://Lander.gd
+res://FuelGauge.tscn
