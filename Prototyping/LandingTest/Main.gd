@@ -22,11 +22,21 @@ func _unhandled_input(event):
 		add_child(pause_menu)
 
 func _ready():
+	$UI/UILayer/ParachuteIndicator.text = ""
 	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,800))
 
 func _process(delta):
 	print("State = ", _state)
 	match _state:
+		State.FREEFALL:
+			if $UI/Node2D/Lander.get_linear_velocity().y >= 300:
+				$UI/UILayer/ParachuteIndicator.text = "Unsafe to deploy parachute!"
+				$UI/UILayer/ParachuteIndicator.set("theme_override_colors/font_color", Color(255, 0, 0))
+			else: 
+				$UI/UILayer/ParachuteIndicator.text = "Safe to deploy!"
+				$UI/UILayer/ParachuteIndicator.set("theme_override_colors/font_color", Color(0, 255, 0))
+		
+		
 		State.PARACHUTE_DEPLOY:
 				instance = ParachuteScene.instantiate()
 				instance.linear_velocity = $UI/Node2D/Lander.get_linear_velocity()
@@ -34,13 +44,17 @@ func _process(delta):
 				instance.global_transform.origin = $UI/Node2D/Lander/AttachmentPoint.global_transform.origin
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
 				
-				_state = State.PARACHUTE_DEPLOYED
-				if instance.get_linear_velocity().y >= 300:
-					$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
 				
+				if instance.get_linear_velocity().y > 300:
+					$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
+					_state = State.PARACHUTE_USED
+				else:
+					_state = State.PARACHUTE_DEPLOYED	
 		State.PARACHUTE_DEPLOYED:
 #				print("Parachute Deployed!")
 #				print(instance.air_resistance)
+				$UI/UILayer/ParachuteIndicator.text = "Parachute Deployed"
+				$UI/UILayer/ParachuteIndicator.set("theme_override_colors/font_color", Color(255, 255, 255))
 				pass
 				
 				
@@ -50,8 +64,8 @@ func _process(delta):
 				
 			
 		State.PARACHUTE_USED:
-			pass
-				
+			$UI/UILayer/ParachuteIndicator.text = "Parachute Detached"
+			$UI/UILayer/ParachuteIndicator.set("theme_override_colors/font_color", Color(255, 255, 255))
 		State.DESTROYED:
 			
 			var pause_menu = PauseScene.instantiate()
@@ -101,9 +115,10 @@ func _integrate_forces(state):
 	
 
 func thrust(value):
+	
 	if $UI/UILayer/HBoxContainer/TextureProgressBar.value > 0:
 		var thrust_value = Vector2(0,value)
-		var thrust = -self.global_transform.y
+		var thrust = -$UI/Node2D/Lander.global_transform.y
 		thrust = thrust * value
 		$UI/Node2D/Lander.apply_central_impulse(thrust)
 		$UI/UILayer/HBoxContainer/TextureProgressBar.value -= value/80

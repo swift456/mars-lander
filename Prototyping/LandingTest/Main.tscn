@@ -36,22 +36,25 @@ position = Vector2(0, -0.0012207)
 max_contacts_reported = 1
 
 [node name="CollisionPolygon2D" parent="UI/Node2D/Lander" index="0"]
-position = Vector2(-1.59998, -1.12119)
+position = Vector2(-0.899784, 1.69229)
 polygon = PackedVector2Array(-13.4, 10.3333, 15.6, 10.3333, 15.6, 6.38586, 4.59998, -5.45618, 3.59998, -12.0351, -1.40002, -12.0351, -2.40002, -5.45618, -13.4, 6.38586)
 
 [node name="LanderSprite" parent="UI/Node2D/Lander" index="1"]
-position = Vector2(-0.599976, -0.0161133)
+position = Vector2(0.100098, 2.79688)
 
 [node name="AttachmentPoint" parent="UI/Node2D/Lander" index="2"]
-position = Vector2(-0.999878, -6.52738)
+position = Vector2(0.00012207, -9.15922)
 disable_collision = false
 
-[node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
-position = Vector2(-0.599976, -2.43674)
+[node name="HeatShield" parent="UI/Node2D/Lander" index="3"]
+position = Vector2(-2.29971, 17.3391)
 
-[node name="RayCast2D" type="RayCast2D" parent="UI/Node2D"]
+[node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
+position = Vector2(0.10022, 0.376736)
+
+[node name="RayCast2D" type="RayCast2D" parent="UI/Node2D/Lander"]
 modulate = Color(0.286275, 1, 1, 1)
-position = Vector2(-1, 7.89355)
+position = Vector2(0, 13.209)
 target_position = Vector2(0, 14860.5)
 collision_mask = 256
 hit_from_inside = true
@@ -62,9 +65,10 @@ position = Vector2(-4, 3.94775)
 collision_layer = 259
 
 [node name="TextureRect" parent="." instance=ExtResource("7_uaj16")]
-offset_left = 1522.0
-offset_right = 17475.0
-offset_bottom = -12824.0
+offset_left = 1511.97
+offset_top = -15913.1
+offset_right = 17465.0
+offset_bottom = -12825.1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="collided" from="UI/Node2D/Lander" to="." method="_on_lander_collided"]

@@ -101,3 +101,7 @@ theme_override_constants/margin_bottom = 0
 visibility_layer = 4
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ParachuteIndicator" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

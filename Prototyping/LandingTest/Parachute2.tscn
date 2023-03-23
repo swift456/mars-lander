@@ -9,11 +9,11 @@ mass = 5.0
 script = ExtResource("1_8gw8e")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -52.7)
+position = Vector2(0, -49.7)
 polygon = PackedVector2Array(0, 21, -15, -9, -11, -20, 0, -30, 13, -19, 15, -8)
 
 [node name="RopeSegment" parent="." instance=ExtResource("2_pib13")]
-position = Vector2(0, -26.7)
+position = Vector2(0, -23.7)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="RopeSegment"]
 position = Vector2(0, -5)
@@ -24,7 +24,7 @@ disable_collision = false
 softness = 0.2
 
 [node name="RopeSegment2" parent="." instance=ExtResource("2_pib13")]
-position = Vector2(0, -15.7)
+position = Vector2(0, -12.7)
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="RopeSegment2"]
 position = Vector2(0, -6)
@@ -35,7 +35,7 @@ disable_collision = false
 softness = 0.2
 
 [node name="RopeSegment3" parent="." instance=ExtResource("2_pib13")]
-position = Vector2(0, -4.7)
+position = Vector2(0, -1.7)
 
 [node name="PinJoint2D3" type="PinJoint2D" parent="RopeSegment3"]
 position = Vector2(0, -5)
@@ -46,7 +46,7 @@ disable_collision = false
 softness = 0.2
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(0, -52.7)
+position = Vector2(0, -49.7)
 scale = Vector2(0.524268, 1.02344)
 texture = ExtResource("1_fstp5")
 

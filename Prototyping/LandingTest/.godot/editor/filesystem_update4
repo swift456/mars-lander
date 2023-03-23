@@ -11,5 +11,5 @@ res://UILayer.tscn
 res://TileSurface.tscn
 res://surface2.tscn
 res://heat_shield.tscn
-res://Lander.gd
 res://FuelGauge.tscn
+res://DtSIndicator.gd
