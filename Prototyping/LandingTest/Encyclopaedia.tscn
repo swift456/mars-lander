@@ -8,58 +8,105 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 4
 
-[node name="PanelContainer4" type="PanelContainer" parent="GridContainer"]
+[node name="Tutorial" type="Label" parent="TabContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="TabContainer" type="TabContainer" parent="TabContainer/Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="GridContainer"]
+[node name="Entry" type="MarginContainer" parent="TabContainer/Tutorial/TabContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
 
-[node name="PanelContainer3" type="PanelContainer" parent="GridContainer"]
+[node name="Entry" type="Label" parent="TabContainer/Tutorial/TabContainer/Entry"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "When the capsule seperates from the orbital vehicle, and makes its entry to Martian atmosphere, the vessel will be travelling at a very high speed. 
+At this point in the lander's descent, the velocity at which the lander is travelling makes deploying a parachute impossible. Deploying a parachute at this speed 
+would cause the parachute to shear off."
 
-[node name="PanelContainer5" type="PanelContainer" parent="GridContainer"]
+[node name="Heating" type="MarginContainer" parent="TabContainer/Tutorial/TabContainer"]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
 
-[node name="PanelContainer6" type="PanelContainer" parent="GridContainer"]
+[node name="Heating" type="Label" parent="TabContainer/Tutorial/TabContainer/Heating"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Upon entering "
 
-[node name="PanelContainer7" type="PanelContainer" parent="GridContainer"]
+[node name="Parachute Deployment" type="MarginContainer" parent="TabContainer/Tutorial/TabContainer"]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
 
-[node name="PanelContainer8" type="PanelContainer" parent="GridContainer"]
+[node name="Parachute Deployment" type="Label" parent="TabContainer/Tutorial/TabContainer/Parachute Deployment"]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="PanelContainer9" type="PanelContainer" parent="GridContainer"]
+[node name="Heatshield Seperation" type="MarginContainer" parent="TabContainer/Tutorial/TabContainer"]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Heatshield Seperation" type="Label" parent="TabContainer/Tutorial/TabContainer/Heatshield Seperation"]
+visible = false
+layout_mode = 2
+
+[node name="Backshell Seperation" type="MarginContainer" parent="TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Backshell Seperation" type="Label" parent="TabContainer/Tutorial/TabContainer/Backshell Seperation"]
+visible = false
+layout_mode = 2
+
+[node name="Powered Descent" type="MarginContainer" parent="TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Powered Descent" type="Label" parent="TabContainer/Tutorial/TabContainer/Powered Descent"]
+visible = false
+layout_mode = 2
+
+[node name="Touchdown" type="MarginContainer" parent="TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Touchdown" type="Label" parent="TabContainer/Tutorial/TabContainer/Touchdown"]
+visible = false
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="TabContainer"]
+visible = false
+layout_mode = 2
