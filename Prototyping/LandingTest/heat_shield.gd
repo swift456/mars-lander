@@ -13,7 +13,8 @@ func _ready():
 func _process(delta):
 	_integrate_forces(self)
 func _integrate_forces(state):
-	drag(state)
+#	drag(state)
+	pass
 
 func drag(state):
 	#function to find out the magnitude of the vector

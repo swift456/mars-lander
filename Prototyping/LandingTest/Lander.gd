@@ -15,10 +15,15 @@ func _ready():
 signal collided
 
 func _process(delta):
+	
+	
+	
+	
 	rotating(self)
+	
 func _physics_process(delta):
 #	thrust(recieved_thrust_value)
-	print(self.rotation)
+	pass
 	
 	
 		
@@ -32,7 +37,7 @@ func drag(state):
 
 
 func _integrate_forces(state):
-	drag(state)
+#	drag(state)
 	
 	
 	for i in state.get_contact_count():

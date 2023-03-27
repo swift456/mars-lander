@@ -1,6 +1,6 @@
 res://default_env.tres
-res://Encyclopaedia.tscn
 res://Menu.tscn
+res://Main.gd
 res://Main.tscn
 res://Lander.tscn
 res://Parachute2.tscn
@@ -12,3 +12,7 @@ res://TileSurface.tscn
 res://surface2.tscn
 res://heat_shield.tscn
 res://FuelGauge.tscn
+res://Encyclopaedia.tscn
+res://DtSIndicator.gd
+res://Lander.gd
+res://heat_shield.gd

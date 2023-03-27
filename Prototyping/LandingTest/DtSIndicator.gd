@@ -4,7 +4,7 @@ extends Control
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var distance_to_surface = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +19,7 @@ func _process(delta):
 	v_Speed_indicator()
 
 func dts_Indicator():
-	var distance_to_surface
+	
 	get_parent().rotation
 	
 	if $Node2D/Lander/RayCast2D.is_colliding():
@@ -28,7 +28,7 @@ func dts_Indicator():
 		var lander_origin = $Node2D/Lander/RayCast2D.global_position
 		distance_to_surface = round(lander_origin.distance_to(collision_point))
 #	$Node2D/RayCast2D.add_exception($Node2D/Lander)
-	print($Node2D/Lander/RayCast2D.get_collider())
+	
 	
 	$UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer4/DtSIndicator.clear()
 	$UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer4/DtSIndicator.add_text(str(distance_to_surface))
@@ -44,4 +44,6 @@ func v_Speed_indicator():
 	$UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer2/VSpeedIndicator.clear()
 	$UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer2/VSpeedIndicator.add_text(str(v_speed))
 	
+func getDistance_to_Surface():
+	return distance_to_surface
 	

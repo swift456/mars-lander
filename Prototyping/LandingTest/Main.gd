@@ -9,7 +9,8 @@ var air_resistance = Vector2(0,0)
 var instance = ParachuteScene
 enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED,LANDED,SUCCESS, DESTROYED, PAUSED}
 var _state = State.FREEFALL
-var density = 0.00002
+var surface_density = 0.00002
+var current_density = 0.0000436
 var current_velocity = 0
 const CD = 1.7
 var parachute_used = false
@@ -26,6 +27,14 @@ func _ready():
 	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,800))
 
 func _process(delta):
+	#something about this is causing it to evaluate to zero, when commented out value printed is what it is declared as.
+	current_density = surface_density*exp($UI.getDistance_to_Surface()-13000)
+	print(current_density)
+	
+	
+	
+	
+	
 	print("State = ", _state)
 	match _state:
 		State.FREEFALL:
@@ -142,7 +151,7 @@ func thrust(value):
 
 func drag(state):
 	#function to find out the magnitude of the vector
-	air_resistance = density * state.get_linear_velocity() * (state.area) * CD * 1/2
+	air_resistance = current_density * state.get_linear_velocity() * (state.area) * CD * 1/2
 	state.apply_central_impulse(Vector2(-air_resistance))
 
 	
