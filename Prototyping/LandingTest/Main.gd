@@ -12,6 +12,7 @@ var _state = State.FREEFALL
 var surface_density = 0.00002
 var current_density = 0.0000436
 var current_velocity = 0
+const EULER = 2.71828
 const CD = 1.7
 var parachute_used = false
 var lander_speed = 0
@@ -28,7 +29,7 @@ func _ready():
 
 func _process(delta):
 	#something about this is causing it to evaluate to zero, when commented out value printed is what it is declared as.
-	current_density = surface_density*exp($UI.getDistance_to_Surface()-13000)
+	current_density = surface_density*(EULER**(-1 * ($UI.getDistance_to_Surface()-0) / 13000))
 	print(current_density)
 	
 	
