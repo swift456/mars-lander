@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpq5e0ksxwlhr"]
+
+[ext_resource type="Script" path="res://SurfaceGen.gd" id="1_lwwp0"]
+
+[node name="Surface" type="Node2D"]
+position = Vector2(0, 600)
+script = ExtResource("1_lwwp0")

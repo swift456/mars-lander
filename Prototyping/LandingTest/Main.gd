@@ -55,7 +55,7 @@ func _process(delta):
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
 				
 				
-				if instance.get_linear_velocity().y > 300:
+				if instance.get_linear_velocity().y > 700:
 					$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
 					_state = State.PARACHUTE_USED
 				else:

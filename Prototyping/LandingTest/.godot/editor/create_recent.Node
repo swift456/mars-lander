@@ -1,3 +1,5 @@
+Polygon2D
+Line2D
 MarginContainer
 Label
 TabContainer
@@ -29,4 +31,3 @@ CollisionPolygon2D
 RigidBody2D
 HSplitContainer
 CanvasLayer
-VSlider

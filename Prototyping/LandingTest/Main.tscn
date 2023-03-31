@@ -27,7 +27,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
-position = Vector2(-52, -15927.6)
+position = Vector2(-180, -32769.6)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
@@ -55,7 +55,7 @@ position = Vector2(0.10022, 0.376736)
 [node name="RayCast2D" type="RayCast2D" parent="UI/Node2D/Lander"]
 modulate = Color(0.286275, 1, 1, 1)
 position = Vector2(0, 13.209)
-target_position = Vector2(0, 14860.5)
+target_position = Vector2(0, 40000)
 collision_mask = 256
 hit_from_inside = true
 collide_with_areas = true
@@ -65,11 +65,10 @@ position = Vector2(-4, 3.94775)
 collision_layer = 259
 
 [node name="TextureRect" parent="." instance=ExtResource("7_uaj16")]
-offset_left = 1511.97
-offset_top = -15913.1
-offset_right = 17465.0
-offset_bottom = -12825.1
-metadata/_edit_use_anchors_ = true
+offset_left = 1512.0
+offset_top = -34311.0
+offset_right = 35863.0
+offset_bottom = -31223.0
 
 [connection signal="collided" from="UI/Node2D/Lander" to="." method="_on_lander_collided"]
 
