@@ -5,6 +5,11 @@ var noise
 func _ready():
 	randomize()
 	noise = FastNoiseLite.new()
+	noise.noise_type = 5
+	noise.fractal_octaves = 2
+	noise.fractal_lacunarity = 6
+	noise.fractal_type = 1
+	noise.frequency = 0.01
 	noise.seed = randi()
 
 	
