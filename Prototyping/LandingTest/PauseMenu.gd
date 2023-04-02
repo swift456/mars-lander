@@ -1,53 +1,61 @@
 extends Control
+## Provides pause and game over scene functionality
+##
+## By default, "pause" scene is what is displayed when the user presses the "escape" key. 
+## Calling in the state variable from the Main script allows for conditional behavior dependant on what state the game is in.
+## The two states that are being passed into this script "DESTROYED" and "SUCCESS" change the visibility of the "Restart" button.
+## Dependant on what state the game is in, the text label "Status" will change to reflect the state of the game.
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-
-# Called when the node enters the scene tree for the first time.
+## Inside the ready function signals from the buttons are connected to other functions in the script.
+## These signals are connected upon Menu entering the scene tree.
 func _ready():
 	pause()
 	$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Resume.pressed.connect(unpause)
 	$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Exit.pressed.connect(get_tree().quit)
 	$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart.pressed.connect(restart)
-	#Maybe have "invisible nodes" which contain the button "Restart" which replaces "Resume" by making resume invisible and restart visible, that should work.
-	#Then that behaviour can be linked to another function "restart" which just changes scene to Main, will that load it in again? hopefully.
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+## The restart function unpauses the scene tree, and reloads the Main scene. 
+## This function is called on the restart button, which is made visible when a game over state is recieved from the Main game script.
 func restart():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Main.tscn")
 	
-
+	
+## The unpause function unpauses the scene tree and sets the visiblity of the attached scene to false.
 func unpause():
 	get_tree().paused = false
 	visible = false
 
 
+## The pause function pauses the scene tree and sets the visibility of the attached scene to true
+## Visibility being set to true allows for processing to occur on the attached scene.
 func pause():
 	get_tree().paused = true
 	visible = true
 
+## The change_title function sets parameters of child nodes to state specifc information, such as "Successful Landing!"
+## This function gets called into the main game script.
 func change_title(state):
 	match state:
 		
-		6:
+		5:
 			$PanelContainer/MarginContainer/VBoxContainer/Status.text = "Sucessful Landing!" 
 			$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart.visible = true
 			$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Resume.visible = false
-			#behavior to make button visible can be stored here in these state variables 
 			#uses the corresponding states from the Main script.
 			#SUCCESS = 6
 			#if the State enum in Main is changed at all this behavior will apply to the corresponding value in the enum variable.
 			
 			
-		7:
+		6:
 			$PanelContainer/MarginContainer/VBoxContainer/Status.text = "Lander Destroyed!" 
 			$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart.visible = true
 			$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Resume.visible = false

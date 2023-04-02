@@ -1,13 +1,33 @@
 extends Node2D
+## Handles game logic relating to Lander and different states the game can be in.
+##
+## The main script of the game. Logic that is not handled in node specific scripts is executed here.
+## The main script needs to be able to reliably access information from all of its child nodes.
+## The alternative too this in some circumstances means having to reach up to the parent node and then refer down from there to the desired child node
+## e.g. the RayCast2D node needs access to information that is stored in the Surface node. 
 
+## A PackedScene of the Parachute2 Scene.
+## Allows for easier instanciation, as this scene is not in the scene tree upon launch.
 const ParachuteScene = preload("res://Parachute2.tscn")
+## A PackedScene of the PauseScene Scene.
+## Allows for easier instanciation, as this scene is not in the scene tree upon launch.
 const PauseScene = preload("res://Menu.tscn")
 
-var vert_drag = 0
-var hori_drag = 0
+## Tracks the air resistance to be applied to the Lander node.
 var air_resistance = Vector2(0,0)
-var instance = ParachuteScene
-enum State {FREEFALL, PARACHUTE_DEPLOY, PARACHUTE_CUT, PARACHUTE_DEPLOYED,PARACHUTE_USED,LANDED,SUCCESS, DESTROYED, PAUSED}
+
+## Enum which holds all of the States the game can be in. 
+## A state variable is utilised to keep track of the current state of the game.
+enum State {
+			FREEFALL, ## Default state. The game will start off in the freefall state. The behavior attached to this state tracks the speed of the lander, and relays information back to the user when it is safe to deploy the parachute. 
+			PARACHUTE_DEPLOY, ## Generates the parachute instance. If the speed is currently too high for the parachute to be deployed, the game transistions to the PARACHUTE_CUT state.
+			PARACHUTE_CUT, ## Removes the connection between the parachute and lander. Sets the node b of the PinJoint2D to "", nullifying the connection between the two rigidbodies.
+			PARACHUTE_DEPLOYED,## Relays textual feedback to the user. Acts as an "idle" state whilst the parachute object is connected to the lander.
+			PARACHUTE_USED, ## After parachute is either cut, or detached, this state becomes the new FREEFALL. This is to insure that the PARACHUTE_DEPLOY state can only be accessed once.
+			SUCCESS, ## Upon colliding with Surface, the landers velocity is evaluated. If the velocity is below a certain value, this state is transistioned to. This state is passed to the PauseMenu script which displays the appropriate information is displayed.
+			DESTROYED, ## Upon colliding with Surface, the landers velocity is evaluated. If the velocity is above/equal to a certain value, this state is transistioned to. This state is passed to the PauseMenu script which displays the appropriate information is displayed.
+			}
+## State variable to track current game state.
 var _state = State.FREEFALL
 var surface_density = 0.00002
 var current_density = 0.0000436
@@ -18,17 +38,27 @@ var parachute_used = false
 var lander_speed = 0
 var lander_fuel = 1000
 
+
+## Inbuilt function that is called every frame.
+## "event" parameter is whatever event that was registered in that frame.
+## In the context of this script, this function currently handles the input for escape key.
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
 		var pause_menu = PauseScene.instantiate()
 		add_child(pause_menu)
 
+
+## Upon the main scene entering the scene tree, the parachute indicator text is reset, (gets set next frame).
+## An impulse is applied to the lander to simulate the velocity upon entering the atmosphere.
 func _ready():
 	$UI/UILayer/ParachuteIndicator.text = ""
 	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,800))
 
+
+## The _process function in this script contains the state machine that tracks the state of the game.
+## Dependant on the state the game is currently in, different behavior will be executed.
 func _process(delta):
-	#something about this is causing it to evaluate to zero, when commented out value printed is what it is declared as.
+	
 	current_density = surface_density*(EULER**(-1 * ($UI.getDistance_to_Surface()-0) / 13000))
 	print(current_density)
 	
@@ -38,8 +68,9 @@ func _process(delta):
 	
 	print("State = ", _state)
 	match _state:
+		
 		State.FREEFALL:
-			if $UI/Node2D/Lander.get_linear_velocity().y >= 300:
+			if $UI/Node2D/Lander.get_linear_velocity().y >= 500:
 				$UI/UILayer/ParachuteIndicator.text = "Unsafe to deploy parachute!"
 				$UI/UILayer/ParachuteIndicator.set("theme_override_colors/font_color", Color(255, 0, 0))
 			else: 
@@ -48,14 +79,14 @@ func _process(delta):
 		
 		
 		State.PARACHUTE_DEPLOY:
-				instance = ParachuteScene.instantiate()
+				var instance = ParachuteScene.instantiate()
 				instance.linear_velocity = $UI/Node2D/Lander.get_linear_velocity()
 				$UI/Node2D/Lander.add_child(instance)
 				instance.global_transform.origin = $UI/Node2D/Lander/AttachmentPoint.global_transform.origin
 				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
 				
 				
-				if instance.get_linear_velocity().y > 700:
+				if instance.get_linear_velocity().y > 500:
 					$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
 					_state = State.PARACHUTE_USED
 				else:
@@ -127,7 +158,6 @@ func _integrate_forces(state):
 func thrust(value):
 	
 	if $UI/UILayer/HBoxContainer/TextureProgressBar.value > 0:
-		var thrust_value = Vector2(0,value)
 		var thrust = -$UI/Node2D/Lander.global_transform.y
 		thrust = thrust * value
 		$UI/Node2D/Lander.apply_central_impulse(thrust)
@@ -166,7 +196,7 @@ func input():
 	
 		
 	
-	if Input.is_action_just_pressed("parachute") && !_state == State.PARACHUTE_DEPLOYED && !_state == State.PARACHUTE_USED && !_state == State.LANDED:
+	if Input.is_action_just_pressed("parachute") && !_state == State.PARACHUTE_DEPLOYED && !_state == State.PARACHUTE_USED:
 		_state = State.PARACHUTE_DEPLOY
 	if Input.is_action_just_pressed("parachute") && _state == State.PARACHUTE_DEPLOYED:
 		_state = State.PARACHUTE_CUT

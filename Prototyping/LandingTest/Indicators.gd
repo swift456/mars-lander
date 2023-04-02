@@ -20,7 +20,6 @@ func _process(delta):
 
 func dts_Indicator():
 	
-	get_parent().rotation
 	
 	if $Node2D/Lander/RayCast2D.is_colliding():
 		

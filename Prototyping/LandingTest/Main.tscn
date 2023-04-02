@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0prcjmw6uk44"]
+[gd_scene load_steps=8 format=3 uid="uid://ufsloldw1juo"]
 
 [ext_resource type="PackedScene" uid="uid://eju5jnr1sa4c" path="res://Lander.tscn" id="2"]
+[ext_resource type="Script" path="res://Indicators.gd" id="2_1ef4i"]
 [ext_resource type="Script" path="res://ControlNode.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://oh82i8npbprn" path="res://UILayer.tscn" id="3_lvhsy"]
-[ext_resource type="Script" path="res://DtSIndicator.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://bh1l8xf35ajhc" path="res://surface2.tscn" id="6_d2uus"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://qjkp0b7qllf" path="res://GradientBG.tscn" id="7_uaj16"]
@@ -20,7 +20,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("6")
+script = ExtResource("2_1ef4i")
 metadata/_edit_use_anchors_ = true
 
 [node name="UILayer" parent="UI" instance=ExtResource("3_lvhsy")]
