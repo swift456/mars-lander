@@ -1,3 +1,5 @@
+StaticBody2D
+CollisionPolygon2D
 Polygon2D
 Line2D
 MarginContainer
@@ -22,12 +24,9 @@ Container
 HBoxContainer
 ColorRect
 TextureRect
-StaticBody2D
 CollisionShape2D
 Area2D
 TileMap
 PinJoint2D
-CollisionPolygon2D
 RigidBody2D
 HSplitContainer
-CanvasLayer

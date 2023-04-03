@@ -13,7 +13,7 @@ offset_left = -302.0
 offset_bottom = 136.0
 grow_horizontal = 0
 
-[node name="TextureProgressBar" parent="HBoxContainer" instance=ExtResource("2_rmp8h")]
+[node name="FuelGauge" parent="HBoxContainer" instance=ExtResource("2_rmp8h")]
 layout_mode = 2
 
 [node name="ThrustIndicator" parent="HBoxContainer" instance=ExtResource("1_aymh4")]

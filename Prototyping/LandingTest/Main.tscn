@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Indicators.gd" id="2_1ef4i"]
 [ext_resource type="Script" path="res://ControlNode.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://oh82i8npbprn" path="res://UILayer.tscn" id="3_lvhsy"]
-[ext_resource type="PackedScene" uid="uid://bh1l8xf35ajhc" path="res://surface2.tscn" id="6_d2uus"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://cpq5e0ksxwlhr" path="res://Surface3.tscn" id="7_b2b24"]
 [ext_resource type="PackedScene" uid="uid://qjkp0b7qllf" path="res://GradientBG.tscn" id="7_uaj16"]
 
 [node name="Main" type="Node2D"]
@@ -27,7 +27,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
-position = Vector2(-180, -32769.6)
+z_index = 7
+position = Vector2(-104, -1761.84)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
@@ -48,6 +49,7 @@ disable_collision = false
 
 [node name="HeatShield" parent="UI/Node2D/Lander" index="3"]
 position = Vector2(-2.29971, 17.3391)
+collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
 position = Vector2(0.10022, 0.376736)
@@ -60,17 +62,17 @@ collision_mask = 256
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="Surface" parent="." instance=ExtResource("6_d2uus")]
-position = Vector2(-4, 3.94775)
-collision_layer = 259
-
 [node name="TextureRect" parent="." instance=ExtResource("7_uaj16")]
 offset_left = 1512.0
 offset_top = -34311.0
 offset_right = 35863.0
 offset_bottom = -31223.0
 
+[node name="Surface" parent="." instance=ExtResource("7_b2b24")]
+position = Vector2(-1577, 0)
+
 [connection signal="collided" from="UI/Node2D/Lander" to="." method="_on_lander_collided"]
 
 [editable path="UI/Node2D/Lander"]
 [editable path="UI/Node2D/Lander/HeatShield"]
+[editable path="Surface"]

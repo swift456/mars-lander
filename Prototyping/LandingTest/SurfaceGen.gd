@@ -10,7 +10,7 @@ func _ready():
 	
 	
 	var poly = Polygon2D.new()
-	var y = get_viewport_rect().size.x
+	var y = 3500
 	var polygon = PackedVector2Array([])
 	var height = 1
 	var width = 1
@@ -24,8 +24,9 @@ func _ready():
 	polygon.append(Vector2(width,1000))
 	poly.set_polygon(polygon)
 	add_child(poly)
-
-
+	var col_poly = CollisionPolygon2D.new()
+	col_poly.set_polygon(polygon)
+	$Surface.add_child(col_poly)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

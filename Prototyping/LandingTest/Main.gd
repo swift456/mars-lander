@@ -29,14 +29,16 @@ enum State {
 			}
 ## State variable to track current game state.
 var _state = State.FREEFALL
-var surface_density = 0.00002
-var current_density = 0.0000436
+var pressure = 0
+var temperature = 0
+var surface_density = 0.02
+var current_density = 0.00436
 var current_velocity = 0
 const EULER = 2.71828
 const CD = 1.7
 var parachute_used = false
 var lander_speed = 0
-var lander_fuel = 1000
+var lander_fuel = 1000000
 
 
 ## Inbuilt function that is called every frame.
@@ -59,7 +61,10 @@ func _ready():
 ## Dependant on the state the game is currently in, different behavior will be executed.
 func _process(delta):
 	
-	current_density = surface_density*(EULER**(-1 * ($UI.getDistance_to_Surface()-0) / 13000))
+#	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())
+#	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
+#	current_density =  pressure / (.1921 * temperature + 273.1)
+	current_density = surface_density*(EULER**(-1 * ($UI.getDistance_to_Surface()-0) / 13))
 	print(current_density)
 	
 	
@@ -157,14 +162,14 @@ func _integrate_forces(state):
 
 func thrust(value):
 	
-	if $UI/UILayer/HBoxContainer/TextureProgressBar.value > 0:
+	if $UI/UILayer/HBoxContainer/FuelGauge.value > 0:
 		var thrust = -$UI/Node2D/Lander.global_transform.y
 		thrust = thrust * value
 		$UI/Node2D/Lander.apply_central_impulse(thrust)
-		$UI/UILayer/HBoxContainer/TextureProgressBar.value -= value/80
-		print($UI/UILayer/HBoxContainer/TextureProgressBar.value)
+		$UI/UILayer/HBoxContainer/FuelGauge.value -= value/80
+		print($UI/UILayer/HBoxContainer/FuelGauge.value)
 	else:
-		$UI/UILayer/HBoxContainer/TextureProgressBar.value = 0
+		$UI/UILayer/HBoxContainer/FuelGauge.value = 0
 		print("Out of fuel!")
 #	rotating($UI/Node2D/Lander)
 	
@@ -182,7 +187,12 @@ func thrust(value):
 
 func drag(state):
 	#function to find out the magnitude of the vector
-	air_resistance = current_density * state.get_linear_velocity() * (state.area) * CD * 1/2
+	var x =  int(state.get_linear_velocity().x)
+	var y = int(state.get_linear_velocity().y)
+	x^2
+	y^2
+	var squared_velocity = Vector2(x,y)
+	air_resistance = (CD * current_density * squared_velocity * state.area) / 2
 	state.apply_central_impulse(Vector2(-air_resistance))
 
 	
@@ -231,9 +241,10 @@ func input():
 #			_state = State.SUCCESS
 
 
-func _on_lander_collided(collider):
-	if collider == $Surface:
-		if lander_speed > 40:
+func _on_lander_collided(collider):#
+	print(collider)
+	if collider == $Surface/Surface:
+		if lander_speed > 7.5:
 			_state = State.DESTROYED
 		else:
 			await get_tree().create_timer(5).timeout

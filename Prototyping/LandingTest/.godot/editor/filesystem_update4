@@ -1,6 +1,6 @@
-res://PauseMenu.gd
 res://default_env.tres
 res://Menu.tscn
+res://SurfaceGen.gd
 res://Main.tscn
 res://Lander.tscn
 res://Parachute2.tscn
@@ -16,3 +16,4 @@ res://Encyclopaedia.tscn
 res://Surface3.tscn
 res://Main.gd
 res://Indicators.gd
+res://Lander.gd

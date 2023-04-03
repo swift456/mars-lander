@@ -4,9 +4,10 @@ extends RigidBody2D
 
 
 var air_resistance = Vector2(0,0)
-var density = 0.00002
+var density = 0.02
 const CD = 1.7
-@export var area = 20670
+@export var area = 54.7
+@export var lander_fuel = 1000
 var recieved_thrust_value = Vector2(0,0)
 
 func _ready():

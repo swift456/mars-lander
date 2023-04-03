@@ -5,3 +5,6 @@
 [node name="Surface" type="Node2D"]
 position = Vector2(0, 600)
 script = ExtResource("1_lwwp0")
+
+[node name="Surface" type="StaticBody2D" parent="."]
+collision_layer = 259
