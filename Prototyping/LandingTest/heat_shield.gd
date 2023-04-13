@@ -1,8 +1,8 @@
 extends RigidBody2D
 var air_resistance = Vector2(0,0)
-var density = 0.00002
+var density = 0.02
 const CD = 1.9
-@export var area = 21000
+@export var area = 5.56
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,8 +13,7 @@ func _ready():
 func _process(delta):
 	_integrate_forces(self)
 func _integrate_forces(state):
-#	drag(state)
-	pass
+	drag(state)
 
 func drag(state):
 	#function to find out the magnitude of the vector

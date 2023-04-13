@@ -54,18 +54,20 @@ func _unhandled_input(event):
 ## An impulse is applied to the lander to simulate the velocity upon entering the atmosphere.
 func _ready():
 	$UI/UILayer/ParachuteIndicator.text = ""
-	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,800))
+	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,900))
 
 
 ## The _process function in this script contains the state machine that tracks the state of the game.
 ## Dependant on the state the game is currently in, different behavior will be executed.
+func calc_density():
+	current_density = surface_density*(EULER**(-1 * ($UI.getDistance_to_Surface()-0) / 13))
+	return current_density
 func _process(delta):
 	
 #	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())
 #	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
 #	current_density =  pressure / (.1921 * temperature + 273.1)
-	current_density = surface_density*(EULER**(-1 * ($UI.getDistance_to_Surface()-0) / 13))
-	print(current_density)
+	
 	
 	
 	
@@ -85,14 +87,17 @@ func _process(delta):
 		
 		State.PARACHUTE_DEPLOY:
 				var instance = ParachuteScene.instantiate()
-				instance.linear_velocity = $UI/Node2D/Lander.get_linear_velocity()
-				$UI/Node2D/Lander.add_child(instance)
-				instance.global_transform.origin = $UI/Node2D/Lander/AttachmentPoint.global_transform.origin
-				$UI/Node2D/Lander/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
+				instance.linear_velocity = $UI/Node2D/Lander/Backshell.get_linear_velocity()
+				$UI/Node2D/Lander/Backshell/AttachmentPoint.add_child(instance)
+				instance.global_transform.origin = $UI/Node2D/Lander/Backshell/AttachmentPoint.global_transform.origin
+				$UI/Node2D/Lander/Backshell/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
 				
 				
 				if instance.get_linear_velocity().y > 500:
-					$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
+					$UI/Node2D/Lander/Backshell/AttachmentPoint.set_node_b("")
+					$UI/Node2D/Lander/Backshell/PinToLander1.set_node_b("")
+					$UI/Node2D/Lander/Backshell/PinToLander2.set_node_b("")
+					$UI/Node2D/Lander/AnimationPlayer.play("leg_deployment")
 					_state = State.PARACHUTE_USED
 				else:
 					_state = State.PARACHUTE_DEPLOYED	
@@ -105,7 +110,9 @@ func _process(delta):
 				
 				
 		State.PARACHUTE_CUT:
-				$UI/Node2D/Lander/AttachmentPoint.set_node_b("")
+				$UI/Node2D/Lander/Backshell/PinToLander1.set_node_b("")
+				$UI/Node2D/Lander/Backshell/PinToLander2.set_node_b("")
+				$UI/Node2D/Lander/AnimationPlayer.play("leg_deployment")
 				_state = State.PARACHUTE_USED
 				
 			
@@ -134,6 +141,7 @@ func _process(delta):
 func _physics_process(delta):
 	lander_speed = $UI/Node2D/Lander.get_linear_velocity().y
 	_integrate_forces($UI/Node2D/Lander)
+	
 	input()
 	
 	
@@ -192,7 +200,7 @@ func drag(state):
 	x^2
 	y^2
 	var squared_velocity = Vector2(x,y)
-	air_resistance = (CD * current_density * squared_velocity * state.area) / 2
+	air_resistance = (CD * calc_density() * squared_velocity * state.area) / 2
 	state.apply_central_impulse(Vector2(-air_resistance))
 
 	
@@ -244,7 +252,7 @@ func input():
 func _on_lander_collided(collider):#
 	print(collider)
 	if collider == $Surface/Surface:
-		if lander_speed > 7.5:
+		if lander_speed > 20:
 			_state = State.DESTROYED
 		else:
 			await get_tree().create_timer(5).timeout

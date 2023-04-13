@@ -1,3 +1,8 @@
+AnimationPlayer
+AnimatedSprite2D
+Sprite2D
+PinJoint2D
+RigidBody2D
 StaticBody2D
 CollisionPolygon2D
 Polygon2D
@@ -19,7 +24,6 @@ Node2D
 Node
 TextureProgressBar
 ProgressBar
-Sprite2D
 Container
 HBoxContainer
 ColorRect
@@ -27,6 +31,3 @@ TextureRect
 CollisionShape2D
 Area2D
 TileMap
-PinJoint2D
-RigidBody2D
-HSplitContainer
