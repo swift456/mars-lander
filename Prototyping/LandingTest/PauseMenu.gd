@@ -6,13 +6,14 @@ extends Control
 ## The two states that are being passed into this script "DESTROYED" and "SUCCESS" change the visibility of the "Restart" button.
 ## Dependant on what state the game is in, the text label "Status" will change to reflect the state of the game.
 
-
+const EncyclopaediaScene = preload("res://Encyclopaedia.tscn")
 
 ## Inside the ready function signals from the buttons are connected to other functions in the script.
 ## These signals are connected upon Menu entering the scene tree.
 func _ready():
 	pause()
 	$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Resume.pressed.connect(unpause)
+	$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/Encyclopedia.pressed.connect(make_encyclopaedia_visible)
 	$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Exit.pressed.connect(get_tree().quit)
 	$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart.pressed.connect(restart)
 
@@ -22,6 +23,7 @@ func _ready():
 func _process(delta):
 	pass
 
+
 ## The restart function unpauses the scene tree, and reloads the Main scene. 
 ## This function is called on the restart button, which is made visible when a game over state is recieved from the Main game script.
 func restart():
@@ -29,10 +31,18 @@ func restart():
 	get_tree().change_scene_to_file("res://Main.tscn")
 	
 	
+## The make_encyclopaedia_visible function instantiates an encyclopaedia scene from the previously declared PackedScene, EncyclopaediaScene
+##
+func make_encyclopaedia_visible():
+		var encyclopaedia = EncyclopaediaScene.instantiate()
+		add_child(encyclopaedia)
+		
+		
 ## The unpause function unpauses the scene tree and sets the visiblity of the attached scene to false.
 func unpause():
 	get_tree().paused = false
 	visible = false
+
 
 
 ## The pause function pauses the scene tree and sets the visibility of the attached scene to true

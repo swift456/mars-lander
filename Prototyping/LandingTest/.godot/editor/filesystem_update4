@@ -1,5 +1,7 @@
 res://default_env.tres
 res://Menu.tscn
+res://Encyclopaedia.gd
+res://PauseMenu.gd
 res://Main.tscn
 res://Lander.tscn
 res://Parachute2.tscn
@@ -8,9 +10,5 @@ res://UILayer.tscn
 res://heat_shield.tscn
 res://Encyclopaedia.tscn
 res://Surface3.tscn
-res://Lander.gd
-res://Main.gd
-res://heat_shield.gd
-res://Parachute2.gd
-res://Backshell.gd
 res://rope_segment.tscn
+res://StartMenu.gd

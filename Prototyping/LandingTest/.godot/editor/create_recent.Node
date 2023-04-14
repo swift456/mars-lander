@@ -1,3 +1,6 @@
+ColorRect
+CanvasLayer
+Button
 AnimationPlayer
 AnimatedSprite2D
 Sprite2D
@@ -13,7 +16,6 @@ TabContainer
 TabBar
 PopupMenu
 MenuBar
-Button
 VBoxContainer
 Control
 ScrollContainer
@@ -26,8 +28,5 @@ TextureProgressBar
 ProgressBar
 Container
 HBoxContainer
-ColorRect
 TextureRect
 CollisionShape2D
-Area2D
-TileMap
