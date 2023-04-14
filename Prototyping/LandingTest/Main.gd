@@ -29,16 +29,26 @@ enum State {
 			}
 ## State variable to track current game state.
 var _state = State.FREEFALL
-var pressure = 0
-var temperature = 0
-var surface_density = 0.02
+
+## Atmospheric density on the surface of mars.
+const surface_density = 0.02
+
+## This variable initiates the tracked density (dependant on the current altitude of the lander using the different of the collison point of the RayCast2D and RayCast2D's current position).
+## Through exponential interpolation when the Lander reaches the surface node, current_density will be equal to surface_density
 var current_density = 0.00436
-var current_velocity = 0
+
+## Eulers number, used for exponential interpolation in the atmospheric density calculation.
 const EULER = 2.71828
+
+## Drag Coeffiecent for the Lander node. 
+## Value taken from average value of drag coefficient for the bottom face of an aeroshell.
 const CD = 1.7
-var parachute_used = false
+
+
+## Tracks the current speed of the lander
+## Used to decide whether or not the lander is destroyed upon contact with the surface.
 var lander_speed = 0
-var lander_fuel = 1000000
+
 
 
 ## Inbuilt function that is called every frame.
@@ -57,13 +67,19 @@ func _ready():
 	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,900))
 
 
-## The _process function in this script contains the state machine that tracks the state of the game.
-## Dependant on the state the game is currently in, different behavior will be executed.
+## The calc_density function works out the current density based on the current altitude of the Lander.
+## This works through calling a value from the UI script responsible for displaying the current altitude of the Lander.
+## For other objects such as the parachute and heatshield they would require a 
 func calc_density():
 	current_density = surface_density*(EULER**(-1 * ($UI.getDistance_to_Surface()-0) / 13))
 	return current_density
+	
+## The _process function in this script contains the state machine that tracks the state of the game.
+## Dependant on the state the game is currently in, different behavior will be executed.
 func _process(delta):
 	
+# 	barmetric equation for working out current density, didn't work, returned erroneous values.
+#	code kept just for future reference.
 #	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())
 #	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
 #	current_density =  pressure / (.1921 * temperature + 273.1)
@@ -137,17 +153,14 @@ func _process(delta):
 		
 		
 
-
+## Inbuilt function which handles any changes to physic bodies.
+## Best to keep calculations in here that are reliant on a fixed frame rate.
+## Some calculations, when tied to computer FPS (which will vary depending on hardware)
+## can have unintended consequences.
 func _physics_process(delta):
 	lander_speed = $UI/Node2D/Lander.get_linear_velocity().y
 	_integrate_forces($UI/Node2D/Lander)
-	
 	input()
-	
-	
-	
-	
-	
 	print($UI/UILayer/HBoxContainer/ThrustIndicator.value)
 	
 	
@@ -161,13 +174,19 @@ func _physics_process(delta):
 
 			
 			
-
+## Inbuilt function which is best used when changes to a rigidbody would directly contradict the calculations handled by the physics engine.
+## In this case, the two functions drag and thrust which apply a force to the object are dealt with inside this function.
 func _integrate_forces(state):
 	drag(state)
 	thrust($UI/UILayer/HBoxContainer/ThrustIndicator.value)
-#	rotating($UI/Node2D/Lander)
-	
 
+## The thrust function applies a central_impulse upward on the Lander object. This thrust is applied directly beneath the Lander.
+## This is accomplished through the global_transform.y property of the Lander object.
+## Thrust accepts a value, float or int. This value is best tied to a meter that is changed via player input.
+## In the context of this script thrust takes in a value from the ThrustIndicator node.
+## This is a slider which is controlled by the up and down arrows.
+## Intensity of the thrust is based on the position of the slider.
+## Thrust cannot be applied if the returned value from FuelGauge is not higher than 0.
 func thrust(value):
 	
 	if $UI/UILayer/HBoxContainer/FuelGauge.value > 0:
@@ -179,20 +198,10 @@ func thrust(value):
 	else:
 		$UI/UILayer/HBoxContainer/FuelGauge.value = 0
 		print("Out of fuel!")
-#	rotating($UI/Node2D/Lander)
-	
-#func rotating(body):
-#
-#	if Input.is_action_pressed("left"):
-#		body.apply_torque(10000)
-#
-#	if Input.is_action_pressed("right"):
-#		body.apply_torque(-10000)
-#
-#	body.apply_torque(0)
-	
-	
 
+	
+## The drag function applies a central impulse to a rigid body using the current density returned by calc_density()
+## This function is derived from the equation for drag.
 func drag(state):
 	#function to find out the magnitude of the vector
 	var x =  int(state.get_linear_velocity().x)
@@ -203,17 +212,9 @@ func drag(state):
 	air_resistance = (CD * calc_density() * squared_velocity * state.area) / 2
 	state.apply_central_impulse(Vector2(-air_resistance))
 
-	
-#func parachute_drag():
-#	parachute_vert_drag = density * $UI/Node2D/Lander.get_linear_velocity().y * (parachute_area) * CD * 1/2
-#	parachute_hori_drag = density * $UI/Node2D/Lander.get_linear_velocity().x * (parachute_area) * CD * 1/2
-#	instance.apply_central_impulse(Vector2(-parachute_hori_drag,-parachute_vert_drag))
-	
+## The input function handles inputs for the parachute deployment and parachute cut.
+## This function can be expanded to hold any inputs that need to be handled during the main game script.
 func input():
-	
-	
-		
-	
 	if Input.is_action_just_pressed("parachute") && !_state == State.PARACHUTE_DEPLOYED && !_state == State.PARACHUTE_USED:
 		_state = State.PARACHUTE_DEPLOY
 	if Input.is_action_just_pressed("parachute") && _state == State.PARACHUTE_DEPLOYED:
@@ -248,7 +249,10 @@ func input():
 #			await get_tree().create_timer(5).timeout
 #			_state = State.SUCCESS
 
-
+## This signal function tracks when the lander collides with an object.
+## This function will only evaluate the lander_speed if the object the lander has collided with is the surface.
+## If higher than 20kph the game will move into the DESTROYED state.
+## If below 20kph the game will move into the SUCCESS state after 5 seconds have elapsed.
 func _on_lander_collided(collider):#
 	print(collider)
 	if collider == $Surface/Surface:
