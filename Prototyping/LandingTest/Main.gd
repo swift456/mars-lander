@@ -49,6 +49,9 @@ const CD = 1.7
 ## Used to decide whether or not the lander is destroyed upon contact with the surface.
 var lander_speed = 0
 
+## Tracks the current altitude of Lander from sea-level (position of surface node)
+## In the _process function,  
+var lander_altitude = 0
 
 
 ## Inbuilt function that is called every frame.
@@ -68,16 +71,20 @@ func _ready():
 
 
 ## The calc_density function works out the current density based on the current altitude of the Lander.
-## This works through calling a value from the UI script responsible for displaying the current altitude of the Lander.
-## For other objects such as the parachute and heatshield they would require a 
+## 
+## For other objects such as the parachute and heatshield they would require a hardcoded position of the Surface node, or a node that can be referenced 
+## in the their own scripts.
 func calc_density():
-	current_density = surface_density*(EULER**(-1 * ($UI.getDistance_to_Surface()-0) / 13))
+	while current_density != surface_density:
+		current_density = surface_density*(EULER**(-1 * (lander_altitude-50) / 13))
+		return current_density
 	return current_density
 	
 ## The _process function in this script contains the state machine that tracks the state of the game.
 ## Dependant on the state the game is currently in, different behavior will be executed.
 func _process(delta):
-	
+	lander_altitude = snapped($UI/Node2D/Lander.get_global_position().distance_to($Surface.get_global_position())/1000, 0.01)
+	print(current_density)
 # 	barmetric equation for working out current density, didn't work, returned erroneous values.
 #	code kept just for future reference.
 #	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())

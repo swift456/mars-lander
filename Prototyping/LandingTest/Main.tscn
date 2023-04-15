@@ -41,9 +41,12 @@ max_contacts_reported = 1
 method_call_mode = 1
 
 [node name="Backshell" parent="UI/Node2D/Lander" index="3"]
+visible = true
 position = Vector2(0, -5.25781)
+collision_layer = 2
 
 [node name="HeatShield" parent="UI/Node2D/Lander" index="4"]
+visible = true
 position = Vector2(9.15527e-05, 10.5305)
 collision_layer = 2
 
@@ -52,15 +55,16 @@ position = Vector2(0.10022, 0.376736)
 zoom = Vector2(2, 2)
 
 [node name="RayCast2D" parent="UI/Node2D/Lander" instance=ExtResource("6_2bf5r")]
+target_position = Vector2(0, 160000)
 
 [node name="TextureRect" parent="." instance=ExtResource("7_uaj16")]
 offset_left = 1512.0
 offset_top = -34311.0
-offset_right = 35863.0
+offset_right = 151512.0
 offset_bottom = -31223.0
 
 [node name="Surface" parent="." instance=ExtResource("7_b2b24")]
-position = Vector2(-1577, -72.3682)
+position = Vector2(-1577, 114454)
 
 [connection signal="collided" from="UI/Node2D/Lander" to="." method="_on_lander_collided"]
 
