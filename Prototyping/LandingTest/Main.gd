@@ -53,6 +53,9 @@ var lander_speed = 0
 ## In the _process function,  
 var lander_altitude = 0
 
+## Tracks whether the surface has been moved.
+## This is so that when the player is in freefall, the map is moved into place and they can begin to land.
+var surface_moved = false
 
 ## Inbuilt function that is called every frame.
 ## "event" parameter is whatever event that was registered in that frame.
@@ -67,9 +70,10 @@ func _unhandled_input(event):
 ## An impulse is applied to the lander to simulate the velocity upon entering the atmosphere.
 func _ready():
 	$UI/UILayer/ParachuteIndicator.text = ""
-	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,900))
+#	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,900))
 
-
+func calc_heat():
+	pass
 ## The calc_density function works out the current density based on the current altitude of the Lander.
 ## 
 ## For other objects such as the parachute and heatshield they would require a hardcoded position of the Surface node, or a node that can be referenced 
@@ -90,7 +94,11 @@ func _process(delta):
 #	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())
 #	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
 #	current_density =  pressure / (.1921 * temperature + 273.1)
-	
+	if !$Surface.on_screen && !surface_moved:
+		$Surface.position.x = $UI/Node2D/Lander.position.x 
+	else: 
+		$Surface.position.x = $UI/Node2D/Lander/Camera2D/SurfaceOrigin.position.x
+		surface_moved = true
 	
 	
 	
@@ -184,7 +192,7 @@ func _physics_process(delta):
 ## Inbuilt function which is best used when changes to a rigidbody would directly contradict the calculations handled by the physics engine.
 ## In this case, the two functions drag and thrust which apply a force to the object are dealt with inside this function.
 func _integrate_forces(state):
-	drag(state)
+#	drag(state)
 	thrust($UI/UILayer/HBoxContainer/ThrustIndicator.value)
 
 ## The thrust function applies a central_impulse upward on the Lander object. This thrust is applied directly beneath the Lander.
@@ -218,6 +226,7 @@ func drag(state):
 	var squared_velocity = Vector2(x,y)
 	air_resistance = (CD * calc_density() * squared_velocity * state.area) / 2
 	state.apply_central_impulse(Vector2(-air_resistance))
+	print(air_resistance)
 
 ## The input function handles inputs for the parachute deployment and parachute cut.
 ## This function can be expanded to hold any inputs that need to be handled during the main game script.

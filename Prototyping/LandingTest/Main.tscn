@@ -14,6 +14,7 @@ visibility_layer = 2
 position = Vector2(5192, 3965)
 scale = Vector2(1, 0.760002)
 script = ExtResource("7")
+metadata/_edit_horizontal_guides_ = []
 
 [node name="UI" type="Control" parent="."]
 visibility_layer = 2
@@ -29,7 +30,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
 z_index = 7
-position = Vector2(-23, -33414.4)
+position = Vector2(128, 113071)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
@@ -53,6 +54,10 @@ collision_layer = 2
 [node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
 position = Vector2(0.10022, 0.376736)
 zoom = Vector2(2, 2)
+editor_draw_limits = true
+
+[node name="SurfaceOrigin" type="Node2D" parent="UI/Node2D/Lander/Camera2D"]
+position = Vector2(-639.819, 473.438)
 
 [node name="RayCast2D" parent="UI/Node2D/Lander" instance=ExtResource("6_2bf5r")]
 target_position = Vector2(0, 160000)
@@ -64,7 +69,7 @@ offset_right = 151512.0
 offset_bottom = -31223.0
 
 [node name="Surface" parent="." instance=ExtResource("7_b2b24")]
-position = Vector2(-1577, 114454)
+position = Vector2(-1562, 114306)
 
 [connection signal="collided" from="UI/Node2D/Lander" to="." method="_on_lander_collided"]
 

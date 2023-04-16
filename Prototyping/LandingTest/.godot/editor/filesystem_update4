@@ -1,6 +1,7 @@
 res://default_env.tres
-res://Main.tscn
 res://Menu.tscn
+res://Main.gd
+res://Main.tscn
 res://Lander.tscn
 res://Parachute2.tscn
 res://StartMenu.tscn
@@ -9,5 +10,4 @@ res://heat_shield.tscn
 res://Encyclopaedia.tscn
 res://Surface3.tscn
 res://rope_segment.tscn
-res://Main.gd
-res://Indicators.gd
+res://SurfaceGen.gd
