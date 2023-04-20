@@ -2,6 +2,7 @@ res://default_env.tres
 res://ThrustIndicator.tscn
 res://ThrustIndicator.gd
 res://Menu.tscn
+res://Main.gd
 res://Main.tscn
 res://Lander.tscn
 res://Parachute2.tscn
@@ -11,10 +12,11 @@ res://heat_shield.tscn
 res://Encyclopaedia.tscn
 res://Surface3.tscn
 res://rope_segment.tscn
-res://Main.gd
 <<<<<<< HEAD
+res://Main.gd
 res://Indicators.gd
 res://SurfaceGen.gd
 res://FuelGauge.tscn
 =======
->>>>>>> e99ac310eb2cafc4ae6d2a0611836a7b64ed6026
+res://SurfaceGen.gd
+>>>>>>> parent of 8ee1d02 (Made changes to enable demonstration of project)

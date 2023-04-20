@@ -83,8 +83,8 @@ func calc_density():
 <<<<<<< HEAD
 		current_density = surface_density*(EULER**(-1 * (lander_altitude-14) / 13))
 =======
-		current_density = surface_density*(EULER**(-1 * (lander_altitude-11) / 13))
->>>>>>> e99ac310eb2cafc4ae6d2a0611836a7b64ed6026
+		current_density = surface_density*(EULER**(-1 * (lander_altitude-50) / 13))
+>>>>>>> parent of 8ee1d02 (Made changes to enable demonstration of project)
 		return current_density
 	return current_density
 	
@@ -196,12 +196,13 @@ func _physics_process(delta):
 ## Inbuilt function which is best used when changes to a rigidbody would directly contradict the calculations handled by the physics engine.
 ## In this case, the two functions drag and thrust which apply a force to the object are dealt with inside this function.
 func _integrate_forces(state):
-	drag(state)
 <<<<<<< HEAD
+	drag(state)
 	thrust($UI/UILayer/HBoxContainer/ThrustIndicator/VSlider.value)
 =======
+#	drag(state)
 	thrust($UI/UILayer/HBoxContainer/ThrustIndicator.value)
->>>>>>> e99ac310eb2cafc4ae6d2a0611836a7b64ed6026
+>>>>>>> parent of 8ee1d02 (Made changes to enable demonstration of project)
 
 ## The thrust function applies a central_impulse upward on the Lander object. This thrust is applied directly beneath the Lander.
 ## This is accomplished through the global_transform.y property of the Lander object.

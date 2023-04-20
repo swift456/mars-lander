@@ -1,5 +1,0 @@
-[gd_scene format=2]
-
-[node name="Timer" type="Timer"]
-wait_time = 0.5
-autostart = true
