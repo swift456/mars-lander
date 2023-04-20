@@ -80,7 +80,11 @@ func calc_heat():
 ## in the their own scripts.
 func calc_density():
 	while current_density != surface_density:
+<<<<<<< HEAD
 		current_density = surface_density*(EULER**(-1 * (lander_altitude-14) / 13))
+=======
+		current_density = surface_density*(EULER**(-1 * (lander_altitude-11) / 13))
+>>>>>>> e99ac310eb2cafc4ae6d2a0611836a7b64ed6026
 		return current_density
 	return current_density
 	
@@ -193,7 +197,11 @@ func _physics_process(delta):
 ## In this case, the two functions drag and thrust which apply a force to the object are dealt with inside this function.
 func _integrate_forces(state):
 	drag(state)
+<<<<<<< HEAD
 	thrust($UI/UILayer/HBoxContainer/ThrustIndicator/VSlider.value)
+=======
+	thrust($UI/UILayer/HBoxContainer/ThrustIndicator.value)
+>>>>>>> e99ac310eb2cafc4ae6d2a0611836a7b64ed6026
 
 ## The thrust function applies a central_impulse upward on the Lander object. This thrust is applied directly beneath the Lander.
 ## This is accomplished through the global_transform.y property of the Lander object.
