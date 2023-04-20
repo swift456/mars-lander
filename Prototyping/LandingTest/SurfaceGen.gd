@@ -30,7 +30,7 @@ func _ready():
 	var col_poly = CollisionPolygon2D.new()
 	col_poly.set_polygon(polygon)
 	$Surface.add_child(col_poly)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	pass
 

@@ -80,7 +80,7 @@ func calc_heat():
 ## in the their own scripts.
 func calc_density():
 	while current_density != surface_density:
-		current_density = surface_density*(EULER**(-1 * (lander_altitude-50) / 13))
+		current_density = surface_density*(EULER**(-1 * (lander_altitude-14) / 13))
 		return current_density
 	return current_density
 	
@@ -176,7 +176,7 @@ func _physics_process(delta):
 	lander_speed = $UI/Node2D/Lander.get_linear_velocity().y
 	_integrate_forces($UI/Node2D/Lander)
 	input()
-	print($UI/UILayer/HBoxContainer/ThrustIndicator.value)
+	print($UI/UILayer/HBoxContainer/ThrustIndicator/VSlider.value)
 	
 	
 
@@ -192,8 +192,8 @@ func _physics_process(delta):
 ## Inbuilt function which is best used when changes to a rigidbody would directly contradict the calculations handled by the physics engine.
 ## In this case, the two functions drag and thrust which apply a force to the object are dealt with inside this function.
 func _integrate_forces(state):
-#	drag(state)
-	thrust($UI/UILayer/HBoxContainer/ThrustIndicator.value)
+	drag(state)
+	thrust($UI/UILayer/HBoxContainer/ThrustIndicator/VSlider.value)
 
 ## The thrust function applies a central_impulse upward on the Lander object. This thrust is applied directly beneath the Lander.
 ## This is accomplished through the global_transform.y property of the Lander object.

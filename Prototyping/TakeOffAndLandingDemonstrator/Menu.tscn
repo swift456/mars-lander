@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg0l8ny181npf"]
+
+[ext_resource type="FontFile" uid="uid://dddxptfk3wehi" path="res://MS Gothic.ttf" id="1"]
+[ext_resource type="Script" path="res://PauseMenu.gd" id="2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ev71h"]
+bg_color = Color(0.6, 0.6, 0.6, 0.172549)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 2
+
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_right = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ev71h")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 80
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 700
+theme_override_constants/margin_right = 700
+
+[node name="Resume" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 40
+text = "Resume"
+
+[node name="Restart" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 40
+text = "Restart"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 700
+theme_override_constants/margin_right = 700
+
+[node name="Encyclopedia" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 40
+text = "Encyclopedia"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 700
+theme_override_constants/margin_right = 700
+
+[node name="Exit" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 40
+text = "Exit"
+
+[node name="MarginContainer4" type="MarginContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 700
+theme_override_constants/margin_right = 700
+
+[node name="HSeparator" type="HSeparator" parent="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer4"]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart" to="Control" method="_on_restart_pressed"]

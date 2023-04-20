@@ -1,3 +1,6 @@
+Label
+RichTextLabel
+VSplitContainer
 Node
 VisibleOnScreenNotifier2D
 ColorRect
@@ -13,7 +16,6 @@ CollisionPolygon2D
 Polygon2D
 Line2D
 MarginContainer
-Label
 TabContainer
 TabBar
 PopupMenu
@@ -28,5 +30,3 @@ Node2D
 TextureProgressBar
 ProgressBar
 Container
-HBoxContainer
-TextureRect

@@ -30,7 +30,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
 z_index = 7
-position = Vector2(128, 113071)
+position = Vector2(56, -30640.7)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
@@ -61,6 +61,8 @@ position = Vector2(-639.819, 473.438)
 
 [node name="RayCast2D" parent="UI/Node2D/Lander" instance=ExtResource("6_2bf5r")]
 target_position = Vector2(0, 160000)
+hit_from_inside = false
+collide_with_areas = false
 
 [node name="TextureRect" parent="." instance=ExtResource("7_uaj16")]
 offset_left = 1512.0

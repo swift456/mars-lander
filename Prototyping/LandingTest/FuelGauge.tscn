@@ -16,3 +16,20 @@ texture_progress = ExtResource("1_3xv6d")
 tint_under = Color(0.466667, 0, 0.00784314, 1)
 tint_over = Color(0.329412, 0.329412, 0.329412, 1)
 tint_progress = Color(0, 0.670588, 0.027451, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "F
+U
+E
+L"
+horizontal_alignment = 1
+vertical_alignment = 1
