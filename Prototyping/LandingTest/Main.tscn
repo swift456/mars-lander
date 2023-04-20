@@ -30,11 +30,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Node2D" type="Node2D" parent="UI"]
 visibility_layer = 2
 z_index = 7
-<<<<<<< HEAD
 position = Vector2(56, -30640.7)
-=======
-position = Vector2(128, 113071)
->>>>>>> parent of 8ee1d02 (Made changes to enable demonstration of project)
 script = ExtResource("3")
 
 [node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
