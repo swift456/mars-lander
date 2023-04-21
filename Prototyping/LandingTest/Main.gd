@@ -90,11 +90,11 @@ func _process(delta):
 #	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())
 #	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
 #	current_density =  pressure / (.1921 * temperature + 273.1)
-	if !$Surface.on_screen && !surface_moved:
-		$Surface.position.x = $UI/Lander.position.x 
-	else: 
-		$Surface.position.x = $UI/Lander/Camera2D/SurfaceOrigin.position.x
-		surface_moved = true
+#	if !$Surface.on_screen && !surface_moved:
+#		$Surface.position.x = $UI/Lander.position.x 
+#	else: 
+#		$Surface.position.x = $UI/Lander/Camera2D/SurfaceOrigin.position.x
+#		surface_moved = true
 	
 	
 	
@@ -187,7 +187,7 @@ func _physics_process(delta):
 ## Inbuilt function which is best used when changes to a rigidbody would directly contradict the calculations handled by the physics engine.
 ## In this case, the two functions drag and thrust which apply a force to the object are dealt with inside this function.
 func _integrate_forces(state):
-	thrust($UI/UILayer/HBoxContainer/ThrustIndicator/VSlider.value)
+	pass
 
 
 ## The thrust function applies a central_impulse upward on the Lander object. This thrust is applied directly beneath the Lander.
@@ -197,16 +197,7 @@ func _integrate_forces(state):
 ## This is a slider which is controlled by the up and down arrows.
 ## Intensity of the thrust is based on the position of the slider.
 ## Thrust cannot be applied if the returned value from FuelGauge is not higher than 0.
-func thrust(value):
-	
-	if $UI/UILayer/HBoxContainer/FuelGauge.value > 0:
-		var thrust = -$UI/Lander.global_transform.y
-		thrust = thrust * value
-		$UI/Lander.apply_central_impulse(thrust)
-		$UI/UILayer/HBoxContainer/FuelGauge.value -= value/80
-	else:
-		$UI/UILayer/HBoxContainer/FuelGauge.value = 0
-		print("Out of fuel!")
+
 
 	
 ## The drag function applies a central impulse to a rigid body using the current density returned by calc_density()
@@ -265,9 +256,10 @@ func input():
 ## If below 20kph the game will move into the SUCCESS state after 5 seconds have elapsed.
 func _on_lander_collided(collider):#
 	print(collider)
-	if collider == $Surface/Surface:
-		if lander_speed > 20:
-			_state = State.DESTROYED
-		else:
-			await get_tree().create_timer(5).timeout
-			_state = State.SUCCESS
+	if lander_speed > 20:
+		print("Speed ", lander_speed)
+		_state = State.DESTROYED
+	else:
+		print("Speed ", lander_speed)
+		await get_tree().create_timer(5).timeout
+		_state = State.SUCCESS

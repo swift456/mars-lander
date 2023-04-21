@@ -1,22 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cmvahwdx2lpyr"]
 
-[ext_resource path="res://icon.png" type="Texture2D" id=1]
-[ext_resource path="res://Player.gd" type="Script" id=5]
+[ext_resource type="Texture2D" uid="uid://7k62nofiuxfd" path="res://icon.png" id="1"]
+[ext_resource type="Script" path="res://Player.gd" id="5"]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 27.0
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 7.0
 height = 14.0
 
 [node name="Player" type="Area2D"]
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
+script = ExtResource("5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

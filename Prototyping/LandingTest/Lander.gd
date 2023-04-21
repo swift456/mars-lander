@@ -5,13 +5,15 @@ extends RigidBody2D
 
 var air_resistance = Vector2(0,0)
 var surface_density = 0.02
-var current_density = 0
+var density = 0
 const EULER = 2.71828
 const CD = 1.7
 @export var area = 54.7
 @export var lander_fuel = 1000
-var recieved_thrust_value = Vector2(0,0)
+var recieved_thrust_value = 0
 var object_altitude = 0
+var lander_speed 
+var lander_average_speed = []
 
 
 func _ready():
@@ -23,18 +25,41 @@ signal collided
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if object_altitude <= 0.1:
+		lander_speed = snapped(self.get_linear_velocity().y * 3.6, 1)
+		lander_average_speed.append(lander_speed)
+	var sum = 0
+	for i in range(0, lander_average_speed.size()):
+		sum += lander_average_speed[i]
+		
+		i+=1
+	
+	lander_speed = sum/lander_average_speed.size()
 	$DtSLander.global_rotation = 0
-	object_altitude = snapped((111100 - self.get_global_position().y)/1000, 0.01)
-	print(object_altitude)
-	print(current_density)
+	print("L ",object_altitude)
+	print("L ",density)
 	_integrate_forces(self)
+	for i in self.get_colliding_bodies():
+		var collider = i
+		
+		
+		
+		
+		lander_speed = sum/lander_average_speed.size()
+		emit_signal('collided' , collider, lander_speed)
+	thrust(recieved_thrust_value)
+	
 
 
-func calc_density():
-	while current_density != surface_density:
-		current_density = surface_density*(EULER**(-1 * (object_altitude-14) / 11))
-		return current_density
-	return current_density
+	
+
+#func calc_density():
+#	while current_density <= surface_density:
+#		current_density = surface_density*(EULER**(-1 * (object_altitude-0) / 11))
+#		return current_density
+#	if current_density > surface_density:
+#			current_density = 0.2
+#	return current_density
 
 func drag(state):
 	var x =  int(state.get_linear_velocity().x)
@@ -42,22 +67,31 @@ func drag(state):
 	x^2
 	y^2
 	var squared_velocity = Vector2(x,y)
-	air_resistance = (CD * calc_density() * squared_velocity * area) / 2
+	air_resistance = (CD * density * squared_velocity * area) / 2
 	state.apply_central_impulse(Vector2(-air_resistance))
 
 
 func _integrate_forces(state):
 	drag(state)
-	for i in state.get_contact_count():
-		var collider = state.get_contact_collider_object(i)
-		emit_signal('collided' , collider)
+	
+
 	
 	if Input.is_action_pressed("heatshield"):
 		$HeatShield.set_collision_layer_value(2,true)
 		$HeatShield/HeatShieldConnection1.set_node_a("")
 		$HeatShield/HeatShieldConnection2.set_node_a("")
 	
+func thrust(value):
 	
+	if lander_fuel > 0:
+		var thrust = -global_transform.y
+		thrust = thrust * value
+		apply_central_impulse(thrust)
+		lander_fuel -= value/80
+		
+	else:
+		lander_fuel = 0
+		
 
 #func thrust(value):
 #	var thrust = -global_transform.y
@@ -77,11 +111,15 @@ func rotating(body):
 		
 	body.apply_torque(0)
 
-func _on_thrust_indicator_value_changed(value):
+
+
+
+func _on_v_slider_value_changed(value):
 	recieved_thrust_value = value
 
-
-
+func _on_outer_atmo_body_entered(body):
+	density = 0.000001 
+	pass # Replace with function body.
 
 
 
@@ -267,6 +305,16 @@ func _on_thrust_indicator_value_changed(value):
 #
 #func _on_Surface_body_entered(body):
 #		_state = State.LANDED
+
+
+
+
+
+
+
+
+
+
 
 
 

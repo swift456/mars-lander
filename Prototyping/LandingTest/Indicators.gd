@@ -6,10 +6,12 @@ var collision_point
 # var b = "text"
 var distance_to_surface = 0
 var scene_initialised = false
+var recieved_thrust_value = 0
+signal distance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$UILayer/HBoxContainer/FuelGauge.max_value = $Lander.lander_fuel
+	pass
 	
 
 
@@ -22,14 +24,21 @@ func get_surface_position(state):
 			scene_initialised = true
 	else:
 		dts_Indicator()
+		emit_signal("distance", collision_point)
 		return 
 
-
+func fuel_gauge(value):
+	if $UILayer/HBoxContainer/FuelGauge.value > 0:
+		$UILayer/HBoxContainer/FuelGauge.value -= value/80
+		print("FuelGauge ", $UILayer/HBoxContainer/FuelGauge.value)
+	else:
+		$UILayer/HBoxContainer/FuelGauge.value = 0
+		print("Out of fuel!")
 
 func _process(delta):
 	get_surface_position(scene_initialised)
-	
-	
+	print(distance_to_surface)
+	fuel_gauge(recieved_thrust_value)
 	h_Speed_indicator()
 	v_Speed_indicator()
 
@@ -65,3 +74,5 @@ func v_Speed_indicator():
 func getDistance_to_Surface():
 	return distance_to_surface
 	
+func _on_v_slider_value_changed(value):
+	recieved_thrust_value = value

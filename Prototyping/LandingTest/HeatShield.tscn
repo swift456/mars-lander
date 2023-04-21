@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://xju6ttxxo0y0"]
+[gd_scene load_steps=4 format=3 uid="uid://cwtaftlmxv4ka"]
 
 [ext_resource type="Script" path="res://heat_shield.gd" id="1_ljn4y"]
 [ext_resource type="Texture2D" uid="uid://d0mla0l8axpgf" path="res://assets/Heatshield.png" id="2_e0s4y"]

@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dl2o8lyobe6vv"]
+[gd_scene load_steps=15 format=3 uid="uid://bvojjrraguhe8"]
 
 [ext_resource type="Script" path="res://Lander.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://xju6ttxxo0y0" path="res://HeatShield.tscn" id="3_ucsw6"]
+[ext_resource type="PackedScene" uid="uid://cwtaftlmxv4ka" path="res://HeatShield.tscn" id="3_ucsw6"]
 [ext_resource type="Texture2D" uid="uid://ccc2c8hvwxiua" path="res://assets/LanderAnim1.png" id="4_jw7ry"]
 [ext_resource type="Texture2D" uid="uid://bvvepq8i7b4rm" path="res://assets/LanderAnim2.png" id="5_vhv6l"]
 [ext_resource type="Texture2D" uid="uid://irwxbhh7o4vu" path="res://assets/LanderAnim3.png" id="6_tkaxp"]
@@ -182,7 +182,7 @@ position = Vector2(0.279999, -2.12374)
 scale = Vector2(0.576367, 0.474258)
 
 [node name="DtSLander" parent="." instance=ExtResource("9_iak6v")]
-position = Vector2(0, 0)
+position = Vector2(0, 7)
 collide_with_areas = true
 
 [node name="Camera2D" parent="." instance=ExtResource("10_nfgoy")]
