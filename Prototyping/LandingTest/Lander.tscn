@@ -1,14 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://eju5jnr1sa4c"]
+[gd_scene load_steps=15 format=3 uid="uid://dl2o8lyobe6vv"]
 
 [ext_resource type="Script" path="res://Lander.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://yx3kik3riuhm" path="res://assets/Backshell.png" id="2_o0rdu"]
-[ext_resource type="PackedScene" uid="uid://xju6ttxxo0y0" path="res://heat_shield.tscn" id="3_ucsw6"]
+[ext_resource type="PackedScene" uid="uid://xju6ttxxo0y0" path="res://HeatShield.tscn" id="3_ucsw6"]
 [ext_resource type="Texture2D" uid="uid://ccc2c8hvwxiua" path="res://assets/LanderAnim1.png" id="4_jw7ry"]
 [ext_resource type="Texture2D" uid="uid://bvvepq8i7b4rm" path="res://assets/LanderAnim2.png" id="5_vhv6l"]
 [ext_resource type="Texture2D" uid="uid://irwxbhh7o4vu" path="res://assets/LanderAnim3.png" id="6_tkaxp"]
 [ext_resource type="Texture2D" uid="uid://bwhkuh1yfkckt" path="res://assets/LanderAnim4.png" id="7_03cc6"]
-[ext_resource type="Script" path="res://Backshell.gd" id="7_0826e"]
+[ext_resource type="PackedScene" uid="uid://cmvts7g2jb5pa" path="res://Backshell.tscn" id="7_6lr0n"]
 [ext_resource type="Texture2D" uid="uid://cidxyg2eu4kqb" path="res://assets/LanderAnim5.png" id="8_nhqcl"]
+[ext_resource type="PackedScene" uid="uid://f0jyhjpk3d1h" path="res://DistanceToSurfaceRC.tscn" id="9_iak6v"]
+[ext_resource type="PackedScene" uid="uid://biojq0qooj76e" path="res://LanderCamera.tscn" id="10_nfgoy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fqvhq"]
 animations = [{
@@ -127,6 +128,7 @@ _data = {
 }
 
 [node name="Lander" type="RigidBody2D"]
+z_index = 6
 mass = 180.0
 max_contacts_reported = 6
 contact_monitor = true
@@ -148,41 +150,11 @@ libraries = {
 "": SubResource("AnimationLibrary_8madl")
 }
 
-[node name="Backshell" type="RigidBody2D" parent="."]
-visible = false
-collision_layer = 256
-collision_mask = 0
-mass = 130.0
-script = ExtResource("7_0826e")
-
-[node name="PinToLander1" type="PinJoint2D" parent="Backshell"]
-position = Vector2(5.38, 4.09)
-node_a = NodePath("..")
-node_b = NodePath("../..")
-
-[node name="PinToLander2" type="PinJoint2D" parent="Backshell"]
-position = Vector2(-6.62, 4.09)
-node_a = NodePath("..")
-node_b = NodePath("../..")
-
-[node name="AttachmentPoint" type="PinJoint2D" parent="Backshell"]
-position = Vector2(0.379997, -9.91)
-node_a = NodePath("..")
-bias = 0.9
-softness = 0.2
-
-[node name="LanderSprite" type="Sprite2D" parent="Backshell"]
-position = Vector2(0.479998, 1.39)
-scale = Vector2(0.559375, 0.475)
-texture = ExtResource("2_o0rdu")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Backshell"]
-position = Vector2(-3.22, 0.389999)
-polygon = PackedVector2Array(-13, 10, 19.6, 9.7, 19.6, 5.7, 10.6, -2.3, 5.6, -10.3, 1.6, -10.3, -2.4, -2.3, -13, 6)
+[node name="Backshell" parent="." instance=ExtResource("7_6lr0n")]
+position = Vector2(0, -3)
 
 [node name="HeatShield" parent="." instance=ExtResource("3_ucsw6")]
-visible = false
-position = Vector2(0, 15)
+position = Vector2(0, 13)
 scale = Vector2(0.959999, 1)
 disable_mode = 2
 collision_layer = 0
@@ -209,4 +181,11 @@ polygon = PackedVector2Array(-14, 1, -2, 5, 4.6, 5.02249, 19.6, 1.02249)
 position = Vector2(0.279999, -2.12374)
 scale = Vector2(0.576367, 0.474258)
 
+[node name="DtSLander" parent="." instance=ExtResource("9_iak6v")]
+position = Vector2(0, 0)
+collide_with_areas = true
+
+[node name="Camera2D" parent="." instance=ExtResource("10_nfgoy")]
+
+[editable path="Backshell"]
 [editable path="HeatShield"]

@@ -8,7 +8,7 @@ script = ExtResource("1_lwwp0")
 metadata/_edit_group_ = true
 
 [node name="Surface" type="StaticBody2D" parent="."]
-collision_layer = 259
+collision_layer = 3843
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

@@ -1,3 +1,4 @@
+Node2D
 Label
 RichTextLabel
 VSplitContainer
@@ -26,7 +27,6 @@ ScrollContainer
 Tree
 PanelContainer
 GridContainer
-Node2D
 TextureProgressBar
 ProgressBar
 Container

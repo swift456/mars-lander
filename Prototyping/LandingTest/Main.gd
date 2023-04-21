@@ -35,7 +35,7 @@ const surface_density = 0.02
 
 ## This variable initiates the tracked density (dependant on the current altitude of the lander using the different of the collison point of the RayCast2D and RayCast2D's current position).
 ## Through exponential interpolation when the Lander reaches the surface node, current_density will be equal to surface_density
-var current_density = 0.00436
+var current_density = 0
 
 ## Eulers number, used for exponential interpolation in the atmospheric density calculation.
 const EULER = 2.71828
@@ -70,7 +70,7 @@ func _unhandled_input(event):
 ## An impulse is applied to the lander to simulate the velocity upon entering the atmosphere.
 func _ready():
 	$UI/UILayer/ParachuteIndicator.text = ""
-#	$UI/Node2D/Lander.apply_central_impulse(Vector2(0,900))
+	$UI/Lander.set_linear_velocity(Vector2(0,900))
 
 func calc_heat():
 	pass
@@ -78,41 +78,33 @@ func calc_heat():
 ## 
 ## For other objects such as the parachute and heatshield they would require a hardcoded position of the Surface node, or a node that can be referenced 
 ## in the their own scripts.
-func calc_density():
-	while current_density != surface_density:
-<<<<<<< HEAD
-		current_density = surface_density*(EULER**(-1 * (lander_altitude-14) / 13))
-=======
-		current_density = surface_density*(EULER**(-1 * (lander_altitude-50) / 13))
->>>>>>> parent of 8ee1d02 (Made changes to enable demonstration of project)
-		return current_density
-	return current_density
+
 	
 ## The _process function in this script contains the state machine that tracks the state of the game.
 ## Dependant on the state the game is currently in, different behavior will be executed.
 func _process(delta):
-	lander_altitude = snapped($UI/Node2D/Lander.get_global_position().distance_to($Surface.get_global_position())/1000, 0.01)
-	print(current_density)
+
+	#print($UI/Node2D/Lander.rotation)
 # 	barmetric equation for working out current density, didn't work, returned erroneous values.
 #	code kept just for future reference.
 #	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())
 #	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
 #	current_density =  pressure / (.1921 * temperature + 273.1)
 	if !$Surface.on_screen && !surface_moved:
-		$Surface.position.x = $UI/Node2D/Lander.position.x 
+		$Surface.position.x = $UI/Lander.position.x 
 	else: 
-		$Surface.position.x = $UI/Node2D/Lander/Camera2D/SurfaceOrigin.position.x
+		$Surface.position.x = $UI/Lander/Camera2D/SurfaceOrigin.position.x
 		surface_moved = true
 	
 	
 	
 	
 	
-	print("State = ", _state)
+#	print("State = ", _state)
 	match _state:
 		
 		State.FREEFALL:
-			if $UI/Node2D/Lander.get_linear_velocity().y >= 500:
+			if $UI/Lander.get_linear_velocity().y >= 500:
 				$UI/UILayer/ParachuteIndicator.text = "Unsafe to deploy parachute!"
 				$UI/UILayer/ParachuteIndicator.set("theme_override_colors/font_color", Color(255, 0, 0))
 			else: 
@@ -122,17 +114,17 @@ func _process(delta):
 		
 		State.PARACHUTE_DEPLOY:
 				var instance = ParachuteScene.instantiate()
-				instance.linear_velocity = $UI/Node2D/Lander/Backshell.get_linear_velocity()
-				$UI/Node2D/Lander/Backshell/AttachmentPoint.add_child(instance)
-				instance.global_transform.origin = $UI/Node2D/Lander/Backshell/AttachmentPoint.global_transform.origin
-				$UI/Node2D/Lander/Backshell/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
+				instance.linear_velocity = $UI/Lander/Backshell.get_linear_velocity()
+				$UI/Lander/Backshell/AttachmentPoint.add_child(instance)
+				instance.global_transform.origin = $UI/Lander/Backshell/AttachmentPoint.global_transform.origin
+				$UI/Lander/Backshell/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
 				
 				
 				if instance.get_linear_velocity().y > 500:
-					$UI/Node2D/Lander/Backshell/AttachmentPoint.set_node_b("")
-					$UI/Node2D/Lander/Backshell/PinToLander1.set_node_b("")
-					$UI/Node2D/Lander/Backshell/PinToLander2.set_node_b("")
-					$UI/Node2D/Lander/AnimationPlayer.play("leg_deployment")
+					$UI/Lander/Backshell/AttachmentPoint.set_node_b("")
+					$UI/Lander/Backshell/PinToLander1.set_node_b("")
+					$UI/Lander/Backshell/PinToLander2.set_node_b("")
+					$UI/Lander/AnimationPlayer.play("leg_deployment")
 					_state = State.PARACHUTE_USED
 				else:
 					_state = State.PARACHUTE_DEPLOYED	
@@ -145,9 +137,9 @@ func _process(delta):
 				
 				
 		State.PARACHUTE_CUT:
-				$UI/Node2D/Lander/Backshell/PinToLander1.set_node_b("")
-				$UI/Node2D/Lander/Backshell/PinToLander2.set_node_b("")
-				$UI/Node2D/Lander/AnimationPlayer.play("leg_deployment")
+				$UI/Lander/Backshell/PinToLander1.set_node_b("")
+				$UI/Lander/Backshell/PinToLander2.set_node_b("")
+				$UI/Lander/AnimationPlayer.play("leg_deployment")
 				_state = State.PARACHUTE_USED
 				
 			
@@ -177,10 +169,9 @@ func _process(delta):
 ## Some calculations, when tied to computer FPS (which will vary depending on hardware)
 ## can have unintended consequences.
 func _physics_process(delta):
-	lander_speed = $UI/Node2D/Lander.get_linear_velocity().y
-	_integrate_forces($UI/Node2D/Lander)
+	lander_speed = $UI/Lander.get_linear_velocity().y
 	input()
-	print($UI/UILayer/HBoxContainer/ThrustIndicator/VSlider.value)
+	
 	
 	
 
@@ -196,13 +187,8 @@ func _physics_process(delta):
 ## Inbuilt function which is best used when changes to a rigidbody would directly contradict the calculations handled by the physics engine.
 ## In this case, the two functions drag and thrust which apply a force to the object are dealt with inside this function.
 func _integrate_forces(state):
-<<<<<<< HEAD
-	drag(state)
 	thrust($UI/UILayer/HBoxContainer/ThrustIndicator/VSlider.value)
-=======
-#	drag(state)
-	thrust($UI/UILayer/HBoxContainer/ThrustIndicator.value)
->>>>>>> parent of 8ee1d02 (Made changes to enable demonstration of project)
+
 
 ## The thrust function applies a central_impulse upward on the Lander object. This thrust is applied directly beneath the Lander.
 ## This is accomplished through the global_transform.y property of the Lander object.
@@ -214,11 +200,10 @@ func _integrate_forces(state):
 func thrust(value):
 	
 	if $UI/UILayer/HBoxContainer/FuelGauge.value > 0:
-		var thrust = -$UI/Node2D/Lander.global_transform.y
+		var thrust = -$UI/Lander.global_transform.y
 		thrust = thrust * value
-		$UI/Node2D/Lander.apply_central_impulse(thrust)
+		$UI/Lander.apply_central_impulse(thrust)
 		$UI/UILayer/HBoxContainer/FuelGauge.value -= value/80
-		print($UI/UILayer/HBoxContainer/FuelGauge.value)
 	else:
 		$UI/UILayer/HBoxContainer/FuelGauge.value = 0
 		print("Out of fuel!")
@@ -226,16 +211,16 @@ func thrust(value):
 	
 ## The drag function applies a central impulse to a rigid body using the current density returned by calc_density()
 ## This function is derived from the equation for drag.
-func drag(state):
-	#function to find out the magnitude of the vector
-	var x =  int(state.get_linear_velocity().x)
-	var y = int(state.get_linear_velocity().y)
-	x^2
-	y^2
-	var squared_velocity = Vector2(x,y)
-	air_resistance = (CD * calc_density() * squared_velocity * state.area) / 2
-	state.apply_central_impulse(Vector2(-air_resistance))
-	print(air_resistance)
+#func drag(state):
+#	#function to find out the magnitude of the vector
+#	var x =  int(state.get_linear_velocity().x)
+#	var y = int(state.get_linear_velocity().y)
+#	x^2
+#	y^2
+#	var squared_velocity = Vector2(x,y)
+#	air_resistance = (CD * calc_density() * squared_velocity * state.area) / 2
+#	state.apply_central_impulse(Vector2(-air_resistance))
+	
 
 ## The input function handles inputs for the parachute deployment and parachute cut.
 ## This function can be expanded to hold any inputs that need to be handled during the main game script.

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://xju6ttxxo0y0"]
+[gd_scene load_steps=4 format=3 uid="uid://xju6ttxxo0y0"]
 
-[ext_resource type="Script" path="res://heat_shield.gd" id="1_dpcgd"]
-[ext_resource type="Texture2D" uid="uid://d0mla0l8axpgf" path="res://assets/Heatshield.png" id="1_v2i2j"]
+[ext_resource type="Script" path="res://heat_shield.gd" id="1_ljn4y"]
+[ext_resource type="Texture2D" uid="uid://d0mla0l8axpgf" path="res://assets/Heatshield.png" id="2_e0s4y"]
+[ext_resource type="PackedScene" uid="uid://f0jyhjpk3d1h" path="res://DistanceToSurfaceRC.tscn" id="3_4vdn7"]
 
 [node name="HeatShield" type="RigidBody2D"]
 position = Vector2(0.400002, 17.3)
@@ -10,7 +11,7 @@ collision_mask = 3
 mass = 40.0
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource("1_dpcgd")
+script = ExtResource("1_ljn4y")
 
 [node name="HeatShieldConnection1" type="PinJoint2D" parent="."]
 position = Vector2(-10.4, -4.3)
@@ -29,4 +30,8 @@ polygon = PackedVector2Array(-14, 1, -2, 5, 2, 5, 14, 1)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.50625, -1.82376)
 scale = Vector2(0.50293, 0.474258)
-texture = ExtResource("1_v2i2j")
+texture = ExtResource("2_e0s4y")
+
+[node name="DtSHeatshield" parent="." instance=ExtResource("3_4vdn7")]
+position = Vector2(1.6, -1.3)
+collision_mask = 512

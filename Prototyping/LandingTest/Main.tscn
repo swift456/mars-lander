@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ufsloldw1juo"]
+[gd_scene load_steps=7 format=3 uid="uid://ufsloldw1juo"]
 
-[ext_resource type="PackedScene" uid="uid://eju5jnr1sa4c" path="res://Lander.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dl2o8lyobe6vv" path="res://Lander.tscn" id="2"]
 [ext_resource type="Script" path="res://Indicators.gd" id="2_1ef4i"]
-[ext_resource type="Script" path="res://ControlNode.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://oh82i8npbprn" path="res://UILayer.tscn" id="3_lvhsy"]
-[ext_resource type="PackedScene" uid="uid://cr6gpvrb1076k" path="res://GroundDetection.tscn" id="6_2bf5r"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://cpq5e0ksxwlhr" path="res://Surface3.tscn" id="7_b2b24"]
 [ext_resource type="PackedScene" uid="uid://qjkp0b7qllf" path="res://GradientBG.tscn" id="7_uaj16"]
@@ -27,42 +25,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="UILayer" parent="UI" instance=ExtResource("3_lvhsy")]
 
-[node name="Node2D" type="Node2D" parent="UI"]
-visibility_layer = 2
-z_index = 7
-position = Vector2(56, -30640.7)
-script = ExtResource("3")
-
-[node name="Lander" parent="UI/Node2D" instance=ExtResource("2")]
-visibility_layer = 2
-position = Vector2(0, -0.0012207)
-max_contacts_reported = 1
-
-[node name="AnimationPlayer" parent="UI/Node2D/Lander" index="2"]
-method_call_mode = 1
-
-[node name="Backshell" parent="UI/Node2D/Lander" index="3"]
-visible = true
-position = Vector2(0, -5.25781)
-collision_layer = 2
-
-[node name="HeatShield" parent="UI/Node2D/Lander" index="4"]
-visible = true
-position = Vector2(9.15527e-05, 10.5305)
-collision_layer = 2
-
-[node name="Camera2D" type="Camera2D" parent="UI/Node2D/Lander"]
-position = Vector2(0.10022, 0.376736)
-zoom = Vector2(2, 2)
-editor_draw_limits = true
-
-[node name="SurfaceOrigin" type="Node2D" parent="UI/Node2D/Lander/Camera2D"]
-position = Vector2(-639.819, 473.438)
-
-[node name="RayCast2D" parent="UI/Node2D/Lander" instance=ExtResource("6_2bf5r")]
-target_position = Vector2(0, 160000)
-hit_from_inside = false
-collide_with_areas = false
+[node name="Lander" parent="UI" instance=ExtResource("2")]
+position = Vector2(82, -31326.2)
 
 [node name="TextureRect" parent="." instance=ExtResource("7_uaj16")]
 offset_left = 1512.0
@@ -73,8 +37,7 @@ offset_bottom = -31223.0
 [node name="Surface" parent="." instance=ExtResource("7_b2b24")]
 position = Vector2(-1562, 114306)
 
-[connection signal="collided" from="UI/Node2D/Lander" to="." method="_on_lander_collided"]
-
-[editable path="UI/Node2D/Lander"]
-[editable path="UI/Node2D/Lander/HeatShield"]
+[editable path="UI/Lander"]
+[editable path="UI/Lander/Backshell"]
+[editable path="UI/Lander/HeatShield"]
 [editable path="Surface"]
