@@ -28,8 +28,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="UILayer" parent="UI" instance=ExtResource("3_lvhsy")]
 
-[node name="Lander" parent="UI" groups=["bodies", "surface"] instance=ExtResource("2")]
-position = Vector2(-41, 111442)
+[node name="Lander" parent="UI" groups=["bodies"] instance=ExtResource("2")]
+position = Vector2(92, 74878.8)
 
 [node name="Backshell" parent="UI/Lander" index="3" groups=["bodies"]]
 
@@ -42,11 +42,7 @@ offset_right = 151512.0
 offset_bottom = -31223.0
 
 [node name="Surface" parent="." groups=["surface"] instance=ExtResource("7_b2b24")]
-position = Vector2(-1592, 115181)
-
-[node name="Surface" parent="Surface" index="0" groups=["surface"]]
-
-[node name="VisibleOnScreenNotifier2D" parent="Surface" index="1" groups=["surface"]]
+position = Vector2(-1582, 113959)
 
 [node name="OuterAtmo" type="Area2D" parent="."]
 position = Vector2(-41.4609, -33507.7)
@@ -73,14 +69,14 @@ shape = SubResource("RectangleShape2D_jmo85")
 position = Vector2(-41.4609, 53982.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LowerAtmo"]
-position = Vector2(0.460999, 34097.2)
+position = Vector2(107.461, 33719.6)
 shape = SubResource("RectangleShape2D_jmo85")
 
 [node name="SurfaceAtmo" type="Area2D" parent="."]
 position = Vector2(-41, 83268.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceAtmo"]
-position = Vector2(0, 35203.9)
+position = Vector2(107, 35153.8)
 shape = SubResource("RectangleShape2D_jmo85")
 
 [connection signal="distance" from="UI" to="UI/Lander" method="_on_ui_distance"]
