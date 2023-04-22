@@ -130,7 +130,7 @@ _data = {
 [node name="Lander" type="RigidBody2D"]
 z_index = 6
 mass = 180.0
-max_contacts_reported = 6
+max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("2")
 

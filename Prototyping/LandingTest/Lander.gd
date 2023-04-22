@@ -25,29 +25,24 @@ signal collided
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if object_altitude <= 0.1:
-		lander_speed = snapped(self.get_linear_velocity().y * 3.6, 1)
-		lander_average_speed.append(lander_speed)
-	var sum = 0
-	for i in range(0, lander_average_speed.size()):
-		sum += lander_average_speed[i]
-		
-		i+=1
-	
-	lander_speed = sum/lander_average_speed.size()
+
 	$DtSLander.global_rotation = 0
 	print("L ",object_altitude)
 	print("L ",density)
-	_integrate_forces(self)
-	for i in self.get_colliding_bodies():
-		var collider = i
-		
-		
-		
-		
-		lander_speed = sum/lander_average_speed.size()
-		emit_signal('collided' , collider, lander_speed)
 	thrust(recieved_thrust_value)
+	rotating(self)
+	_integrate_forces(self)
+	
+		
+		
+		
+		
+		
+func _on_body_entered(body):
+	lander_speed = get_linear_velocity().y
+	if body.is_in_group('surface'):
+		emit_signal('collided' , lander_speed)
+
 	
 
 
@@ -93,13 +88,7 @@ func thrust(value):
 		lander_fuel = 0
 		
 
-#func thrust(value):
-#	var thrust = -global_transform.y
-#	thrust * value
-#	apply_central_force(thrust)
-#
-#
-	rotating(self)
+
 	
 func rotating(body):
 	
@@ -121,7 +110,20 @@ func _on_outer_atmo_body_entered(body):
 	density = 0.000001 
 	pass # Replace with function body.
 
+func _on_upper_atmo_body_entered(body):
+	density = 0.00001
 
+
+func _on_middle_atmo_body_entered(body):
+	density = 0.0001
+
+
+func _on_lower_atmo_body_entered(body):
+	density = 0.001
+
+
+func _on_surface_atmo_body_entered(body):
+	density = 0.02
 
 
 
@@ -305,6 +307,12 @@ func _on_outer_atmo_body_entered(body):
 #
 #func _on_Surface_body_entered(body):
 #		_state = State.LANDED
+
+
+
+
+
+
 
 
 

@@ -49,3 +49,19 @@ func _on_ui_distance(collision_point):
 
 func _on_outer_atmo_body_entered(body):
 	density = 0.000001 
+
+
+func _on_upper_atmo_body_entered(body):
+	density = 0.00001
+
+
+func _on_middle_atmo_body_entered(body):
+	density = 0.0001
+
+
+func _on_lower_atmo_body_entered(body):
+	density = 0.001
+
+
+func _on_surface_atmo_body_entered(body):
+	density = 0.02

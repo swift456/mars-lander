@@ -47,7 +47,7 @@ const CD = 1.7
 
 ## Tracks the current speed of the lander
 ## Used to decide whether or not the lander is destroyed upon contact with the surface.
-var lander_speed = 0
+#var lander_speed = 0
 
 ## Tracks the current altitude of Lander from sea-level (position of surface node)
 ## In the _process function,  
@@ -169,7 +169,6 @@ func _process(delta):
 ## Some calculations, when tied to computer FPS (which will vary depending on hardware)
 ## can have unintended consequences.
 func _physics_process(delta):
-	lander_speed = $UI/Lander.get_linear_velocity().y
 	input()
 	
 	
@@ -254,7 +253,7 @@ func input():
 ## This function will only evaluate the lander_speed if the object the lander has collided with is the surface.
 ## If higher than 20kph the game will move into the DESTROYED state.
 ## If below 20kph the game will move into the SUCCESS state after 5 seconds have elapsed.
-func _on_lander_collided(collider):#
+func _on_lander_collided(collider, lander_speed):#
 	print(collider)
 	if lander_speed > 20:
 		print("Speed ", lander_speed)
