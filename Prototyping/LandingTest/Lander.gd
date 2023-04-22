@@ -39,13 +39,14 @@ func _process(delta):
 		
 		
 func _on_body_entered(body):
-	lander_speed = get_linear_velocity().y
+	
 	if body.is_in_group('surface'):
 		emit_signal('collided' , lander_speed)
 
 	
 
-
+func _physics_process(delta):
+	lander_speed = get_linear_velocity().y
 	
 
 #func calc_density():

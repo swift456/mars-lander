@@ -1,6 +1,6 @@
 extends Control
 
-var collision_point
+var collision_point = Vector2(0,0)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -16,13 +16,10 @@ func _ready():
 
 
 func get_surface_position(state):
-	if !state:
 		if $Lander/DtSLander.is_colliding():
-			$Lander/DtSLander.add_exception($Lander)
 			collision_point = $Lander/DtSLander.get_collision_point()
-			print(collision_point)
+			print("Collided!")
 			scene_initialised = true
-	else:
 		dts_Indicator()
 		emit_signal("distance", collision_point)
 		return 

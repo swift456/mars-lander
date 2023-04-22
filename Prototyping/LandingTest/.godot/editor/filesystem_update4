@@ -10,3 +10,7 @@ res://Parachute2.tscn
 res://Backshell.tscn
 res://GradientBG.tscn
 res://rope_segment.tscn
+res://Indicators.gd
+res://Surface3.tscn
+res://Main.gd
+res://Lander.gd
