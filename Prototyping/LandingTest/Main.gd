@@ -253,8 +253,8 @@ func input():
 ## This function will only evaluate the lander_speed if the object the lander has collided with is the surface.
 ## If higher than 20kph the game will move into the DESTROYED state.
 ## If below 20kph the game will move into the SUCCESS state after 5 seconds have elapsed.
-func _on_lander_collided(collider, lander_speed):#
-	print(collider)
+func _on_lander_collided(lander_speed):#
+	print("Speed ", lander_speed)
 	if lander_speed > 20:
 		print("Speed ", lander_speed)
 		_state = State.DESTROYED
