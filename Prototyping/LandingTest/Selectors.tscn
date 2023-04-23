@@ -1,0 +1,77 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1e2qk60stx5"]
+
+[sub_resource type="GDScript" id="GDScript_l8wdi"]
+script/source = "extends VBoxContainer
+
+var state = 0
+
+
+signal state_changed(state)
+
+
+
+
+
+
+func _ready():
+	emit_signal(\"state_changed\", state)
+func _process(delta):
+	pass
+
+
+func _on_left_arrow_pressed():
+	state -= 1
+	if state < 0:
+			state = 2
+	emit_signal(\"state_changed\", state)
+
+
+func _on_right_arrow_pressed():
+	state += 1
+	if state > 2:
+			state = 0
+			
+	emit_signal(\"state_changed\", state)
+"
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_left = 131.0
+offset_right = 131.0
+offset_bottom = 40.0
+theme_override_constants/separation = 25
+script = SubResource("GDScript_l8wdi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Identifier" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Heatshield"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="LeftArrow" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "<"
+
+[node name="Type" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+
+[node name="RightArrow" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = ">"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LeftArrow" to="." method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/RightArrow" to="." method="_on_right_arrow_pressed"]

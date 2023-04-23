@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://qonrhbpmxdco"]
+[gd_scene load_steps=9 format=3 uid="uid://qonrhbpmxdco"]
 
 [ext_resource type="PackedScene" uid="uid://bvojjrraguhe8" path="res://Lander.tscn" id="2"]
 [ext_resource type="Script" path="res://Indicators.gd" id="2_1ef4i"]
 [ext_resource type="PackedScene" uid="uid://oh82i8npbprn" path="res://UILayer.tscn" id="3_lvhsy"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://cpq5e0ksxwlhr" path="res://Surface3.tscn" id="7_b2b24"]
+[ext_resource type="PackedScene" uid="uid://wj7jt1fg2854" path="res://SelectionScreen.tscn" id="7_f34wg"]
 [ext_resource type="PackedScene" uid="uid://qjkp0b7qllf" path="res://GradientBG.tscn" id="7_uaj16"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmo85"]
@@ -83,6 +84,9 @@ position = Vector2(-41, 83268.2)
 position = Vector2(0, 35203.9)
 shape = SubResource("RectangleShape2D_jmo85")
 
+[node name="SelectionMenu" parent="." instance=ExtResource("7_f34wg")]
+process_mode = 3
+
 [connection signal="distance" from="UI" to="UI/Lander" method="_on_ui_distance"]
 [connection signal="distance" from="UI" to="UI/Lander/Backshell" method="_on_ui_distance"]
 [connection signal="distance" from="UI" to="UI/Lander/HeatShield" method="_on_ui_distance"]
@@ -105,6 +109,7 @@ shape = SubResource("RectangleShape2D_jmo85")
 [connection signal="body_entered" from="SurfaceAtmo" to="UI/Lander" method="_on_surface_atmo_body_entered"]
 [connection signal="body_entered" from="SurfaceAtmo" to="UI/Lander/Backshell" method="_on_surface_atmo_body_entered"]
 [connection signal="body_entered" from="SurfaceAtmo" to="UI/Lander/HeatShield" method="_on_surface_atmo_body_entered"]
+[connection signal="changed" from="SelectionMenu/SelectionMenu" to="." method="_on_selection_menu_changed"]
 
 [editable path="UI/UILayer"]
 [editable path="UI/UILayer/HBoxContainer/ThrustIndicator"]
@@ -113,3 +118,4 @@ shape = SubResource("RectangleShape2D_jmo85")
 [editable path="UI/Lander/HeatShield"]
 [editable path="UI/Lander/Camera2D"]
 [editable path="Surface"]
+[editable path="SelectionMenu"]

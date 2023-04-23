@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://wj7jt1fg2854"]
+
+[ext_resource type="Script" path="res://SelectionScreen.gd" id="1_38t2f"]
+[ext_resource type="PackedScene" uid="uid://d1e2qk60stx5" path="res://Selectors.tscn" id="2_lbfg8"]
+
+[sub_resource type="Theme" id="1"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 4
+
+[node name="SelectionMenu" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_38t2f")
+
+[node name="Background" type="ColorRect" parent="SelectionMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("1")
+color = Color(0.364706, 0.364706, 0.364706, 0.462745)
+
+[node name="MarginContainer" type="MarginContainer" parent="SelectionMenu/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectionMenu/Background/MarginContainer"]
+layout_mode = 2
+
+[node name="Heatshield" parent="SelectionMenu/Background/MarginContainer/VBoxContainer" instance=ExtResource("2_lbfg8")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="SelectionMenu/Background/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="SelectionMenu/Background/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Continue"
+
+[connection signal="state_changed" from="SelectionMenu/Background/MarginContainer/VBoxContainer/Heatshield" to="SelectionMenu" method="_on_heatshield_state_changed"]
+[connection signal="pressed" from="SelectionMenu/Background/MarginContainer/VBoxContainer/ContinueButton" to="SelectionMenu" method="_on_continue_button_pressed"]

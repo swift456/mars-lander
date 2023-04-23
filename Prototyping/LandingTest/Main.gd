@@ -69,8 +69,11 @@ func _unhandled_input(event):
 ## Upon the main scene entering the scene tree, the parachute indicator text is reset, (gets set next frame).
 ## An impulse is applied to the lander to simulate the velocity upon entering the atmosphere.
 func _ready():
+	get_tree().paused = true
 	$UI/UILayer/ParachuteIndicator.text = ""
 	$UI/Lander.set_linear_velocity(Vector2(0,900))
+	
+	
 
 func calc_heat():
 	pass
@@ -262,3 +265,10 @@ func _on_lander_collided(lander_speed):#
 		print("Speed ", lander_speed)
 		await get_tree().create_timer(5).timeout
 		_state = State.SUCCESS
+
+
+func _on_selection_menu_changed(heatshield_choice):
+	if heatshield_choice == 0:
+		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.95513957738876, 0.29442018270493, 0)
+	if heatshield_choice == 1:
+		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.59090965986252, 0.49248903989792, 0.2732364833355)
