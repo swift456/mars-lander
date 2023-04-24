@@ -5,9 +5,9 @@
 [node name="Surface" type="Node2D"]
 position = Vector2(600, 600)
 script = ExtResource("1_lwwp0")
-metadata/_edit_group_ = true
 
 [node name="Surface" type="StaticBody2D" parent="."]
+position = Vector2(-602, 0)
 collision_layer = 3843
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

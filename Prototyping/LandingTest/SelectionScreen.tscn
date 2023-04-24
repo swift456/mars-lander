@@ -38,11 +38,9 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SelectionMenu/Background/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="Heatshield" parent="SelectionMenu/Background/MarginContainer/VBoxContainer" instance=ExtResource("2_lbfg8")]
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="SelectionMenu/Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="ContinueButton" type="Button" parent="SelectionMenu/Background/MarginContainer/VBoxContainer"]

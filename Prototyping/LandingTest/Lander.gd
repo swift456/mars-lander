@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 
-
+signal lander_position
 
 var air_resistance = Vector2(0,0)
 var surface_density = 0.02
@@ -25,13 +25,15 @@ signal collided
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
+	
+	emit_signal("lander_position", self.position)
 	$DtSLander.global_rotation = 0
 	print("L ",object_altitude)
 	print("L ",density)
 	thrust(recieved_thrust_value)
 	rotating(self)
 	_integrate_forces(self)
+	print("L" ,position)
 	
 		
 		

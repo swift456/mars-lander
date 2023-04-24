@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://qjkp0b7qllf" path="res://GradientBG.tscn" id="7_uaj16"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmo85"]
-size = Vector2(3094, 29980.1)
+size = Vector2(21024, 3350.59)
 
 [node name="Main" type="Node2D"]
 visibility_layer = 2
@@ -30,59 +30,70 @@ metadata/_edit_use_anchors_ = true
 [node name="UILayer" parent="UI" instance=ExtResource("3_lvhsy")]
 
 [node name="Lander" parent="UI" groups=["bodies", "surface"] instance=ExtResource("2")]
-position = Vector2(-41, 111442)
+position = Vector2(40, -36953.8)
 
 [node name="Backshell" parent="UI/Lander" index="3" groups=["bodies"]]
 
 [node name="HeatShield" parent="UI/Lander" index="4" groups=["bodies"]]
 
-[node name="TextureRect" parent="." instance=ExtResource("7_uaj16")]
-offset_left = 1512.0
-offset_top = -34311.0
-offset_right = 151512.0
-offset_bottom = -31223.0
+[node name="Background" parent="." instance=ExtResource("7_uaj16")]
+position = Vector2(0, -42185.4)
+metadata/_edit_group_ = true
+
+[node name="TextureRect" parent="Background" index="0"]
+offset_left = 1295.82
+offset_top = -3081.81
+offset_right = 141296.0
+offset_bottom = -81.8066
+
+[node name="OuterAtmo" type="Area2D" parent="Background"]
+position = Vector2(-87.7344, 15031.4)
+rotation = -1.57079
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/OuterAtmo"]
+position = Vector2(-296.146, 198.24)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="UpperAtmo" type="Area2D" parent="Background"]
+position = Vector2(-76.6055, 61454.4)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/UpperAtmo"]
+position = Vector2(8.80273, -17.417)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="MiddleAtmo" type="Area2D" parent="Background"]
+position = Vector2(-334.961, 89103.2)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/MiddleAtmo"]
+position = Vector2(7.77344, 79.1113)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="LowerAtmo" type="Area2D" parent="Background"]
+position = Vector2(-680.859, 110764)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/LowerAtmo"]
+position = Vector2(-344.184, 176.957)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="SurfaceAtmo" type="Area2D" parent="Background"]
+position = Vector2(-597.305, 128101)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/SurfaceAtmo"]
+position = Vector2(-10749, 192.532)
+shape = SubResource("RectangleShape2D_jmo85")
 
 [node name="Surface" parent="." groups=["surface"] instance=ExtResource("7_b2b24")]
-position = Vector2(-1592, 115181)
+position = Vector2(0, 92802.4)
 
 [node name="Surface" parent="Surface" index="0" groups=["surface"]]
+position = Vector2(-1613, 0)
 
 [node name="VisibleOnScreenNotifier2D" parent="Surface" index="1" groups=["surface"]]
-
-[node name="OuterAtmo" type="Area2D" parent="."]
-position = Vector2(-41.4609, -33507.7)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OuterAtmo"]
-position = Vector2(8.46094, 13678.2)
-shape = SubResource("RectangleShape2D_jmo85")
-
-[node name="UpperAtmo" type="Area2D" parent="."]
-position = Vector2(-41.4609, -4468.41)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperAtmo"]
-position = Vector2(8.46094, 13678.2)
-shape = SubResource("RectangleShape2D_jmo85")
-
-[node name="MiddleAtmo" type="Area2D" parent="."]
-position = Vector2(-41.4609, 24573.6)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleAtmo"]
-position = Vector2(8.46094, 14926.9)
-shape = SubResource("RectangleShape2D_jmo85")
-
-[node name="LowerAtmo" type="Area2D" parent="."]
-position = Vector2(-41.4609, 53982.8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerAtmo"]
-position = Vector2(0.460999, 34097.2)
-shape = SubResource("RectangleShape2D_jmo85")
-
-[node name="SurfaceAtmo" type="Area2D" parent="."]
-position = Vector2(-41, 83268.2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceAtmo"]
-position = Vector2(0, 35203.9)
-shape = SubResource("RectangleShape2D_jmo85")
 
 [node name="SelectionMenu" parent="." instance=ExtResource("7_f34wg")]
 process_mode = 3
@@ -94,21 +105,22 @@ process_mode = 3
 [connection signal="value_changed" from="UI/UILayer/HBoxContainer/ThrustIndicator/VSlider" to="UI/Lander" method="_on_v_slider_value_changed"]
 [connection signal="body_entered" from="UI/Lander" to="UI/Lander" method="_on_body_entered"]
 [connection signal="collided" from="UI/Lander" to="." method="_on_lander_collided"]
-[connection signal="body_entered" from="OuterAtmo" to="UI/Lander" method="_on_outer_atmo_body_entered"]
-[connection signal="body_entered" from="OuterAtmo" to="UI/Lander/Backshell" method="_on_outer_atmo_body_entered"]
-[connection signal="body_entered" from="OuterAtmo" to="UI/Lander/HeatShield" method="_on_outer_atmo_body_entered"]
-[connection signal="body_entered" from="UpperAtmo" to="UI/Lander" method="_on_upper_atmo_body_entered"]
-[connection signal="body_entered" from="UpperAtmo" to="UI/Lander/Backshell" method="_on_upper_atmo_body_entered"]
-[connection signal="body_entered" from="UpperAtmo" to="UI/Lander/HeatShield" method="_on_upper_atmo_body_entered"]
-[connection signal="body_entered" from="MiddleAtmo" to="UI/Lander" method="_on_middle_atmo_body_entered"]
-[connection signal="body_entered" from="MiddleAtmo" to="UI/Lander/Backshell" method="_on_middle_atmo_body_entered"]
-[connection signal="body_entered" from="MiddleAtmo" to="UI/Lander/HeatShield" method="_on_middle_atmo_body_entered"]
-[connection signal="body_entered" from="LowerAtmo" to="UI/Lander" method="_on_lower_atmo_body_entered"]
-[connection signal="body_entered" from="LowerAtmo" to="UI/Lander/Backshell" method="_on_lower_atmo_body_entered"]
-[connection signal="body_entered" from="LowerAtmo" to="UI/Lander/HeatShield" method="_on_lower_atmo_body_entered"]
-[connection signal="body_entered" from="SurfaceAtmo" to="UI/Lander" method="_on_surface_atmo_body_entered"]
-[connection signal="body_entered" from="SurfaceAtmo" to="UI/Lander/Backshell" method="_on_surface_atmo_body_entered"]
-[connection signal="body_entered" from="SurfaceAtmo" to="UI/Lander/HeatShield" method="_on_surface_atmo_body_entered"]
+[connection signal="lander_position" from="UI/Lander" to="Background" method="_on_lander_lander_position"]
+[connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander" method="_on_outer_atmo_body_entered"]
+[connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander/Backshell" method="_on_outer_atmo_body_entered"]
+[connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander/HeatShield" method="_on_outer_atmo_body_entered"]
+[connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander" method="_on_upper_atmo_body_entered"]
+[connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander/Backshell" method="_on_upper_atmo_body_entered"]
+[connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander/HeatShield" method="_on_upper_atmo_body_entered"]
+[connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander" method="_on_middle_atmo_body_entered"]
+[connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander/Backshell" method="_on_middle_atmo_body_entered"]
+[connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander/HeatShield" method="_on_middle_atmo_body_entered"]
+[connection signal="body_entered" from="Background/LowerAtmo" to="UI/Lander" method="_on_lower_atmo_body_entered"]
+[connection signal="body_entered" from="Background/LowerAtmo" to="UI/Lander/Backshell" method="_on_lower_atmo_body_entered"]
+[connection signal="body_entered" from="Background/LowerAtmo" to="UI/Lander/HeatShield" method="_on_lower_atmo_body_entered"]
+[connection signal="body_entered" from="Background/SurfaceAtmo" to="UI/Lander" method="_on_surface_atmo_body_entered"]
+[connection signal="body_entered" from="Background/SurfaceAtmo" to="UI/Lander/Backshell" method="_on_surface_atmo_body_entered"]
+[connection signal="body_entered" from="Background/SurfaceAtmo" to="UI/Lander/HeatShield" method="_on_surface_atmo_body_entered"]
 [connection signal="changed" from="SelectionMenu/SelectionMenu" to="." method="_on_selection_menu_changed"]
 
 [editable path="UI/UILayer"]
@@ -117,5 +129,6 @@ process_mode = 3
 [editable path="UI/Lander/Backshell"]
 [editable path="UI/Lander/HeatShield"]
 [editable path="UI/Lander/Camera2D"]
+[editable path="Background"]
 [editable path="Surface"]
 [editable path="SelectionMenu"]

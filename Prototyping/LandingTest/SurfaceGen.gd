@@ -11,7 +11,7 @@ func _ready():
 
 	
 	var poly = Polygon2D.new()
-	var i = DisplayServer.screen_get_size().x
+	var i = 4000
 	var polygon = PackedVector2Array([])
 	var height = 1
 	var width = 1

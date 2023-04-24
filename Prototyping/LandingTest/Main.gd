@@ -93,11 +93,9 @@ func _process(delta):
 #	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())
 #	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
 #	current_density =  pressure / (.1921 * temperature + 273.1)
-#	if !$Surface.on_screen && !surface_moved:
-#		$Surface.position.x = $UI/Lander.position.x 
-#	else: 
-#		$Surface.position.x = $UI/Lander/Camera2D/SurfaceOrigin.position.x
-#		surface_moved = true
+	if $Surface.position.distance_to($UI/Lander.position) > 200:
+		$Surface.position.x = $UI/Lander.position.x 
+	
 	
 	
 	
@@ -269,6 +267,9 @@ func _on_lander_collided(lander_speed):#
 
 func _on_selection_menu_changed(heatshield_choice):
 	if heatshield_choice == 0:
-		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.95513957738876, 0.29442018270493, 0)
+		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.98824435472488, 0.30587202310562, 0)
 	if heatshield_choice == 1:
-		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.59090965986252, 0.49248903989792, 0.2732364833355)
+		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.88709461688995, 0.86753046512604, 0.18083310127258)
+	if heatshield_choice == 2:
+		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.27889686822891, 0.25785693526268, 0.27853071689606)
+		

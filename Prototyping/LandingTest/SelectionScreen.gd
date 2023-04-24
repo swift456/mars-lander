@@ -29,6 +29,7 @@ func _on_heatshield_state_changed(state):
 			2: 
 				$Background/MarginContainer/VBoxContainer/Heatshield/VBoxContainer/HBoxContainer/Type.text =  "Thick"
 				heatshield_choice = state
+				emit_signal("changed" ,heatshield_choice)
 	print(heatshield_choice)
 
 
