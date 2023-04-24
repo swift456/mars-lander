@@ -17,8 +17,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print("BS ",object_altitude)
-	print("BS ",density)
+#	print("BS ",object_altitude)
+#	print("BS ",density)
 
 	_integrate_forces(self)
 

@@ -163,6 +163,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 1
 text = "Increase Thrust"
+autowrap_mode = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer4/HBoxContainer/VBoxContainer2"]
 layout_mode = 2

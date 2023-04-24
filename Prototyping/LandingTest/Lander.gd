@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-
+var node_path = NodePath("")
 signal lander_position
 
 var air_resistance = Vector2(0,0)
@@ -28,12 +28,13 @@ func _process(delta):
 	
 	emit_signal("lander_position", self.position)
 	$DtSLander.global_rotation = 0
-	print("L ",object_altitude)
-	print("L ",density)
+#	print("L ",object_altitude)
+#	print("L ",density)
 	thrust(recieved_thrust_value)
 	rotating(self)
 	_integrate_forces(self)
 	print("L" ,position)
+	print($HeatShield/HeatShieldConnection1.node_a)
 	
 		
 		
@@ -81,14 +82,15 @@ func _integrate_forces(state):
 	
 func thrust(value):
 	
-	if lander_fuel > 0:
-		var thrust = -global_transform.y
-		thrust = thrust * value
-		apply_central_impulse(thrust)
-		lander_fuel -= value/80
+	if $HeatShield/HeatShieldConnection1.node_a == node_path:
+		if lander_fuel > 0:
+			var thrust = -global_transform.y
+			thrust = thrust * value
+			apply_central_impulse(thrust)
+			lander_fuel -= value/80
 		
-	else:
-		lander_fuel = 0
+		else:
+			lander_fuel = 0
 		
 
 

@@ -25,12 +25,14 @@ func get_surface_position(state):
 		return 
 
 func fuel_gauge(value):
-	if $UILayer/HBoxContainer/FuelGauge.value > 0:
-		$UILayer/HBoxContainer/FuelGauge.value -= value/80
-		print("FuelGauge ", $UILayer/HBoxContainer/FuelGauge.value)
-	else:
-		$UILayer/HBoxContainer/FuelGauge.value = 0
-		print("Out of fuel!")
+	var node_path = NodePath("")
+	if $Lander/HeatShield/HeatShieldConnection1.node_a == node_path:
+		if $UILayer/HBoxContainer/FuelGauge.value > 0:
+			$UILayer/HBoxContainer/FuelGauge.value -= value/80
+			print("FuelGauge ", $UILayer/HBoxContainer/FuelGauge.value)
+		else:
+			$UILayer/HBoxContainer/FuelGauge.value = 0
+			print("Out of fuel!")
 
 func _process(delta):
 	get_surface_position(scene_initialised)

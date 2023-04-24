@@ -10,8 +10,8 @@ const EULER = 2.71828
 
 
 func _process(delta):
-	print("HS ",object_altitude)
-	print("HS ",density)
+#	print("HS ",object_altitude)
+#	print("HS ",density)
 
 	_integrate_forces(self)
 

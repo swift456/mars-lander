@@ -44,6 +44,15 @@ const EULER = 2.71828
 ## Value taken from average value of drag coefficient for the bottom face of an aeroshell.
 const CD = 1.7
 
+var heatshield_strength = 0
+
+var heatshield_health = 1000
+
+var heatshield_destroyed = false
+
+var heat_rate
+
+var node_path = NodePath("")
 
 ## Tracks the current speed of the lander
 ## Used to decide whether or not the lander is destroyed upon contact with the surface.
@@ -93,6 +102,10 @@ func _process(delta):
 #	pressure = .699 * exp(-0.00009 * $UI.getDistance_to_Surface())
 #	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
 #	current_density =  pressure / (.1921 * temperature + 273.1)
+	heat(delta)
+	print("Temp ",heat_rate)
+	if heat_rate > 50 && $UI/Lander/HeatShield/HeatShieldConnection1.node_a == node_path:
+		_state = State.DESTROYED
 	if $Surface.position.distance_to($UI/Lander.position) > 200:
 		$Surface.position.x = $UI/Lander.position.x 
 	
@@ -180,7 +193,39 @@ func _physics_process(delta):
 #	print((_state)," ",(debug_velocity)," ",(air_resistance))
 	
 	
-
+func heat(delta):
+	
+	var velocity = $UI/Lander/HeatShield.get_linear_velocity().length_squared() 
+	var density = $UI/Lander/HeatShield.density
+	var dynamic_pressure = 0.5 * density * velocity
+	heat_rate = heatshield_strength * pow(dynamic_pressure,1.5)
+	if heatshield_health > 0:
+		heatshield_health -= heat_rate * delta
+		print("HS HE", heatshield_health)
+	elif heatshield_health < 0 && !heatshield_destroyed:
+		var node = CenterContainer.new()
+		$UI/UILayer.add_child(node)
+		var label = Label.new()
+		label.horizontal_alignment =HORIZONTAL_ALIGNMENT_CENTER
+		label.pivot_offset = label.size/2
+		node.pivot_offset = node.size/2
+		label.add_theme_color_override("font_color", Color(1, 0, 0.03137255087495))
+		label.add_theme_font_size_override("font_size", 20)
+		label.text = "! HEATSHIELD COMPROMISED !"
+		node.position = get_viewport_rect().size / 2
+		label.position = get_viewport_rect().size / 2
+		
+		
+		node.add_child(label)
+		
+		await get_tree().create_timer(1.5).timeout
+		$UI/Lander/HeatShield/HeatShieldConnection1.set_node_a("")
+		$UI/Lander/HeatShield/HeatShieldConnection2.set_node_a("")
+		$UI/Lander/HeatShield.mass = 2
+		await get_tree().create_timer(2).timeout
+		node.queue_free()
+		heatshield_destroyed = true
+		
 
 			
 			
@@ -268,8 +313,13 @@ func _on_lander_collided(lander_speed):#
 func _on_selection_menu_changed(heatshield_choice):
 	if heatshield_choice == 0:
 		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.98824435472488, 0.30587202310562, 0)
+		heatshield_strength = 0.005
+		$UI/Lander/HeatShield.mass = 20
 	if heatshield_choice == 1:
 		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.88709461688995, 0.86753046512604, 0.18083310127258)
+		heatshield_strength = 0.002
+		$UI/Lander/HeatShield.mass = 30
 	if heatshield_choice == 2:
 		$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.27889686822891, 0.25785693526268, 0.27853071689606)
-		
+		heatshield_strength = 0.0001
+		$UI/Lander/HeatShield.mass = 50
