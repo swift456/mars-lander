@@ -153,6 +153,9 @@ libraries = {
 [node name="Backshell" parent="." instance=ExtResource("7_6lr0n")]
 position = Vector2(0, -3)
 
+[node name="AttachmentPoint" parent="Backshell" index="2"]
+position = Vector2(0.36673, -7.37452)
+
 [node name="HeatShield" parent="." instance=ExtResource("3_ucsw6")]
 position = Vector2(0, 13)
 scale = Vector2(0.959999, 1)
@@ -177,7 +180,11 @@ node_b = NodePath("../..")
 position = Vector2(-2.32, -5.14623)
 polygon = PackedVector2Array(-14, 1, -2, 5, 4.6, 5.02249, 19.6, 1.02249)
 
-[node name="Sprite2D" parent="HeatShield" index="3"]
+[node name="HeatOverlay" parent="HeatShield" index="3"]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+
+[node name="Sprite2D" parent="HeatShield" index="4"]
 position = Vector2(0.279999, -2.12374)
 scale = Vector2(0.576367, 0.474258)
 

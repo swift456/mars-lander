@@ -1,6 +1,5 @@
 res://default_env.tres
 res://StartMenu.tscn
-res://Main.gd
 res://Menu.tscn
 res://Encyclopaedia.tscn
 res://HeatShield.tscn
@@ -12,7 +11,4 @@ res://SelectionScreen.tscn
 res://Selectors.tscn
 res://Surface3.tscn
 res://GradientBG.tscn
-res://Backshell.gd
-res://heat_shield.gd
-res://Lander.gd
-res://Indicators.gd
+res://Main.gd

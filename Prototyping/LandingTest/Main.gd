@@ -104,7 +104,7 @@ func _process(delta):
 #	current_density =  pressure / (.1921 * temperature + 273.1)
 	heat(delta)
 	print("Temp ",heat_rate)
-	if heat_rate > 50 && $UI/Lander/HeatShield/HeatShieldConnection1.node_a == node_path:
+	if heat_rate > 50 && heatshield_destroyed:
 		_state = State.DESTROYED
 	if $Surface.position.distance_to($UI/Lander.position) > 200:
 		$Surface.position.x = $UI/Lander.position.x 
@@ -202,27 +202,25 @@ func heat(delta):
 	if heatshield_health > 0:
 		heatshield_health -= heat_rate * delta
 		print("HS HE", heatshield_health)
+		$UI/Lander/HeatShield/HeatOverlay.modulate = Color(0.84313726425171, 0, 0.00784313771874, heat_rate)
 	elif heatshield_health < 0 && !heatshield_destroyed:
-		var node = CenterContainer.new()
+		var node = Node.new()
 		$UI/UILayer.add_child(node)
 		var label = Label.new()
-		label.horizontal_alignment =HORIZONTAL_ALIGNMENT_CENTER
-		label.pivot_offset = label.size/2
-		node.pivot_offset = node.size/2
+		
+
 		label.add_theme_color_override("font_color", Color(1, 0, 0.03137255087495))
 		label.add_theme_font_size_override("font_size", 20)
 		label.text = "! HEATSHIELD COMPROMISED !"
-		node.position = get_viewport_rect().size / 2
 		label.position = get_viewport_rect().size / 2
-		
-		
+		label.position -= (label.size/2)
 		node.add_child(label)
 		
-		await get_tree().create_timer(1.5).timeout
+		
 		$UI/Lander/HeatShield/HeatShieldConnection1.set_node_a("")
 		$UI/Lander/HeatShield/HeatShieldConnection2.set_node_a("")
 		$UI/Lander/HeatShield.mass = 2
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(3).timeout
 		node.queue_free()
 		heatshield_destroyed = true
 		

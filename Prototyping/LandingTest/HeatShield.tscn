@@ -27,6 +27,11 @@ node_b = NodePath("..")
 position = Vector2(0.399998, -4.02251)
 polygon = PackedVector2Array(-14, 1, -2, 5, 2, 5, 14, 1)
 
+[node name="HeatOverlay" type="Sprite2D" parent="."]
+position = Vector2(1.50625, -1.82376)
+scale = Vector2(0.50293, 0.474258)
+texture = ExtResource("2_e0s4y")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.50625, -1.82376)
 scale = Vector2(0.50293, 0.474258)
