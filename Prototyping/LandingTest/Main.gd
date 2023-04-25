@@ -80,7 +80,7 @@ func _unhandled_input(event):
 func _ready():
 	get_tree().paused = true
 	$UI/UILayer/ParachuteIndicator.text = ""
-	$UI/Lander.set_linear_velocity(Vector2(0,900))
+	$UI/Lander.apply_central_impulse(Vector2(0,100))
 	
 	
 
@@ -104,8 +104,7 @@ func _process(delta):
 #	current_density =  pressure / (.1921 * temperature + 273.1)
 	heat(delta)
 	print("Temp ",heat_rate)
-	if heat_rate > 50 && heatshield_destroyed:
-		_state = State.DESTROYED
+	
 	if $Surface.position.distance_to($UI/Lander.position) > 200:
 		$Surface.position.x = $UI/Lander.position.x 
 	
@@ -114,7 +113,7 @@ func _process(delta):
 	
 	
 	
-#	print("State = ", _state)
+	print("State = ", _state)
 	match _state:
 		
 		State.FREEFALL:
@@ -130,8 +129,8 @@ func _process(delta):
 				var instance = ParachuteScene.instantiate()
 				instance.linear_velocity = $UI/Lander/Backshell.get_linear_velocity()
 				$UI/Lander/Backshell/AttachmentPoint.add_child(instance)
-				instance.global_transform.origin = $UI/Lander/Backshell/AttachmentPoint.global_transform.origin
-				$UI/Lander/Backshell/AttachmentPoint.set_node_b(instance.get_node("RopeSegment3").get_path())
+				instance.get_child(0).global_transform.origin = $UI/Lander/Backshell/AttachmentPoint.global_transform.origin
+				$UI/Lander/Backshell/AttachmentPoint.set_node_b(instance.get_node("Connector").get_path())
 				
 				
 				if instance.get_linear_velocity().y > 500:
@@ -220,9 +219,11 @@ func heat(delta):
 		$UI/Lander/HeatShield/HeatShieldConnection1.set_node_a("")
 		$UI/Lander/HeatShield/HeatShieldConnection2.set_node_a("")
 		$UI/Lander/HeatShield.mass = 2
-		await get_tree().create_timer(3).timeout
-		node.queue_free()
 		heatshield_destroyed = true
+		await get_tree().create_timer(0.5).timeout
+		node.queue_free()
+		if heat_rate > 50 && heatshield_destroyed:
+			_state = State.DESTROYED
 		
 
 			

@@ -14,6 +14,7 @@ var recieved_thrust_value = 0
 var object_altitude = 0
 var lander_speed 
 var lander_average_speed = []
+var sound_playing = false
 
 
 func _ready():
@@ -35,7 +36,10 @@ func _process(delta):
 	_integrate_forces(self)
 	print("L" ,position)
 	print($HeatShield/HeatShieldConnection1.node_a)
-	
+	if !sound_playing:
+		$AudioStreamPlayer2D.stream_paused = true
+	if sound_playing:
+		$AudioStreamPlayer2D.stream_paused = false
 		
 		
 		
@@ -117,18 +121,21 @@ func _on_outer_atmo_body_entered(body):
 
 func _on_upper_atmo_body_entered(body):
 	density = 0.00001
-
+	sound_playing = true
+	
 
 func _on_middle_atmo_body_entered(body):
 	density = 0.0001
-
+	
 
 func _on_lower_atmo_body_entered(body):
-	density = 0.001
+	while density <= 0.001:
+		density +=0.0001
 
 
 func _on_surface_atmo_body_entered(body):
-	density = 0.02
+	while density <= 0.02:
+		density +=0.001
 
 
 

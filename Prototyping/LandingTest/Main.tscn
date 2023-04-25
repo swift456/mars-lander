@@ -32,9 +32,54 @@ metadata/_edit_use_anchors_ = true
 [node name="Lander" parent="UI" groups=["bodies", "surface"] instance=ExtResource("2")]
 position = Vector2(40, -36953.8)
 
+[node name="CollisionPolygon2D2" parent="UI/Lander" index="0"]
+position = Vector2(-4.41101, -4.02232)
+
+[node name="AnimatedSprite2D" parent="UI/Lander" index="1"]
+position = Vector2(-0.811035, 1.67773)
+
 [node name="Backshell" parent="UI/Lander" index="3" groups=["bodies"]]
 
+[node name="PinToLander1" parent="UI/Lander/Backshell" index="0"]
+position = Vector2(14.1066, 7.71695)
+
+[node name="PinToLander2" parent="UI/Lander/Backshell" index="1"]
+position = Vector2(-12.8934, 7.71695)
+
+[node name="AttachmentPoint" parent="UI/Lander/Backshell" index="2"]
+position = Vector2(-0.0273132, -6.1128)
+
+[node name="LanderSprite" parent="UI/Lander/Backshell" index="3"]
+position = Vector2(0.0859375, 2.65234)
+
+[node name="CollisionPolygon2D" parent="UI/Lander/Backshell" index="4"]
+position = Vector2(-3.61404, 1.65172)
+
+[node name="DtSBackshell" parent="UI/Lander/Backshell" index="5"]
+position = Vector2(-0.394043, 4.26172)
+
 [node name="HeatShield" parent="UI/Lander" index="4" groups=["bodies"]]
+
+[node name="HeatShieldConnection1" parent="UI/Lander/HeatShield" index="0"]
+position = Vector2(-3.82986, -4.98507)
+
+[node name="HeatShieldConnection2" parent="UI/Lander/HeatShield" index="1"]
+position = Vector2(4.17014, -4.98507)
+
+[node name="CollisionPolygon2D" parent="UI/Lander/HeatShield" index="2"]
+position = Vector2(-2.42986, -5.00756)
+
+[node name="HeatOverlay" parent="UI/Lander/HeatShield" index="3"]
+position = Vector2(1.39648, -1.6875)
+
+[node name="Sprite2D" parent="UI/Lander/HeatShield" index="4"]
+position = Vector2(0.170166, -1.98828)
+
+[node name="DtSHeatshield" parent="UI/Lander/HeatShield" index="5"]
+position = Vector2(1.49014, -1.16133)
+
+[node name="DtSLander" parent="UI/Lander" index="5"]
+position = Vector2(-0.606033, 3.63472)
 
 [node name="Background" parent="." instance=ExtResource("7_uaj16")]
 position = Vector2(0, -42185.4)
@@ -92,6 +137,7 @@ position = Vector2(0, 92802.4)
 
 [node name="Surface" parent="Surface" index="0" groups=["surface"]]
 position = Vector2(-1613, 0)
+collision_mask = 257
 
 [node name="VisibleOnScreenNotifier2D" parent="Surface" index="1" groups=["surface"]]
 

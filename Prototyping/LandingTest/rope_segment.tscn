@@ -3,10 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://7k62nofiuxfd" path="res://icon.png" id="1_lxqpo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ajhjn"]
-radius = 2.0
-height = 10.0
+radius = 2.77777
+height = 12.0
 
 [node name="RopeSegment" type="RigidBody2D"]
+scale = Vector2(0.360001, 1)
 collision_layer = 256
 collision_mask = 0
 mass = 2.0

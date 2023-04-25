@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://mia43cxt7bvl"]
+[gd_scene load_steps=7 format=3 uid="uid://mia43cxt7bvl"]
 
 [ext_resource type="Script" path="res://Parachute2.gd" id="1_8gw8e"]
 [ext_resource type="Texture2D" uid="uid://cakf4wkcolec" path="res://assets/Parachute.png" id="1_fstp5"]
 [ext_resource type="PackedScene" uid="uid://q8lptmwh0eum" path="res://rope_segment.tscn" id="2_pib13"]
+[ext_resource type="Texture2D" uid="uid://7k62nofiuxfd" path="res://icon.png" id="3_plke5"]
 [ext_resource type="PackedScene" uid="uid://f0jyhjpk3d1h" path="res://DistanceToSurfaceRC.tscn" id="4_45oyc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7xjp"]
+size = Vector2(3.61112, 1.5)
 
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 1024
@@ -11,50 +15,64 @@ collision_mask = 0
 mass = 15.0
 script = ExtResource("1_8gw8e")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -90.086)
-scale = Vector2(1, 2.58088)
-polygon = PackedVector2Array(0, 21, -15, -9, -11, -20, 0, -30, 13, -19, 15, -8)
+[node name="Connector" type="RigidBody2D" parent="."]
+position = Vector2(0, 2.99985)
+scale = Vector2(0.360001, 1)
+collision_layer = 257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connector"]
+position = Vector2(0, 2.38419e-07)
+shape = SubResource("RectangleShape2D_d7xjp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Connector"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.0434026, 0.0156265)
+texture = ExtResource("3_plke5")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Connector"]
+node_a = NodePath("../../RopeSegment3")
+node_b = NodePath("..")
+bias = 0.9
 
 [node name="RopeSegment" parent="." instance=ExtResource("2_pib13")]
-position = Vector2(0, -23.7)
+position = Vector2(0, -23.7001)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="RopeSegment"]
 position = Vector2(0, -5)
 node_a = NodePath("../..")
 node_b = NodePath("..")
 bias = 0.9
-disable_collision = false
-softness = 0.2
 
 [node name="RopeSegment2" parent="." instance=ExtResource("2_pib13")]
-position = Vector2(0, -12.7)
+position = Vector2(0, -12.7001)
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="RopeSegment2"]
 position = Vector2(0, -6)
 node_a = NodePath("../../RopeSegment")
 node_b = NodePath("..")
 bias = 0.9
-disable_collision = false
-softness = 0.2
 
 [node name="RopeSegment3" parent="." instance=ExtResource("2_pib13")]
-position = Vector2(0, -1.7)
+position = Vector2(0, -1.70015)
 
 [node name="PinJoint2D3" type="PinJoint2D" parent="RopeSegment3"]
 position = Vector2(0, -5)
 node_a = NodePath("../../RopeSegment2")
 node_b = NodePath("..")
 bias = 0.9
-disable_collision = false
-softness = 0.2
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(0, -86.475)
+position = Vector2(0, -86.4752)
 scale = Vector2(0.524268, 2.70391)
 texture = ExtResource("1_fstp5")
 
 [node name="DtSParachute" parent="." instance=ExtResource("4_45oyc")]
+visible = false
 position = Vector2(0, -35)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -90.0862)
+scale = Vector2(1, 2.58088)
+polygon = PackedVector2Array(0, 21, -15, -9, -11, -20, 0, -30, 13, -19, 15, -8)
 
 [editable path="RopeSegment3"]
