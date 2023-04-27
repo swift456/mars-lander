@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdej18wxdudg2"]
+
+[ext_resource type="Script" path="res://ThrustIndicator.gd" id="1_1elt6"]
+
+[node name="VSplitContainer" type="VSplitContainer"]
+offset_right = 51.0
+offset_bottom = 271.0
+size_flags_vertical = 3
+
+[node name="VSlider" type="VSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+max_value = 175.0
+step = 5.0
+script = ExtResource("1_1elt6")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Thrust"

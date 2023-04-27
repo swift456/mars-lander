@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://f0jyhjpk3d1h"]
+
+[node name="DtSLander" type="RayCast2D"]
+modulate = Color(0.286275, 1, 1, 1)
+position = Vector2(0, 13.209)
+target_position = Vector2(0, 160000)
+collision_mask = 256

@@ -1,0 +1,219 @@
+[gd_scene load_steps=15 format=3 uid="uid://bvojjrraguhe8"]
+
+[ext_resource type="Script" path="res://Lander.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cwtaftlmxv4ka" path="res://HeatShield.tscn" id="3_ucsw6"]
+[ext_resource type="Texture2D" uid="uid://ccc2c8hvwxiua" path="res://assets/LanderAnim1.png" id="4_jw7ry"]
+[ext_resource type="Texture2D" uid="uid://bvvepq8i7b4rm" path="res://assets/LanderAnim2.png" id="5_vhv6l"]
+[ext_resource type="Texture2D" uid="uid://irwxbhh7o4vu" path="res://assets/LanderAnim3.png" id="6_tkaxp"]
+[ext_resource type="Texture2D" uid="uid://bwhkuh1yfkckt" path="res://assets/LanderAnim4.png" id="7_03cc6"]
+[ext_resource type="PackedScene" uid="uid://cmvts7g2jb5pa" path="res://Backshell.tscn" id="7_6lr0n"]
+[ext_resource type="Texture2D" uid="uid://cidxyg2eu4kqb" path="res://assets/LanderAnim5.png" id="8_nhqcl"]
+[ext_resource type="PackedScene" uid="uid://f0jyhjpk3d1h" path="res://DistanceToSurfaceRC.tscn" id="9_iak6v"]
+[ext_resource type="PackedScene" uid="uid://biojq0qooj76e" path="res://LanderCamera.tscn" id="10_nfgoy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fqvhq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jw7ry")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jw7ry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vhv6l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tkaxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_03cc6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nhqcl")
+}],
+"loop": true,
+"name": &"leg-deployment",
+"speed": 3.0
+}]
+
+[sub_resource type="Animation" id="Animation_7hev6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"leg-deployment"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionPolygon2D2:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-4.4, 6.7, 11.6, 6.7, 15.6, 3.7, 11.6, 0.7, 7.6, 0.7, 2.6, 0.7, -3.4, 0.7, -7.4, 2.7)]
+}
+
+[sub_resource type="Animation" id="Animation_nx6cl"]
+resource_name = "leg_deployment"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"leg-deployment"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionPolygon2D2:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-4.4, 6.7, 11.6, 6.7, 15.6, 3.7, 11.6, 0.7, 7.6, 0.7, 2.6, 0.7, -3.4, 0.7, -7.4, 2.7), PackedVector2Array(-5.4, 7.7, 12.6, 7.7, 15.6, 3.7, 11.6, 0.7, 7.6, 0.7, 2.6, 0.7, -3.4, 0.7, -7.4, 2.7), PackedVector2Array(-6.4, 8.7, 13.6, 8.7, 15.6, 3.7, 11.6, 0.7, 7.6, 0.7, 2.6, 0.7, -3.4, 0.7, -7.4, 2.7), PackedVector2Array(-7.4, 9.7, 15.6, 9.7, 15.6, 3.7, 11.6, 0.7, 7.6, 0.7, 2.6, 0.7, -3.4, 0.7, -7.4, 2.7), PackedVector2Array(-9.4, 10.7, 16.6, 10.7, 15.6, 3.7, 11.6, 0.7, 7.6, 0.7, 2.6, 0.7, -3.4, 0.7, -7.4, 2.7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8madl"]
+_data = {
+"RESET": SubResource("Animation_7hev6"),
+"leg_deployment": SubResource("Animation_nx6cl")
+}
+
+[node name="Lander" type="RigidBody2D"]
+z_index = 6
+mass = 180.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("2")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(-4.11279, -6.4101)
+polygon = PackedVector2Array(-4.4, 6.7, 11.6, 6.7, 15.6, 3.7, 11.6, 0.7, 7.6, 0.7, 2.6, 0.7, -3.4, 0.7, -7.4, 2.7)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(-0.512781, -0.710094)
+scale = Vector2(0.53125, 0.53125)
+sprite_frames = SubResource("SpriteFrames_fqvhq")
+animation = &"leg-deployment"
+
+[node name="HeatOverlay" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(-0.512781, -0.710094)
+scale = Vector2(0.53125, 0.53125)
+sprite_frames = SubResource("SpriteFrames_fqvhq")
+animation = &"leg-deployment"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8madl")
+}
+
+[node name="Backshell" parent="." instance=ExtResource("7_6lr0n")]
+position = Vector2(-0.545212, -7.17383)
+
+[node name="AttachmentPoint" parent="Backshell" index="2"]
+position = Vector2(0.36673, -7.37452)
+softness = 0.0
+
+[node name="DtSBackshell" parent="Backshell" index="6"]
+position = Vector2(0, 75)
+rotation = 3.14159
+target_position = Vector2(0, 100)
+hit_from_inside = true
+
+[node name="HeatShield" parent="." instance=ExtResource("3_ucsw6")]
+position = Vector2(-0.461784, 11.0787)
+scale = Vector2(0.959999, 1)
+disable_mode = 2
+collision_layer = 0
+collision_mask = 0
+mass = 35.0
+max_contacts_reported = 4
+contact_monitor = false
+
+[node name="HeatShieldConnection1" parent="HeatShield" index="0"]
+position = Vector2(-3.72, -5.12374)
+node_a = NodePath("..")
+node_b = NodePath("../..")
+
+[node name="HeatShieldConnection2" parent="HeatShield" index="1"]
+position = Vector2(4.28, -5.12374)
+node_a = NodePath("..")
+node_b = NodePath("../..")
+
+[node name="CollisionPolygon2D" parent="HeatShield" index="2"]
+position = Vector2(-2.32, -5.14623)
+polygon = PackedVector2Array(-14, 1, -2, 5, 4.6, 5.02249, 19.6, 1.02249)
+
+[node name="HeatOverlay" parent="HeatShield" index="3"]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+position = Vector2(0.279999, -2.12374)
+scale = Vector2(0.576367, 0.474258)
+
+[node name="Sprite2D" parent="HeatShield" index="4"]
+position = Vector2(0.279999, -2.12374)
+scale = Vector2(0.576367, 0.474258)
+
+[node name="DtSLander" parent="." instance=ExtResource("9_iak6v")]
+position = Vector2(-0.147911, 6.93159)
+collide_with_areas = true
+
+[node name="Camera2D" parent="." instance=ExtResource("10_nfgoy")]
+position = Vector2(-0.444992, -3.79709)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-0.0446472, -0.669867)
+autoplay = true
+
+[editable path="Backshell"]
+[editable path="HeatShield"]

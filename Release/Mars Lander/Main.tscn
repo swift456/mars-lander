@@ -1,0 +1,203 @@
+[gd_scene load_steps=9 format=3 uid="uid://qonrhbpmxdco"]
+
+[ext_resource type="PackedScene" uid="uid://bvojjrraguhe8" path="res://Lander.tscn" id="2"]
+[ext_resource type="Script" path="res://Indicators.gd" id="2_1ef4i"]
+[ext_resource type="PackedScene" uid="uid://oh82i8npbprn" path="res://UILayer.tscn" id="3_lvhsy"]
+[ext_resource type="Script" path="res://Main.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://cpq5e0ksxwlhr" path="res://Surface3.tscn" id="7_b2b24"]
+[ext_resource type="PackedScene" uid="uid://wj7jt1fg2854" path="res://SelectionScreen.tscn" id="7_f34wg"]
+[ext_resource type="PackedScene" uid="uid://qjkp0b7qllf" path="res://GradientBG.tscn" id="7_uaj16"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmo85"]
+size = Vector2(21024, 3350.59)
+
+[node name="Main" type="Node2D"]
+visibility_layer = 2
+position = Vector2(5192, 3965)
+scale = Vector2(1, 0.760002)
+script = ExtResource("7")
+metadata/_edit_horizontal_guides_ = []
+
+[node name="UI" type="Control" parent="."]
+visibility_layer = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_1ef4i")
+metadata/_edit_use_anchors_ = true
+
+[node name="UILayer" parent="UI" instance=ExtResource("3_lvhsy")]
+
+[node name="ParachuteIndicator" parent="UI/UILayer" index="1"]
+text = "Too high to deploy!"
+
+[node name="Lander" parent="UI" groups=["bodies", "surface"] instance=ExtResource("2")]
+position = Vector2(40, -36953.8)
+
+[node name="CollisionPolygon2D2" parent="UI/Lander" index="0"]
+position = Vector2(-3.51794, -6.6356)
+
+[node name="AnimatedSprite2D" parent="UI/Lander" index="1"]
+position = Vector2(0.0820313, -0.935547)
+
+[node name="HeatOverlay" parent="UI/Lander" index="2"]
+position = Vector2(0.0820313, -0.935547)
+
+[node name="Backshell" parent="UI/Lander" index="4" groups=["bodies"]]
+position = Vector2(-0.462837, -8.50955)
+collision_layer = 258
+
+[node name="PinToLander1" parent="UI/Lander/Backshell" index="0"]
+position = Vector2(14.1066, 7.71695)
+
+[node name="PinToLander2" parent="UI/Lander/Backshell" index="1"]
+position = Vector2(-12.8934, 7.71695)
+
+[node name="AttachmentPoint" parent="UI/Lander/Backshell" index="2"]
+position = Vector2(-0.0273132, -6.1128)
+
+[node name="LanderSprite" parent="UI/Lander/Backshell" index="3"]
+position = Vector2(0.0859375, 2.65234)
+
+[node name="CollisionPolygon2D" parent="UI/Lander/Backshell" index="5"]
+position = Vector2(-3.61404, 1.65172)
+polygon = PackedVector2Array(-13, 10, 19.6, 9.7, 19.6, 5.7, 13.2021, -3.22461, 6.57715, -11.6133, 1.32715, -11.6133, -4.54785, -3.71875, -13, 6)
+
+[node name="DtSBackshell" parent="UI/Lander/Backshell" index="6"]
+position = Vector2(0, 87.9063)
+target_position = Vector2(0, 200)
+collision_mask = 65535
+
+[node name="HeatShield" parent="UI/Lander" index="5" groups=["bodies"]]
+position = Vector2(-0.37941, 9.74301)
+collision_layer = 4
+
+[node name="HeatShieldConnection1" parent="UI/Lander/HeatShield" index="0"]
+position = Vector2(-3.82986, -4.98507)
+
+[node name="HeatShieldConnection2" parent="UI/Lander/HeatShield" index="1"]
+position = Vector2(4.17014, -4.98507)
+
+[node name="CollisionPolygon2D" parent="UI/Lander/HeatShield" index="2"]
+position = Vector2(-2.42986, -5.00756)
+
+[node name="HeatOverlay" parent="UI/Lander/HeatShield" index="3"]
+position = Vector2(0.170166, -1.98828)
+
+[node name="Sprite2D" parent="UI/Lander/HeatShield" index="4"]
+position = Vector2(0.170166, -1.98828)
+
+[node name="DtSHeatshield" parent="UI/Lander/HeatShield" index="5"]
+position = Vector2(1.49014, -1.16133)
+
+[node name="DtSLander" parent="UI/Lander" index="6"]
+position = Vector2(-0.407303, 4.41597)
+
+[node name="Camera2D" parent="UI/Lander" index="7"]
+position = Vector2(-0.362617, -5.13281)
+
+[node name="AudioStreamPlayer2D" parent="UI/Lander" index="8"]
+position = Vector2(0.0377274, -2.00559)
+
+[node name="Background" parent="." instance=ExtResource("7_uaj16")]
+position = Vector2(0, -42185.4)
+metadata/_edit_group_ = true
+
+[node name="TextureRect" parent="Background" index="0"]
+offset_left = 1295.82
+offset_top = -3081.81
+offset_right = 141296.0
+offset_bottom = -81.8066
+
+[node name="OuterAtmo" type="Area2D" parent="Background"]
+position = Vector2(-87.7344, 15031.4)
+rotation = -1.57079
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/OuterAtmo"]
+position = Vector2(-296.146, 198.24)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="UpperAtmo" type="Area2D" parent="Background"]
+position = Vector2(-76.6055, 61454.4)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/UpperAtmo"]
+position = Vector2(8.80273, -17.417)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="MiddleAtmo" type="Area2D" parent="Background"]
+position = Vector2(-334.961, 89103.2)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/MiddleAtmo"]
+position = Vector2(7.77344, 79.1113)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="LowerAtmo" type="Area2D" parent="Background"]
+position = Vector2(-680.859, 110764)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/LowerAtmo"]
+position = Vector2(-344.184, 176.957)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="SurfaceAtmo" type="Area2D" parent="Background"]
+position = Vector2(-384.867, 125383)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/SurfaceAtmo"]
+position = Vector2(-10749, 192.532)
+shape = SubResource("RectangleShape2D_jmo85")
+
+[node name="Surface" parent="." groups=["surface"] instance=ExtResource("7_b2b24")]
+position = Vector2(0, 92802.4)
+
+[node name="Surface" parent="Surface" index="0" groups=["surface"]]
+position = Vector2(-1613, 0)
+collision_layer = 3847
+collision_mask = 257
+
+[node name="VisibleOnScreenNotifier2D" parent="Surface" index="1" groups=["surface"]]
+
+[node name="SelectionMenu" parent="." instance=ExtResource("7_f34wg")]
+process_mode = 3
+
+[connection signal="distance" from="UI" to="UI/Lander" method="_on_ui_distance"]
+[connection signal="distance" from="UI" to="UI/Lander/Backshell" method="_on_ui_distance"]
+[connection signal="distance" from="UI" to="UI/Lander/HeatShield" method="_on_ui_distance"]
+[connection signal="value_changed" from="UI/UILayer/HBoxContainer/ThrustIndicator/VSlider" to="UI" method="_on_v_slider_value_changed"]
+[connection signal="value_changed" from="UI/UILayer/HBoxContainer/ThrustIndicator/VSlider" to="UI/Lander" method="_on_v_slider_value_changed"]
+[connection signal="body_entered" from="UI/Lander" to="UI/Lander" method="_on_body_entered"]
+[connection signal="collided" from="UI/Lander" to="." method="_on_lander_collided"]
+[connection signal="lander_position" from="UI/Lander" to="Background" method="_on_lander_lander_position"]
+[connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander" method="_on_outer_atmo_body_entered"]
+[connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander/Backshell" method="_on_outer_atmo_body_entered"]
+[connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander/HeatShield" method="_on_outer_atmo_body_entered"]
+[connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander" method="_on_upper_atmo_body_entered"]
+[connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander/Backshell" method="_on_upper_atmo_body_entered"]
+[connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander/HeatShield" method="_on_upper_atmo_body_entered"]
+[connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander" method="_on_middle_atmo_body_entered"]
+[connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander/Backshell" method="_on_middle_atmo_body_entered"]
+[connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander/HeatShield" method="_on_middle_atmo_body_entered"]
+[connection signal="body_entered" from="Background/LowerAtmo" to="UI/Lander" method="_on_lower_atmo_body_entered"]
+[connection signal="body_entered" from="Background/LowerAtmo" to="UI/Lander/Backshell" method="_on_lower_atmo_body_entered"]
+[connection signal="body_entered" from="Background/LowerAtmo" to="UI/Lander/HeatShield" method="_on_lower_atmo_body_entered"]
+[connection signal="body_entered" from="Background/SurfaceAtmo" to="UI/Lander" method="_on_surface_atmo_body_entered"]
+[connection signal="body_entered" from="Background/SurfaceAtmo" to="UI/Lander/Backshell" method="_on_surface_atmo_body_entered"]
+[connection signal="body_entered" from="Background/SurfaceAtmo" to="UI/Lander/HeatShield" method="_on_surface_atmo_body_entered"]
+[connection signal="hs_changed" from="SelectionMenu/SelectionMenu" to="." method="_on_selection_menu_hs_changed"]
+[connection signal="pc_changed" from="SelectionMenu/SelectionMenu" to="." method="_on_selection_menu_pc_changed"]
+
+[editable path="UI/UILayer"]
+[editable path="UI/UILayer/HBoxContainer/ThrustIndicator"]
+[editable path="UI/Lander"]
+[editable path="UI/Lander/Backshell"]
+[editable path="UI/Lander/HeatShield"]
+[editable path="UI/Lander/Camera2D"]
+[editable path="Background"]
+[editable path="Surface"]
+[editable path="SelectionMenu"]
+[editable path="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Heatshield"]
+[editable path="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Parachute"]

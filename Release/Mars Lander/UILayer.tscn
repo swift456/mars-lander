@@ -1,0 +1,105 @@
+[gd_scene load_steps=3 format=3 uid="uid://oh82i8npbprn"]
+
+[ext_resource type="PackedScene" uid="uid://bdej18wxdudg2" path="res://ThrustIndicator.tscn" id="1_aymh4"]
+[ext_resource type="PackedScene" uid="uid://i8yyuhvet6sk" path="res://FuelGauge.tscn" id="2_rmp8h"]
+
+[node name="UILayer" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -383.0
+offset_bottom = 129.0
+grow_horizontal = 0
+
+[node name="FuelGauge" parent="HBoxContainer" instance=ExtResource("2_rmp8h")]
+layout_mode = 2
+
+[node name="ThrustIndicator" parent="HBoxContainer" instance=ExtResource("1_aymh4")]
+visibility_layer = 4
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSpeed" type="Label" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Horizontal Speed    :"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSpeed" type="Label" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Vertical Speed          :"
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DtS" type="Label" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2/MarginContainer3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Distance to Surface :"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HSpeedIndicator" type="RichTextLabel" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer3"]
+visibility_layer = 4
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VSpeedIndicator" type="RichTextLabel" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer2"]
+visibility_layer = 4
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="DtSIndicator" type="RichTextLabel" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer4"]
+visibility_layer = 4
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ParachuteIndicator" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

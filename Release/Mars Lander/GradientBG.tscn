@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://qjkp0b7qllf"]
+
+[ext_resource type="Script" path="res://Background.gd" id="1_r4313"]
+
+[sub_resource type="Gradient" id="Gradient_4i7o8"]
+offsets = PackedFloat32Array(0.0322581, 1)
+colors = PackedColorArray(0, 0.184314, 0.454902, 1, 0.766984, 0.452273, 0.37791, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dft1k"]
+gradient = SubResource("Gradient_4i7o8")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_r4313")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+offset_left = 1424.0
+offset_top = -1288.0
+offset_right = 141424.0
+offset_bottom = 1712.0
+rotation = 1.57079
+texture = SubResource("GradientTexture1D_dft1k")
+metadata/_edit_group_ = true

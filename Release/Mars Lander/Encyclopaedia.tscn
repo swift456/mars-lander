@@ -1,0 +1,137 @@
+[gd_scene load_steps=2 format=3 uid="uid://csvbjkfivjue5"]
+
+[ext_resource type="Script" path="res://Encyclopaedia.gd" id="1_86xru"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 3
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_86xru")
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0745098, 0.0745098, 0.0745098, 0.772549)
+
+[node name="TabContainer" type="TabContainer" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tutorial" type="Label" parent="Control/ColorRect/TabContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="Control/ColorRect/TabContainer/Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Entry" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="Entry" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Entry"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "When the capsule seperates from the orbital vehicle, and makes its entry to Martian atmosphere, the vessel will be travelling at a very high speed. 
+At this point in the lander's descent, the velocity at which the lander is travelling makes deploying a parachute impossible. Deploying a parachute at this speed 
+would cause the parachute to shear off."
+
+[node name="Heating" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Heating" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Heating"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Upon entering "
+
+[node name="Parachute Deployment" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Parachute Deployment" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Parachute Deployment"]
+visible = false
+layout_mode = 2
+
+[node name="Heatshield Seperation" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Heatshield Seperation" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Heatshield Seperation"]
+visible = false
+layout_mode = 2
+
+[node name="Backshell Seperation" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Backshell Seperation" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Backshell Seperation"]
+visible = false
+layout_mode = 2
+
+[node name="Powered Descent" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Powered Descent" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Powered Descent"]
+visible = false
+layout_mode = 2
+
+[node name="Touchdown" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="Touchdown" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Touchdown"]
+visible = false
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Control/ColorRect/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Control/ColorRect/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Back to Menu"

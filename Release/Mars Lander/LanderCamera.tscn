@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://biojq0qooj76e"]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2(0.10022, 0.376736)
+zoom = Vector2(2, 2)
+editor_draw_limits = true
+
+[node name="SurfaceOrigin" type="Node2D" parent="."]
+position = Vector2(-639.819, 473.438)
