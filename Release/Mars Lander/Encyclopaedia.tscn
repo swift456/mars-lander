@@ -52,9 +52,9 @@ theme_override_constants/margin_right = 10
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "When the capsule seperates from the orbital vehicle, and makes its entry to Martian atmosphere, the vessel will be travelling at a very high speed. 
-At this point in the lander's descent, the velocity at which the lander is travelling makes deploying a parachute impossible. Deploying a parachute at this speed 
-would cause the parachute to shear off."
+text = "The game begins with the lander vessel travelling down to the surface of mars. It is your job to land the craft successfully. Reading through this encyclopedia will likely help you to complete you mission.
+
+As you descend down to the martian surface, the lander may experience turbulence. Its important that you keep the lander level so that when heating occurs, the heatshield is able to protect the craft. This turbulence is caused by the craft encountering pockets of gas which are more or less dense than other parts of the atmosphere."
 
 [node name="Heating" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
 visible = false
@@ -66,7 +66,7 @@ theme_override_constants/margin_top = 10
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "Upon entering "
+text = "When heating occurs you will see the heatshield begin turning red. This occurs due to a wave of high pressure forming in front of the heatshield. This pressure compresses gas, and when gas is compressed, heat is generated. This heat is imparted upon the lander. An effect of this heating is that kinetic energy of the lander is converted to heat. Essential, as the lander heats up, velocity will decrease due to velocity being converted to heat."
 
 [node name="Parachute Deployment" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
 visible = false

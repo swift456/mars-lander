@@ -143,7 +143,7 @@ position = Vector2(-680.859, 110764)
 rotation = -1.57079
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/LowerAtmo"]
-position = Vector2(-344.184, 176.957)
+position = Vector2(-5739.74, 433.28)
 shape = SubResource("RectangleShape2D_jmo85")
 
 [node name="SurfaceAtmo" type="Area2D" parent="Background"]
@@ -151,7 +151,7 @@ position = Vector2(-384.867, 125383)
 rotation = -1.57079
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/SurfaceAtmo"]
-position = Vector2(-10749, 192.532)
+position = Vector2(-12328.3, 192.543)
 shape = SubResource("RectangleShape2D_jmo85")
 
 [node name="Surface" parent="." groups=["surface"] instance=ExtResource("7_b2b24")]

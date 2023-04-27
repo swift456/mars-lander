@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvojjrraguhe8"]
+[gd_scene load_steps=16 format=3 uid="uid://bvojjrraguhe8"]
 
 [ext_resource type="Script" path="res://Lander.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cwtaftlmxv4ka" path="res://HeatShield.tscn" id="3_ucsw6"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cidxyg2eu4kqb" path="res://assets/LanderAnim5.png" id="8_nhqcl"]
 [ext_resource type="PackedScene" uid="uid://f0jyhjpk3d1h" path="res://DistanceToSurfaceRC.tscn" id="9_iak6v"]
 [ext_resource type="PackedScene" uid="uid://biojq0qooj76e" path="res://LanderCamera.tscn" id="10_nfgoy"]
+[ext_resource type="AudioStream" uid="uid://y06mfecw66qc" path="res://assets/atmo_sound.wav" id="11_tb427"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fqvhq"]
 animations = [{
@@ -213,6 +214,7 @@ position = Vector2(-0.444992, -3.79709)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-0.0446472, -0.669867)
+stream = ExtResource("11_tb427")
 autoplay = true
 
 [editable path="Backshell"]

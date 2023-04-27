@@ -324,15 +324,15 @@ func _on_selection_menu_hs_changed(heatshield_choice):
 	match heatshield_choice: 
 		0:
 			$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.98824435472488, 0.30587202310562, 0)
-			heatshield_health = 50
+			heatshield_health = 25
 			$UI/Lander/HeatShield.mass = 20
 		1:
 			$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.88709461688995, 0.86753046512604, 0.18083310127258)
-			heatshield_health = 125
+			heatshield_health = 50
 			$UI/Lander/HeatShield.mass = 30
 		2:
 			$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.27889686822891, 0.25785693526268, 0.27853071689606)
-			heatshield_health = 300
+			heatshield_health = 100
 			$UI/Lander/HeatShield.mass = 50
 
 
