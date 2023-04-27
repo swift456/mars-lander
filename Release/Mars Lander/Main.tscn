@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://qonrhbpmxdco"]
+[gd_scene load_steps=11 format=3 uid="uid://qonrhbpmxdco"]
 
 [ext_resource type="PackedScene" uid="uid://bvojjrraguhe8" path="res://Lander.tscn" id="2"]
 [ext_resource type="Script" path="res://Indicators.gd" id="2_1ef4i"]
-[ext_resource type="PackedScene" uid="uid://oh82i8npbprn" path="res://UILayer.tscn" id="3_lvhsy"]
+[ext_resource type="PackedScene" uid="uid://i8yyuhvet6sk" path="res://FuelGauge.tscn" id="3_blpmj"]
+[ext_resource type="PackedScene" uid="uid://bdej18wxdudg2" path="res://ThrustIndicator.tscn" id="4_28clc"]
+[ext_resource type="Script" path="res://TimeControl.gd" id="5_b3dv2"]
 [ext_resource type="Script" path="res://Main.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://cpq5e0ksxwlhr" path="res://Surface3.tscn" id="7_b2b24"]
 [ext_resource type="PackedScene" uid="uid://wj7jt1fg2854" path="res://SelectionScreen.tscn" id="7_f34wg"]
@@ -27,10 +29,156 @@ offset_bottom = 40.0
 script = ExtResource("2_1ef4i")
 metadata/_edit_use_anchors_ = true
 
-[node name="UILayer" parent="UI" instance=ExtResource("3_lvhsy")]
+[node name="UILayer" type="CanvasLayer" parent="UI"]
 
-[node name="ParachuteIndicator" parent="UI/UILayer" index="1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UILayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -383.0
+offset_bottom = 129.0
+grow_horizontal = 0
+
+[node name="FuelGauge" parent="UI/UILayer/HBoxContainer" instance=ExtResource("3_blpmj")]
+layout_mode = 2
+
+[node name="ThrustIndicator" parent="UI/UILayer/HBoxContainer" instance=ExtResource("4_28clc")]
+visibility_layer = 4
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="UI/UILayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSpeed" type="Label" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Horizontal Speed    :"
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSpeed" type="Label" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Vertical Speed          :"
+
+[node name="MarginContainer3" type="MarginContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DtS" type="Label" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2/MarginContainer3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Distance to Surface :"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HSpeedIndicator" type="RichTextLabel" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer3"]
+visibility_layer = 4
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VSpeedIndicator" type="RichTextLabel" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer2"]
+visibility_layer = 4
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer4" type="MarginContainer" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="DtSIndicator" type="RichTextLabel" parent="UI/UILayer/HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer/MarginContainer4"]
+visibility_layer = 4
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ParachuteIndicator" type="Label" parent="UI/UILayer"]
+offset_right = 40.0
+offset_bottom = 23.0
 text = "Too high to deploy!"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UILayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -61.0
+offset_right = 119.0
+grow_vertical = 0
+theme_override_constants/separation = 25
+script = ExtResource("5_b3dv2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UILayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Identifier" type="Label" parent="UI/UILayer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Time Control"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UILayer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TimeControlLeft" type="Button" parent="UI/UILayer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+action_mode = 0
+text = "<"
+
+[node name="Type" type="Label" parent="UI/UILayer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="TimeControlRight" type="Button" parent="UI/UILayer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+action_mode = 0
+text = ">"
 
 [node name="Lander" parent="UI" groups=["bodies", "surface"] instance=ExtResource("2")]
 position = Vector2(40, -36953.8)
@@ -172,6 +320,11 @@ process_mode = 3
 [connection signal="distance" from="UI" to="UI/Lander/HeatShield" method="_on_ui_distance"]
 [connection signal="value_changed" from="UI/UILayer/HBoxContainer/ThrustIndicator/VSlider" to="UI" method="_on_v_slider_value_changed"]
 [connection signal="value_changed" from="UI/UILayer/HBoxContainer/ThrustIndicator/VSlider" to="UI/Lander" method="_on_v_slider_value_changed"]
+[connection signal="state_changed" from="UI/UILayer/VBoxContainer" to="UI" method="_on_v_box_container_state_changed"]
+[connection signal="pressed" from="UI/UILayer/VBoxContainer/VBoxContainer/HBoxContainer/TimeControlLeft" to="UI/UILayer/VBoxContainer" method="_on_left_arrow_pressed" flags=18]
+[connection signal="pressed" from="UI/UILayer/VBoxContainer/VBoxContainer/HBoxContainer/TimeControlLeft" to="UI/UILayer/VBoxContainer" method="_on_time_control_left_pressed" flags=18]
+[connection signal="pressed" from="UI/UILayer/VBoxContainer/VBoxContainer/HBoxContainer/TimeControlRight" to="UI/UILayer/VBoxContainer" method="_on_right_arrow_pressed" flags=18]
+[connection signal="pressed" from="UI/UILayer/VBoxContainer/VBoxContainer/HBoxContainer/TimeControlRight" to="UI/UILayer/VBoxContainer" method="_on_time_control_right_pressed" flags=18]
 [connection signal="body_entered" from="UI/Lander" to="UI/Lander" method="_on_body_entered"]
 [connection signal="collided" from="UI/Lander" to="." method="_on_lander_collided"]
 [connection signal="lander_position" from="UI/Lander" to="Background" method="_on_lander_lander_position"]
@@ -192,8 +345,11 @@ process_mode = 3
 [connection signal="body_entered" from="Background/SurfaceAtmo" to="UI/Lander/HeatShield" method="_on_surface_atmo_body_entered"]
 [connection signal="hs_changed" from="SelectionMenu/SelectionMenu" to="." method="_on_selection_menu_hs_changed"]
 [connection signal="pc_changed" from="SelectionMenu/SelectionMenu" to="." method="_on_selection_menu_pc_changed"]
+[connection signal="pressed" from="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Heatshield/VBoxContainer/HBoxContainer/LeftArrow" to="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Heatshield" method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Heatshield/VBoxContainer/HBoxContainer/RightArrow" to="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Heatshield" method="_on_right_arrow_pressed"]
+[connection signal="pressed" from="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Parachute/VBoxContainer/HBoxContainer/LeftArrow" to="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Parachute" method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Parachute/VBoxContainer/HBoxContainer/RightArrow" to="SelectionMenu/SelectionMenu/Background/MarginContainer/VBoxContainer/Parachute" method="_on_right_arrow_pressed"]
 
-[editable path="UI/UILayer"]
 [editable path="UI/UILayer/HBoxContainer/ThrustIndicator"]
 [editable path="UI/Lander"]
 [editable path="UI/Lander/Backshell"]

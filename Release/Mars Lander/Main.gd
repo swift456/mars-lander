@@ -51,6 +51,8 @@ var heatshield_strength
 ## Tracks the heatshield's health, when depleted the heatshield is seen as being "compromised" or destroyed
 var heatshield_health = 50
 
+var game_over_reason = 0
+
 ## 
 var heatshield_destroyed = false
 
@@ -119,28 +121,32 @@ func _process(delta):
 		$Surface.position.x = $UI/Lander.position.x 
 	
 	if heatshield_destroyed && !_state == State.DESTROYED:
-		await get_tree().create_timer(0.5).timeout
-		_state = State.DESTROYED
-		if heat($UI/Lander, delta) > 30 && !destroyed:	
-			
-			var node = Node.new()
-			$UI/UILayer.add_child(node)
-			var label = Label.new()
+		var node = Node.new()
+		$UI/UILayer.add_child(node)
+		var label = Label.new()
+		label.add_theme_color_override("font_color", Color(1, 0, 0.03137255087495))
+		label.add_theme_font_size_override("font_size", 20)
+		label.text = "! HEATSHIELD COMPROMISED !"
+		label.position = get_viewport_rect().size / 2
+		label.position -= (label.size/2)
+		node.add_child(label)
+		await get_tree().create_timer(2).timeout
+		node.queue_free()
+		if heat($UI/Lander, delta) > 30 && !destroyed:
+			game_over_reason = 0
+			_state = State.DESTROYED
+			await get_tree().create_timer(0.5).timeout
 		
 
-			label.add_theme_color_override("font_color", Color(1, 0, 0.03137255087495))
-			label.add_theme_font_size_override("font_size", 20)
-			label.text = "! HEATSHIELD COMPROMISED !"
-			label.position = get_viewport_rect().size / 2
-			label.position -= (label.size/2)
-			node.add_child(label)
-			await get_tree().create_timer(0.5).timeout
-			node.queue_free()
+			
+			
+			
 			destroyed = true
 	if is_backshell_exposed():
 		if heat($UI/Lander/Backshell, delta) > 0.1:
 			backshell_visible += delta
 			if backshell_visible >= 5:
+				game_over_reason = 1
 				_state = State.DESTROYED
 	else:
 		backshell_visible = 0
@@ -193,7 +199,7 @@ func _process(delta):
 					$UI/Lander/Backshell/AttachmentPoint.set_node_b(instance.get_node("Connector").get_path())
 					
 					
-					if instance.get_linear_velocity().y > 500:
+					if instance.get_linear_velocity().y > 250:
 						$UI/Lander/Backshell/AttachmentPoint.set_node_b("")
 						$UI/Lander/Backshell/PinToLander1.set_node_b("")
 						$UI/Lander/Backshell/PinToLander2.set_node_b("")
@@ -223,7 +229,7 @@ func _process(delta):
 			
 				
 				var pause_menu = PauseScene.instantiate()
-				pause_menu.get_node("Control").change_title(State.DESTROYED)
+				pause_menu.get_node("Control").change_title(State.DESTROYED,game_over_reason)
 				add_child(pause_menu)
 				_state = State.FREEFALL
 			
@@ -313,6 +319,7 @@ func _on_lander_collided(lander_speed):#
 	print("Speed ", lander_speed)
 	if lander_speed > 20:
 		print("Speed ", lander_speed)
+		game_over_reason = 2
 		_state = State.DESTROYED
 	else:
 		print("Speed ", lander_speed)

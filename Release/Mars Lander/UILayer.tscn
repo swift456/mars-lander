@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://oh82i8npbprn"]
+[gd_scene load_steps=4 format=3 uid="uid://oh82i8npbprn"]
 
 [ext_resource type="PackedScene" uid="uid://bdej18wxdudg2" path="res://ThrustIndicator.tscn" id="1_aymh4"]
 [ext_resource type="PackedScene" uid="uid://i8yyuhvet6sk" path="res://FuelGauge.tscn" id="2_rmp8h"]
+[ext_resource type="Script" path="res://TimeControl.gd" id="4_xsocj"]
 
 [node name="UILayer" type="CanvasLayer"]
 
@@ -103,3 +104,55 @@ size_flags_vertical = 3
 [node name="ParachuteIndicator" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -61.0
+offset_right = 119.0
+grow_vertical = 0
+theme_override_constants/separation = 25
+script = ExtResource("4_xsocj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Identifier" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Time Control"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TimeControlLeft" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+text = "<"
+
+[node name="Type" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="TimeControlRight" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlLeft" to="VBoxContainer" method="_on_left_arrow_pressed" flags=18]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlLeft" to="VBoxContainer" method="_on_time_control_left_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlRight" to="VBoxContainer" method="_on_right_arrow_pressed" flags=18]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlRight" to="VBoxContainer" method="_on_time_control_right_pressed"]

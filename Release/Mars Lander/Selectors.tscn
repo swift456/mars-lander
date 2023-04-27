@@ -72,6 +72,3 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = ">"
-
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/LeftArrow" to="." method="_on_left_arrow_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/RightArrow" to="." method="_on_right_arrow_pressed"]

@@ -53,20 +53,29 @@ func pause():
 
 ## The change_title function sets parameters of child nodes to state specifc information, such as "Successful Landing!"
 ## This function gets called into the main game script.
-func change_title(state):
+func change_title(state, game_over_reason):
 	match state:
 		
 		5:
-			$PanelContainer/MarginContainer/VBoxContainer/Status.text = "Sucessful Landing!" 
+			$PanelContainer/MarginContainer/VBoxContainer/MarginContainer/Status.text = "Sucessful Landing!" 
 			$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart.visible = true
 			$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Resume.visible = false
 			#uses the corresponding states from the Main script.
-			#SUCCESS = 6
+			#SUCCESS = 5
 			#if the State enum in Main is changed at all this behavior will apply to the corresponding value in the enum variable.
 			
 			
 		6:
-			$PanelContainer/MarginContainer/VBoxContainer/Status.text = "Lander Destroyed!" 
+			$PanelContainer/MarginContainer/VBoxContainer/MarginContainer/Status.text = "Lander Destroyed!" 
 			$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart.visible = true
 			$PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Resume.visible = false
-			#DESTROYED = 7
+			match game_over_reason:
+				
+				0:
+					$PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/Reason.text = "Heatshield became compromised whilst vessel was under heating, lander destroyed by atmospheric heating.\n Maybe try using a thicker heatshield?"
+				1:
+					$PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/Reason.text = "Atmospheric heating applied to side of backshell damaged lander inside, communication lost with lander.\n Keep the lander level to ensure the heatshield can do its job."
+					
+				2:
+					$PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/Reason.text = "Catastrophic impact with surface. \n Using a bigger parachute may result in more fuel being available for the powered descent."
+			#DESTROYED = 6

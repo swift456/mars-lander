@@ -1,3 +1,7 @@
+Button
+Control
+MarginContainer
+TabBar
 Label
 AudioStreamPlayer2D
 PinJoint2D
@@ -8,8 +12,6 @@ Node2D
 CanvasLayer
 HSeparator
 VBoxContainer
-Button
-MarginContainer
 VSplitContainer
 HBoxContainer
 CollisionPolygon2D
@@ -24,9 +26,7 @@ StaticBody2D
 Polygon2D
 Line2D
 TabContainer
-TabBar
 PopupMenu
 MenuBar
-Control
 ScrollContainer
 Tree

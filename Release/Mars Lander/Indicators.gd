@@ -75,3 +75,25 @@ func getDistance_to_Surface():
 	
 func _on_v_slider_value_changed(value):
 	recieved_thrust_value = value
+
+
+func _on_v_box_container_state_changed(state):
+	print("TIMESTATE ",state)
+	match state:
+			0: 
+				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "Realtime"
+				Engine.time_scale = 1
+			1: 
+				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "x1.5"
+				Engine.time_scale = 1.5
+				
+			2: 
+				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text =  "x2"
+				
+				Engine.time_scale = 2
+				
+			3:
+				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "x2.5"
+				Engine.time_scale = 2.5
+	
+

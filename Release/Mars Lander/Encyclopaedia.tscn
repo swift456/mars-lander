@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://csvbjkfivjue5"]
+[gd_scene load_steps=3 format=3 uid="uid://csvbjkfivjue5"]
 
 [ext_resource type="Script" path="res://Encyclopaedia.gd" id="1_86xru"]
+[ext_resource type="Script" path="res://ExternalLinks.gd" id="2_c6d3n"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 3
@@ -42,89 +43,204 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Entry" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+[node name="Entry" type="Control" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
 
 [node name="Entry" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Entry"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "The game begins with the lander vessel travelling down to the surface of mars. It is your job to land the craft successfully. Reading through this encyclopedia will likely help you to complete you mission.
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "The game begins with the lander vessel travelling down to the surface of mars. 
+It is your job to land the craft successfully. Reading through this encyclopedia will likely help you to complete you mission.
 
-As you descend down to the martian surface, the lander may experience turbulence. Its important that you keep the lander level so that when heating occurs, the heatshield is able to protect the craft. This turbulence is caused by the craft encountering pockets of gas which are more or less dense than other parts of the atmosphere."
+As you descend down to the martian surface, the lander may experience turbulence. Its important that you keep the lander level so that when heating occurs, the heatshield is able to protect the craft. This turbulence is caused by the craft encountering pockets of gas which are more or less dense than other parts of the atmosphere.
 
-[node name="Heating" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+To pitch the left side of the lander upwards, use the \"Left Arrow Key\". 
+To do the same to the right side, use the \"Right Arrow Key\"."
+autowrap_mode = 3
+clip_text = true
+
+[node name="Heating" type="Control" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
 visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
 
 [node name="Heating" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Heating"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "When heating occurs you will see the heatshield begin turning red. This occurs due to a wave of high pressure forming in front of the heatshield. This pressure compresses gas, and when gas is compressed, heat is generated. This heat is imparted upon the lander. An effect of this heating is that kinetic energy of the lander is converted to heat. Essential, as the lander heats up, velocity will decrease due to velocity being converted to heat."
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 658.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "When heating occurs you will see the heatshield begin turning red. 
+This occurs due to a wave of high pressure forming in front of the heatshield. This pressure compresses gas, and when gas is compressed, heat is generated. 
+This heat is imparted upon the lander. 
+An effect of this heating is that kinetic energy of the lander is converted to heat. Essential, as the lander heats up, 
+velocity will decrease due to velocity being converted to heat."
+autowrap_mode = 3
 
-[node name="Parachute Deployment" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+[node name="Parachute Deployment" type="Control" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
 visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
 
 [node name="Parachute Deployment" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Parachute Deployment"]
-visible = false
 layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1240.0
+offset_bottom = 11556.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "The parachute can be deployed by pressing \"Spacebar\".
+At an altitude of 50km the ability to deploy the parachute will become available. 
+It is not advised to deploy the parachute whilst the craft is going faster than 900km/h. 
+Doing so will result in the parachute shearing away from the lander, leaving the lander without any method of slowing down.
 
-[node name="Heatshield Seperation" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+Aim to deploy the parachute around 2km from the surface.
+This will give you ample time to decelerate and plan your descent."
+autowrap_mode = 3
+
+[node name="Heatshield Seperation" type="Control" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
 visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
 
 [node name="Heatshield Seperation" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Heatshield Seperation"]
-visible = false
 layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1240.0
+offset_bottom = 11556.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "Once the parachute has been deployed, the heatshield can be jettisoned.
+This improves the effectiveness of the parachute as it is carrying less weight.
 
-[node name="Backshell Seperation" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+This can be done by pressing \"X\""
+autowrap_mode = 3
+
+[node name="Backshell Seperation" type="Control" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
 visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
 
 [node name="Backshell Seperation" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Backshell Seperation"]
-visible = false
 layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1240.0
+offset_bottom = 11556.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "Around 0.5km above the surface, the lander can be seperated from the backshell.
 
-[node name="Powered Descent" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
+This can be done by pressing the \"Spacebar\" again."
+autowrap_mode = 3
+
+[node name="Powered Descent" type="Control" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
 visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
 
 [node name="Powered Descent" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Powered Descent"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1240.0
+offset_bottom = 11556.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "By using the \"Up\" and \"Down\" arrow keys, the thrust can be changed. 
+
+Thrust can be pushed to max by pressing the \"Home\" key, and turned back down to zero by using the \"End\" key.
+
+Try to bring your speed to below 20km/h upon nearing the surface.
+
+This may take a few tries to master, therefore it is advised to take advantage of the Time Control feature."
+autowrap_mode = 3
+
+[node name="Additional Features" type="Label" parent="Control/ColorRect/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Touchdown" type="MarginContainer" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
+[node name="TabContainer" type="TabContainer" parent="Control/ColorRect/TabContainer/Additional Features"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Touchdown" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Touchdown"]
-visible = false
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="Control/ColorRect/TabContainer"]
-visible = false
+[node name="Parts" type="Control" parent="Control/ColorRect/TabContainer/Additional Features/TabContainer"]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="Control/ColorRect/TabContainer"]
+[node name="Parts" type="Label" parent="Control/ColorRect/TabContainer/Additional Features/TabContainer/Parts"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "Before the game begins, you will have the opportunity to customise a few of the parts on the lander. When sending a real lander to mars, every consideration is made regarding mass of the vessel. 
+This is for two reasons, the higher the mass of the payload (lander) the more fuel needed to get to mars, and secondly more resources are required to slow the lander down so it safely reaches the martian surface.
+For this reason, equipping the thickest heatshield and biggest parachute may leave you short on fuel when trying to land safely on the surface.
+ 
+The player is encouraged to experiment to find out the right combination of parts."
+autowrap_mode = 3
+clip_text = true
+
+[node name="Time Control" type="Control" parent="Control/ColorRect/TabContainer/Additional Features/TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="Time Control" type="Label" parent="Control/ColorRect/TabContainer/Additional Features/TabContainer/Time Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 658.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "Landing on Mars is often regarded as \"7 minutes of hell\" by experts. 
+
+For this reason, the Time Control feature is available for use.
+
+Using this feature allows you to accelerate time, be careful however, you will still need to unpause to correctly carry out the stages covered in the tutorial."
+autowrap_mode = 3
+
+[node name="External Links" type="Label" parent="Control/ColorRect/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("2_c6d3n")
+
+[node name="TabContainer" type="TabContainer" parent="Control/ColorRect/TabContainer/External Links"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Time Control" type="Control" parent="Control/ColorRect/TabContainer/External Links/TabContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Control/ColorRect/TabContainer/External Links/TabContainer/Time Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+action_mode = 0
+text = "Click here to open a link showing all past and current Mars missions!"
 
 [node name="ExitButton" type="Button" parent="Control"]
 layout_mode = 1
@@ -135,3 +251,5 @@ offset_left = -8.0
 offset_bottom = 8.0
 grow_horizontal = 0
 text = "Back to Menu"
+
+[connection signal="pressed" from="Control/ColorRect/TabContainer/External Links/TabContainer/Time Control/Button" to="Control/ColorRect/TabContainer/External Links" method="_on_button_pressed"]
