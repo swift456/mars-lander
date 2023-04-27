@@ -60,6 +60,9 @@ position = Vector2(-0.0273132, -6.1128)
 [node name="LanderSprite" parent="UI/Lander/Backshell" index="3"]
 position = Vector2(0.0859375, 2.65234)
 
+[node name="HeatOverlay" parent="UI/Lander/Backshell" index="4"]
+position = Vector2(0.0859375, 2.65234)
+
 [node name="CollisionPolygon2D" parent="UI/Lander/Backshell" index="5"]
 position = Vector2(-3.61404, 1.65172)
 polygon = PackedVector2Array(-13, 10, 19.6, 9.7, 19.6, 5.7, 13.2021, -3.22461, 6.57715, -11.6133, 1.32715, -11.6133, -4.54785, -3.71875, -13, 6)

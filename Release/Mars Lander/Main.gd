@@ -46,10 +46,10 @@ const CD = 1.7
 
 ## Measures the strength of shield, this is changed by the users choice at the beginning of the game
 ## Set to zero to avoid a null instance exception upon runtime
-var heatshield_strength = 0
+var heatshield_strength
 
 ## Tracks the heatshield's health, when depleted the heatshield is seen as being "compromised" or destroyed
-var heatshield_health = 1000
+var heatshield_health = 50
 
 ## 
 var heatshield_destroyed = false
@@ -111,7 +111,9 @@ func _process(delta):
 #	temperature =  -31 - 0.000998 * $UI.getDistance_to_Surface()
 #	current_density =  pressure / (.1921 * temperature + 273.1)
 	heat($UI/Lander/HeatShield,delta)
-	
+	print("Rotation ", $UI/Lander/Backshell.global_rotation_degrees)
+	print("Backshell heat", backshell_visible)
+	print("HS HE", heatshield_health)
 	
 	if $Surface.position.distance_to($UI/Lander.position) > 200:
 		$Surface.position.x = $UI/Lander.position.x 
@@ -135,11 +137,10 @@ func _process(delta):
 			await get_tree().create_timer(0.5).timeout
 			node.queue_free()
 			destroyed = true
-	print("Colliding with ",$UI/Lander/Backshell/DtSBackshell.get_collider())
-	if $UI/Lander/Backshell/DtSBackshell.get_collider() == $UI/Lander/Backshell:
-			print("Colliding with ",$UI/Lander/Backshell/DtSBackshell.get_collider())
+	if is_backshell_exposed():
+		if heat($UI/Lander/Backshell, delta) > 0.1:
 			backshell_visible += delta
-			if backshell_visible >= 500:
+			if backshell_visible >= 5:
 				_state = State.DESTROYED
 	else:
 		backshell_visible = 0
@@ -237,6 +238,8 @@ func _process(delta):
 		
 		
 
+		
+
 ## Inbuilt function which handles any changes to physic bodies.
 ## Best to keep calculations in here that are reliant on a fixed frame rate.
 ## Some calculations, when tied to computer FPS (which will vary depending on hardware)
@@ -246,6 +249,11 @@ func _physics_process(delta):
 	
 	
 	
+func is_backshell_exposed():
+	if $UI/Lander/Backshell.global_rotation_degrees > 45 || $UI/Lander/Backshell.global_rotation_degrees < -45:
+		return true
+	else:
+		return false
 
 	
 #	var debug_velocity = $UI/Node2D/Lander.get_linear_velocity()
@@ -257,10 +265,10 @@ func heat(state,delta):
 	var velocity = state.get_linear_velocity().length_squared() 
 	var density = state.density
 	var dynamic_pressure = 0.5 * density * velocity
-	var heat_rate = heatshield_strength * pow(dynamic_pressure,1.5)
+	var heat_rate = 0.0001 * pow(dynamic_pressure,1.5)
 	if heatshield_health > 0:
 		heatshield_health -= (heat_rate/100)
-		print("HS HE", heatshield_health)
+		
 		state.get_node("HeatOverlay").modulate = Color(0.84313726425171, 0, 0.00784313771874, heat_rate)
 		
 	elif heatshield_health <= 0 && !heatshield_destroyed:
@@ -316,15 +324,15 @@ func _on_selection_menu_hs_changed(heatshield_choice):
 	match heatshield_choice: 
 		0:
 			$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.98824435472488, 0.30587202310562, 0)
-			heatshield_strength = 0.005
+			heatshield_health = 50
 			$UI/Lander/HeatShield.mass = 20
 		1:
 			$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.88709461688995, 0.86753046512604, 0.18083310127258)
-			heatshield_strength = 0.0002
+			heatshield_health = 125
 			$UI/Lander/HeatShield.mass = 30
 		2:
 			$UI/Lander/HeatShield/Sprite2D.modulate = Color(0.27889686822891, 0.25785693526268, 0.27853071689606)
-			heatshield_strength = 0.000009
+			heatshield_health = 300
 			$UI/Lander/HeatShield.mass = 50
 
 

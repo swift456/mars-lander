@@ -14,3 +14,4 @@ res://GradientBG.tscn
 res://rope_segment.tscn
 res://DistanceToSurfaceRC.tscn
 res://surface2.tscn
+res://Main.gd
