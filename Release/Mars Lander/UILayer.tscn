@@ -152,7 +152,7 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 50
 text = ">"
 
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlLeft" to="VBoxContainer" method="_on_left_arrow_pressed" flags=18]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlLeft" to="VBoxContainer" method="_on_time_control_left_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlLeft" to="VBoxContainer" method="_on_left_arrow_pressed" flags=18]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlRight" to="VBoxContainer" method="_on_right_arrow_pressed" flags=18]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/TimeControlRight" to="VBoxContainer" method="_on_time_control_right_pressed"]

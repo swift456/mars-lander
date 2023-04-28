@@ -102,7 +102,7 @@ func _integrate_forces(state):
 func thrust(value):
 	if $HeatShield/HeatShieldConnection1.node_a == node_path:
 		if lander_fuel > 0:
-			var thrust = -global_transform.y
+			var thrust = -transform.y
 			thrust = thrust * value
 			apply_central_impulse(thrust)
 			lander_fuel -= value/80

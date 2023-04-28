@@ -44,7 +44,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Entry" type="Control" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="Entry" type="Label" parent="Control/ColorRect/TabContainer/Tutorial/TabContainer/Entry"]
