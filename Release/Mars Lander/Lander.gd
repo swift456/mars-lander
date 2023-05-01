@@ -36,8 +36,7 @@ func _process(delta):
 	thrust(recieved_thrust_value)
 	rotating(self)
 	_integrate_forces(self)
-	print("L" ,position)
-	print($HeatShield/HeatShieldConnection1.node_a)
+	
 	if !sound_playing:
 		$AudioStreamPlayer2D.stream_paused = true
 		
@@ -76,7 +75,7 @@ func drag(state):
 	x^2
 	y^2
 	var squared_velocity = Vector2(x,y)
-	air_resistance = (CD * density * squared_velocity * area) / 2
+	air_resistance = (CD * density * (squared_velocity/2) * area)
 	state.apply_central_impulse(Vector2(-air_resistance))
 
 ## Inbuilt function which is best used when changes to a rigidbody would directly contradict the calculations handled by the physics engine.

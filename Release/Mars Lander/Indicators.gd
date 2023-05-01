@@ -7,6 +7,7 @@ var collision_point = Vector2(0,0)
 var distance_to_surface = 0
 var scene_initialised = false
 var recieved_thrust_value = 0
+var time_control = true
 signal distance
 
 # Called when the node enters the scene tree for the first time.
@@ -35,6 +36,10 @@ func fuel_gauge(value):
 			print("Out of fuel!")
 
 func _process(delta):
+	if !time_control:
+		$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "Realtime"
+		Engine.time_scale = 1
+		print("HELLO3")
 	get_surface_position(scene_initialised)
 	print(distance_to_surface)
 	fuel_gauge(recieved_thrust_value)
@@ -79,21 +84,28 @@ func _on_v_slider_value_changed(value):
 
 func _on_v_box_container_state_changed(state):
 	print("TIMESTATE ",state)
-	match state:
+	
+	if time_control:
+		match state:
 			0: 
-				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "Realtime"
+				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "x1.0"
 				Engine.time_scale = 1
 			1: 
 				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "x1.5"
 				Engine.time_scale = 1.5
 				
 			2: 
-				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text =  "x2"
+				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text =  "x2.0"
 				
 				Engine.time_scale = 2
 				
 			3:
 				$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "x2.5"
 				Engine.time_scale = 2.5
-	
+	else:
+		$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "x1.0"
+		Engine.time_scale = 1
+		print("HELLO1")
 
+func set_time_control(arg):
+	time_control = arg

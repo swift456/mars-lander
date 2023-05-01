@@ -264,7 +264,6 @@ offset_bottom = -81.8066
 [node name="OuterAtmo" type="Area2D" parent="Background"]
 position = Vector2(-87.7344, 15031.4)
 rotation = -1.57079
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/OuterAtmo"]
 position = Vector2(-296.146, 198.24)
@@ -287,7 +286,7 @@ position = Vector2(7.77344, 79.1113)
 shape = SubResource("RectangleShape2D_jmo85")
 
 [node name="LowerAtmo" type="Area2D" parent="Background"]
-position = Vector2(-680.859, 110764)
+position = Vector2(-839.824, 104482)
 rotation = -1.57079
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/LowerAtmo"]
@@ -295,7 +294,7 @@ position = Vector2(-5739.74, 433.28)
 shape = SubResource("RectangleShape2D_jmo85")
 
 [node name="SurfaceAtmo" type="Area2D" parent="Background"]
-position = Vector2(-384.867, 125383)
+position = Vector2(-384.852, 119463)
 rotation = -1.57079
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/SurfaceAtmo"]
@@ -331,9 +330,11 @@ process_mode = 3
 [connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander" method="_on_outer_atmo_body_entered"]
 [connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander/Backshell" method="_on_outer_atmo_body_entered"]
 [connection signal="body_entered" from="Background/OuterAtmo" to="UI/Lander/HeatShield" method="_on_outer_atmo_body_entered"]
+[connection signal="body_entered" from="Background/UpperAtmo" to="." method="_on_upper_atmo_body_entered"]
 [connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander" method="_on_upper_atmo_body_entered"]
 [connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander/Backshell" method="_on_upper_atmo_body_entered"]
 [connection signal="body_entered" from="Background/UpperAtmo" to="UI/Lander/HeatShield" method="_on_upper_atmo_body_entered"]
+[connection signal="body_entered" from="Background/MiddleAtmo" to="." method="_on_middle_atmo_body_entered"]
 [connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander" method="_on_middle_atmo_body_entered"]
 [connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander/Backshell" method="_on_middle_atmo_body_entered"]
 [connection signal="body_entered" from="Background/MiddleAtmo" to="UI/Lander/HeatShield" method="_on_middle_atmo_body_entered"]

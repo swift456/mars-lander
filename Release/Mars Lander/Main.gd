@@ -19,13 +19,28 @@ var air_resistance = Vector2(0,0)
 ## Enum which holds all of the States the game can be in. 
 ## A state variable is utilised to keep track of the current state of the game.
 enum State {
-			FREEFALL, ## Default state. The game will start off in the freefall state. The behavior attached to this state tracks the speed of the lander, and relays information back to the user when it is safe to deploy the parachute. 
-			PARACHUTE_DEPLOY, ## Generates the parachute instance. If the speed is currently too high for the parachute to be deployed, the game transistions to the PARACHUTE_CUT state.
-			PARACHUTE_CUT, ## Removes the connection between the parachute and lander. Sets the node b of the PinJoint2D to "", nullifying the connection between the two rigidbodies.
-			PARACHUTE_DEPLOYED,## Relays textual feedback to the user. Acts as an "idle" state whilst the parachute object is connected to the lander.
-			PARACHUTE_USED, ## After parachute is either cut, or detached, this state becomes the new FREEFALL. This is to insure that the PARACHUTE_DEPLOY state can only be accessed once.
-			SUCCESS, ## Upon colliding with Surface, the landers velocity is evaluated. If the velocity is below a certain value, this state is transistioned to. This state is passed to the PauseMenu script which displays the appropriate information is displayed.
-			DESTROYED, ## Upon colliding with Surface, the landers velocity is evaluated. If the velocity is above/equal to a certain value, this state is transistioned to. This state is passed to the PauseMenu script which displays the appropriate information is displayed.
+			FREEFALL, ## Default state. The game will start off in the freefall state. The behavior attached to this 
+					## state tracks the speed of the lander, and relays information back to the user when it is safe 
+					## to deploy the parachute. 
+					
+			PARACHUTE_DEPLOY, ## Generates the parachute instance. If the speed is currently too high for the parachute 
+							## to be deployed, the game transistions to the PARACHUTE_CUT state.
+							
+			PARACHUTE_CUT, ## Removes the connection between the parachute and lander.Sets the node b of the 
+						## PinJoint2D to "", nullifying the connection between the two rigidbodies.
+						
+			PARACHUTE_DEPLOYED, ## Relays textual feedback to the user. Acts as an "idle" state whilst the 
+								## parachute object is connected to the lander.
+							
+			PARACHUTE_USED, ## After parachute is either cut, or detached, this state becomes the new FREEFALL.
+							## This is to insure that the PARACHUTE_DEPLOY state can only be accessed once.
+							
+			SUCCESS, ## Upon colliding with Surface, the landers velocity is evaluated. If the velocity is below a
+					## certain value, this state is transistioned to. 
+					## This state is passed to the PauseMenu script which displays the appropriate information
+			DESTROYED, ## Upon colliding with Surface, the landers velocity is evaluated. If the velocity is 
+					## above/equal to a certain value, this state is transistioned to. This state is passed to the 
+					## PauseMenu script which displays the appropriate information is displayed.
 			}
 ## State variable to track current game state.
 var _state = State.FREEFALL
@@ -105,7 +120,11 @@ func calc_heat():
 ## The _process function in this script contains the state machine that tracks the state of the game.
 ## Dependant on the state the game is currently in, different behavior will be executed.
 func _process(delta):
-
+	
+	
+		
+	
+	print("Altitude " ,$UI.distance_to_surface,"Density ",$UI/Lander.density)
 	#print($UI/Node2D/Lander.rotation)
 # 	barmetric equation for working out current density, didn't work, returned erroneous values.
 #	code kept just for future reference.
@@ -132,7 +151,7 @@ func _process(delta):
 		node.add_child(label)
 		await get_tree().create_timer(2).timeout
 		node.queue_free()
-		if heat($UI/Lander, delta) > 30 && !destroyed:
+		if heat($UI/Lander, delta) > 1 && !destroyed:
 			game_over_reason = 0
 			_state = State.DESTROYED
 			await get_tree().create_timer(0.5).timeout
@@ -143,7 +162,7 @@ func _process(delta):
 			
 			destroyed = true
 	if is_backshell_exposed():
-		if heat($UI/Lander/Backshell, delta) > 0.1:
+		if heat($UI/Lander/Backshell, delta) > 1:
 			backshell_visible += delta
 			if backshell_visible >= 5:
 				game_over_reason = 1
@@ -161,7 +180,7 @@ func _process(delta):
 		
 		State.FREEFALL:
 				if lander_altitude < 50:
-					if $UI/Lander.get_linear_velocity().y >= 500:
+					if $UI/Lander.get_linear_velocity().y >= 350:
 						$UI/UILayer/ParachuteIndicator.text = "Unsafe to deploy parachute!"
 						$UI/UILayer/ParachuteIndicator.set("theme_override_colors/font_color", Color(255, 0, 0))
 					else: 
@@ -199,7 +218,7 @@ func _process(delta):
 					$UI/Lander/Backshell/AttachmentPoint.set_node_b(instance.get_node("Connector").get_path())
 					
 					
-					if instance.get_linear_velocity().y > 250:
+					if instance.get_linear_velocity().y > 350:
 						$UI/Lander/Backshell/AttachmentPoint.set_node_b("")
 						$UI/Lander/Backshell/PinToLander1.set_node_b("")
 						$UI/Lander/Backshell/PinToLander2.set_node_b("")
@@ -237,7 +256,7 @@ func _process(delta):
 		State.SUCCESS:
 			
 			var pause_menu = PauseScene.instantiate()
-			pause_menu.get_node("Control").change_title(State.SUCCESS)
+			pause_menu.get_node("Control").change_title(State.SUCCESS,game_over_reason)
 			add_child(pause_menu)
 			_state = State.FREEFALL
 			
@@ -270,8 +289,8 @@ func heat(state,delta):
 	
 	var velocity = state.get_linear_velocity().length_squared() 
 	var density = state.density
-	var dynamic_pressure = 0.5 * density * velocity
-	var heat_rate = 0.0001 * pow(dynamic_pressure,1.5)
+	var heating_value = 0.5 * density * velocity
+	var heat_rate = 0.001 * heating_value
 	if heatshield_health > 0:
 		heatshield_health -= (heat_rate/100)
 		
@@ -357,3 +376,10 @@ func _on_selection_menu_pc_changed(parachute_choice):
 		2:
 			parachute_select = parachute_choice
 			$UI/Lander/Backshell.mass += 30
+
+
+
+
+func _on_upper_atmo_body_entered(body):
+	print("HELLO2")
+	$UI.set_time_control(false)

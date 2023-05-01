@@ -7,9 +7,6 @@ func _ready():
 	randomize()
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
-
-
-	
 	var poly = Polygon2D.new()
 	var i = 4000
 	var polygon = PackedVector2Array([])

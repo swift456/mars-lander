@@ -57,7 +57,7 @@ size_flags_vertical = 3
 [node name="DtS" type="Label" parent="HBoxContainer/MarginContainer4/HBoxContainer/VBoxContainer2/MarginContainer3"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Distance to Surface :"
+text = "Altitude                     :"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer4/HBoxContainer"]
 layout_mode = 2

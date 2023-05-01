@@ -65,9 +65,9 @@ func _on_middle_atmo_body_entered(body):
 
 
 func _on_lower_atmo_body_entered(body):
-	while density <= 0.001:
-		density +=0.0001
+	density <= 0.001
+		
 
 func _on_surface_atmo_body_entered(body):
-	while density <= 0.02:
-		density +=0.001
+	density = 0.02
+		

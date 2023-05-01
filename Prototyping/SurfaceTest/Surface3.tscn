@@ -3,5 +3,6 @@
 [ext_resource type="Script" path="res://SurfaceGen.gd" id="1_lwwp0"]
 
 [node name="Surface" type="Node2D"]
+modulate = Color(1, 0.403922, 0.196078, 1)
 position = Vector2(0, 500)
 script = ExtResource("1_lwwp0")

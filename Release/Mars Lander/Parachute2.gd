@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var air_resistance = Vector2(0,0)
-const CD = 1.75
+const CD = 1.9
 @export var area = 00
 var current_density = 0
 var surface_density = 0.02

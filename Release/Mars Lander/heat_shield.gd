@@ -2,7 +2,7 @@ extends RigidBody2D
 var air_resistance = Vector2(0,0)
 @export var area = 5.56
 var density = 0
-const CD = 1.9
+const CD = 1.6
 var object_altitude = 0
 var current_density = 0.0
 const EULER = 2.71828
