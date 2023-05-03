@@ -37,7 +37,7 @@ func fuel_gauge(value):
 
 func _process(delta):
 	if !time_control:
-		$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "Realtime"
+		$UILayer/VBoxContainer/VBoxContainer/HBoxContainer/Type.text = "x1.0"
 		Engine.time_scale = 1
 		print("HELLO3")
 	get_surface_position(scene_initialised)

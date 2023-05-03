@@ -72,7 +72,7 @@ func change_title(state, game_over_reason):
 			match game_over_reason:
 				
 				0:
-					$PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/Reason.text = "Heatshield became compromised whilst vessel was under heating, lander destroyed by atmospheric heating.\n Maybe try using a thicker heatshield?"
+					$PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/Reason.text = "Heatshield became compromised whilst vessel was under heating or\nlander destroyed by atmospheric heating due to early jettison of heatshield.\n Maybe try using a thicker heatshield?"
 				1:
 					$PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/Reason.text = "Atmospheric heating applied to side of backshell damaged lander inside, communication lost with lander.\n Keep the lander level to ensure the heatshield can do its job."
 					

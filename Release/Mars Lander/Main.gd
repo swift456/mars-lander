@@ -71,13 +71,15 @@ var game_over_reason = 0
 ## 
 var heatshield_destroyed = false
 
-var destroyed
+var destroyed = false
 
 var node_path = NodePath("")
 
 var parachute_select 
 
 var backshell_visible = 0 
+
+var node 
 
 ## Tracks the current speed of the lander
 ## Used to decide whether or not the lander is destroyed upon contact with the surface.
@@ -139,28 +141,21 @@ func _process(delta):
 	if $Surface.position.distance_to($UI/Lander.position) > 200:
 		$Surface.position.x = $UI/Lander.position.x 
 	
-	if heatshield_destroyed && !_state == State.DESTROYED:
-		var node = Node.new()
-		$UI/UILayer.add_child(node)
-		var label = Label.new()
-		label.add_theme_color_override("font_color", Color(1, 0, 0.03137255087495))
-		label.add_theme_font_size_override("font_size", 20)
-		label.text = "! HEATSHIELD COMPROMISED !"
-		label.position = get_viewport_rect().size / 2
-		label.position -= (label.size/2)
-		node.add_child(label)
-		await get_tree().create_timer(2).timeout
-		node.queue_free()
-		if heat($UI/Lander, delta) > 1 && !destroyed:
+	if heatshield_destroyed:
+		
+		
+		
+		if heat($UI/Lander, delta) > 0.5 && !destroyed:
 			game_over_reason = 0
+			destroyed = true
 			_state = State.DESTROYED
-			await get_tree().create_timer(0.5).timeout
+			
 		
 
 			
 			
 			
-			destroyed = true
+			
 	if is_backshell_exposed():
 		if heat($UI/Lander/Backshell, delta) > 1:
 			backshell_visible += delta
@@ -174,7 +169,7 @@ func _process(delta):
 	lander_altitude = $UI.distance_to_surface
 	
 	print("State = ", _state)
-	print("TEMP ",heat($UI/Lander/HeatShield, delta))
+	print("TEMP ",heat($UI/Lander, delta))
 	print("Mass ",$UI/Lander/HeatShield.mass)
 	match _state:
 		
@@ -272,6 +267,9 @@ func _process(delta):
 func _physics_process(delta):
 	input()
 	
+
+
+
 	
 	
 func is_backshell_exposed():
@@ -299,8 +297,9 @@ func heat(state,delta):
 	elif heatshield_health <= 0 && !heatshield_destroyed:
 		$UI/Lander/HeatShield/HeatShieldConnection1.set_node_a("")
 		$UI/Lander/HeatShield/HeatShieldConnection2.set_node_a("")
-		
+		$UI/Lander/HeatShield.mass = 5
 		heatshield_destroyed = true
+	
 		
 	return heat_rate
 		
@@ -313,7 +312,11 @@ func input():
 		_state = State.PARACHUTE_DEPLOY
 	if Input.is_action_just_pressed("parachute") && _state == State.PARACHUTE_DEPLOYED:
 		_state = State.PARACHUTE_CUT
-	
+	if Input.is_action_pressed("heatshield"):
+		$UI/Lander/HeatShield.set_collision_layer_value(2,true)
+		$UI/Lander/HeatShield/HeatShieldConnection1.set_node_a("")
+		$UI/Lander/HeatShield/HeatShieldConnection2.set_node_a("")
+		heatshield_destroyed = true
 	
 	
 

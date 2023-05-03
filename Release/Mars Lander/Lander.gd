@@ -84,11 +84,7 @@ func _integrate_forces(state):
 	
 
 	
-	if Input.is_action_pressed("heatshield"):
-		$HeatShield.set_collision_layer_value(2,true)
-		$HeatShield/HeatShieldConnection1.set_node_a("")
-		$HeatShield/HeatShieldConnection2.set_node_a("")
-	
+
 	
 
 ## The thrust function applies a central_impulse upward on the Lander object. This thrust is applied directly beneath the Lander.

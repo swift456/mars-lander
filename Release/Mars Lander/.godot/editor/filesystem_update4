@@ -1,6 +1,5 @@
 res://default_env.tres
 res://StartMenu.tscn
-res://Indicators.gd
 res://Menu.tscn
 res://Encyclopaedia.tscn
 res://HeatShield.tscn
@@ -16,3 +15,6 @@ res://DistanceToSurfaceRC.tscn
 res://surface2.tscn
 res://UILayer.tscn
 res://Main.gd
+res://Lander.gd
+res://PauseMenu.gd
+res://Indicators.gd
